@@ -3,9 +3,6 @@ from ..lexer.comp_expr import tokens, comp_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
-# these items are expected to be implemented in module generate (see below)
-used_procedures_and_classes = used_procedures_and_classes
-
 gen = None
 
 def set_generator_module(m):

@@ -29,12 +29,6 @@ precedence.insert(1, ['left', 'XOR', 'NEQ', 'EQ', 'IMPL'])
 precedence.insert(1, ['left', 'AND', 'NAND'])
 precedence.insert(1, ['left', 'OR', 'NOR'])
 
-# = [
-#     ['left', 'OR', 'NOR'],
-#     ['left', 'AND', 'NAND'],
-#     ['left', 'XOR', 'IMPL'],
-# ] + precedence
-
 
 def p_expression_unary_not(p):
     '''expression : NOT expression %prec UMINUS'''

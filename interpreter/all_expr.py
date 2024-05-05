@@ -119,40 +119,17 @@ class LoopExpression(InterpretedExpression):
             r, env = self.body.eval(env)
         return (r, env)
 
+class ForExpression(InterpretedExpression):
+    def __init__(self, start, test, cont, body):
+        self.start = start
+        self.test = test
+        self.cont = cont
+        self.body = body
 
-## LOOP
-"""
-## expr : Loop expression COLON expression ##
-def LoopExpression():
-    # __init__ (number, body)
-
-    eval
-    n, env = self.number.eval(env)
-    for _ in range(n):
-        r, env = self.body.eval(env)
-        return (r, env) """
-
-
-
-
-'''
-Loop / For
----
-loop expr do expr
-for assign; bool_expr; assign do expr
-[for assign; bool_expr; assign do lock var expr]  <--  optional
-'''
-# Was ist der Rückgabewert der Loop-Expression?
-# Das Ergebnis der letzen Expression im Körper?
-#   -> Was, wenn der Körper gar nicht ausgeführt wurde? 'None'?!
-
-
-'''
-If Then Else
----
-
-IF bool_expr THEN expr
-IF bool_expr THEN expr ELSE expr
-'''
-
-# precedence 'ELSE' > 'THEN'
+    def eval(self, env):
+        env = self.start.eval(env)
+        r = None
+        while not self.test.eval(env):
+            r, env = self.body.eval(env)
+            env = self.cont.eval(env)
+        return (r, env)

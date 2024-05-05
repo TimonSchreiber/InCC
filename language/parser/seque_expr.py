@@ -23,9 +23,12 @@ def check_generator_module():
     if not generator_module_implements(used_procedures_and_classes):
         raise Exception("code generator doesn't implement all expected functions")
 
-### the parser
-precedence = precedence
 
+### the parser
+# Insert after 'DO'
+precedence = precedence + [
+    ['left', 'SEPARATOR']
+]
 
 def p_expression_sequence(p):
     'expression : BEGIN body END'

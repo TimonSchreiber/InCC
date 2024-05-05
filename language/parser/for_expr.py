@@ -1,11 +1,11 @@
-from .seque_expr import *
-from ..lexer.loop_expr import tokens, loop_lexer
+from .loop_expr import *
+from ..lexer.for_expr import tokens, for_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
 # these items are expected to be implemented in module generate (see below)
 used_procedures_and_classes |= {
-    'LoopExpression'
+    'ForExpression'
 }
 
 gen = None
@@ -23,17 +23,26 @@ def check_generator_module():
     if not generator_module_implements(used_procedures_and_classes):
         raise Exception("code generator doesn't implement all expected functions")
 
-
 ### the parser
-# Insert after 'UMINUS'
-precedence = precedence + [
-    ['left', 'DO']
-]
 
+def p_expression_for(p):
+    'expression : FOR assign_expr SEPARATOR bool_expr SEPARATOR assign_expr DO expression'
+    p[0] = gen.ForExpression(p[2], p[4], p[6], p[8])
 
-def p_expression_loop(p):
-    'expression : LOOP expression DO expression'
-    p[0] = gen.LoopExpression(p[2], p[4])
+def p_expression_assign_expr(p):
+    'assign_expr : IDENTIFIER ASSIGN expression'
+    p[0] = gen.AssignmentExpression(p[1], p[3])
+
+def p_expression_bool_expr(p):
+    '''bool_expr : expression AND expression
+                 | expression NAND expression
+                 | expression OR expression
+                 | expression NOR expression
+                 | expression XOR expression
+                 | expression EQ expression
+                 | expression NEQ expression
+                 | expression IMPL expression'''
+    p[0] = gen.BinaryOperatorExpression(p[1], p[2], p[3])
 
 
 ### the REPL
@@ -41,12 +50,12 @@ def p_expression_loop(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-loop_parser = yacc(start='expression')
+for_parser = yacc(start='expression')
 
 # testing
 if __name__ == '__main__':
     env = {}
     while True:
         i=input("repl > ")
-        result = loop_parser.parse(input=i, lexer=loop_lexer)
+        result = for_parser.parse(input=i, lexer=for_lexer)
         print(i,"\n\t",result.eval(env))

@@ -1,5 +1,5 @@
-from language.parser.loop_expr import loop_parser as parser, precedence
-from language.lexer.loop_expr import loop_lexer as lexer
+from language.parser.for_expr import for_parser as parser, precedence
+from language.lexer.for_expr import for_lexer as lexer
 
 if __name__ == '__main__':
     env = {}
@@ -7,16 +7,13 @@ if __name__ == '__main__':
     #     i=input("repl > ")
     i = '''
         {
-            x := 1;
-            y := 1;
-            z := loop x + y * 6 DO
+            y := 0;
+            z := for x := 0; x > 3; x := x + 1 DO
             {
-                x := x * 2;
-                y := x > 6 neq x > 120
+                y := y + 2
             }
         }
         '''
-    # i = 'y := 128 > 6 neq 128 > 120'
     result = parser.parse(input=i, lexer=lexer)
     print(i,"\n\t",result.eval(env))
     b = 1
@@ -41,3 +38,25 @@ note:
 https://en.cppreference.com/w/cpp/language/operator_precedence
 TODO: precedence of IMPL not mentioned in cpp-reference
 '''
+
+'''
+Loop / For
+---
+loop expr do expr
+for assign; bool_expr; assign do expr
+[for assign; bool_expr; assign do lock var expr]  <--  optional
+'''
+# Was ist der Rückgabewert der Loop-Expression?
+# Das Ergebnis der letzen Expression im Körper?
+#   -> Was, wenn der Körper gar nicht ausgeführt wurde? 'None'?!
+
+
+'''
+If Then Else
+---
+
+IF bool_expr THEN expr
+IF bool_expr THEN expr ELSE expr
+'''
+
+# precedence 'ELSE' > 'THEN'
