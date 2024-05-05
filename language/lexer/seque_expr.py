@@ -1,4 +1,4 @@
-from bool_expr import *
+from .bool_expr import *
 
 # Sequences
 token_set |= {'BEGIN', 'END', 'SEPARATOR'}
@@ -12,7 +12,7 @@ t_SEPARATOR = r';'
 tokens = list(token_set | reserved_set)
 
 # Create Lexer
-sequence_lexer = lex()
+seque_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         }
     '''
 
-    sequence_lexer.input(data)
+    seque_lexer.input(data)
 
-    for token in sequence_lexer:
+    for token in seque_lexer:
         print(token)

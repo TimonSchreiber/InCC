@@ -1,5 +1,5 @@
-from language.parser.bool_expr import bool_parser as parser
-from language.lexer.bool_expr import bool_lexer as lexer
+from language.parser.seque_expr import seque_parser as parser
+from language.lexer.seque_expr import seque_lexer as lexer
 
 if __name__ == '__main__':
     env = {}
