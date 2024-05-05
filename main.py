@@ -1,12 +1,22 @@
-from language.parser.seque_expr import seque_parser as parser
-from language.lexer.seque_expr import seque_lexer as lexer
+from language.parser.loop_expr import loop_parser as parser
+from language.lexer.loop_expr import loop_lexer as lexer
 
 if __name__ == '__main__':
     env = {}
-    while True:
-        i=input("repl > ")
-        result = parser.parse(input=i, lexer=lexer)
-        print(i,"\n\t",result.eval(env))
+    # while True:
+    #     i=input("repl > ")
+    i = '''
+        {
+            x := 1;
+            y := 1;
+            x := loop x + y * 3 DO
+            {
+                y := y * 2
+            }
+        }
+        '''
+    result = parser.parse(input=i, lexer=lexer)
+    print(i,"\n\t",result.eval(env))
 
 
 '''
@@ -22,6 +32,4 @@ note:
 
 
 TODO: https://en.cppreference.com/w/cpp/language/operator_precedence
-
-
 '''

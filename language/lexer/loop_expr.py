@@ -1,4 +1,4 @@
-from seque_expr import *
+from .seque_expr import *
 
 reserved_set |= {
     'LOOP',

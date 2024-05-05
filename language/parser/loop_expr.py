@@ -1,11 +1,11 @@
-from .bool_expr import *
-from ..lexer.seque_expr import tokens, seque_lexer
+from .seque_expr import *
+from ..lexer.loop_expr import tokens, loop_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
 # these items are expected to be implemented in module generate (see below)
 used_procedures_and_classes |= {
-    'SequenceExpression'
+    'LoopExpression'
 }
 
 gen = None
@@ -27,14 +27,10 @@ def check_generator_module():
 precedence = precedence
 
 
-def p_expression_sequence(p):
-    'expression : BEGIN body END'
-    p[0] = gen.SequenceExpression(p[2])
+def p_expression_loop(p):
+    'expression : LOOP expression DO expression'
+    p[0] = gen.LoopExpression(p[2], p[4])
 
-def p_bodyn(p):
-    '''body : expression
-            | body SEPARATOR expression'''
-    p[0] = [p[1]] if len(p) == 2 else p[1] + [p[3]]
 
 
 ### the REPL
@@ -42,12 +38,12 @@ def p_bodyn(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-seque_parser = yacc(start='expression')
+loop_parser = yacc(start='expression')
 
 # testing
 if __name__ == '__main__':
     env = {}
     while True:
         i=input("repl > ")
-        result = seque_parser.parse(input=i, lexer=seque_lexer)
+        result = loop_parser.parse(input=i, lexer=loop_lexer)
         print(i,"\n\t",result.eval(env))

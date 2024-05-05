@@ -29,7 +29,6 @@ precedence = [
     ['left', 'AND', 'NAND'],
     ['left', 'EQ', 'XOR', 'IMPL'],
 ] + precedence
-# TODO: logical NOT should have the same precedence as UNARY MINUS
 # TODO: precedence of IMPL not mentioned in cpp-reference
 
 

@@ -1,4 +1,4 @@
-from loop_expr import *
+from .loop_expr import *
 
 reserved_set |= {
     'FOR'

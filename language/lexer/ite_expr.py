@@ -1,4 +1,4 @@
-from for_expr import *
+from .for_expr import *
 
 reserved_set |= {
     'IF',
