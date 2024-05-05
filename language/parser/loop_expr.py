@@ -24,7 +24,9 @@ def check_generator_module():
         raise Exception("code generator doesn't implement all expected functions")
 
 ### the parser
-precedence = precedence
+precedence = [
+    ['left', 'DO']
+] + precedence
 
 
 def p_expression_loop(p):

@@ -9,7 +9,7 @@ if __name__ == '__main__':
         {
             x := 1;
             y := 1;
-            z := loop 0 DO
+            z := loop 6 DO
             {
                 y := y * 2
             }

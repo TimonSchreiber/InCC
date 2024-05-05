@@ -9,8 +9,8 @@ Rule 3     expression -> expression LESS_EQUALS expression
 Rule 4     expression -> expression GREATER_EQUALS expression
 Rule 5     expression -> expression EQUALS expression
 Rule 6     expression -> expression NOT_EQUALS expression
-Rule 7     expression -> LOOP expression DO expression
-Rule 8     expression -> BEGIN body END
+Rule 7     expression -> BEGIN body END
+Rule 8     expression -> LOOP expression DO expression
 Rule 9     expression -> IDENTIFIER
 Rule 10    expression -> NOT expression
 Rule 11    body -> expression
@@ -38,10 +38,10 @@ Terminals, with rules where they appear
 
 AND                  : 14
 ASSIGN               : 13
-BEGIN                : 8
+BEGIN                : 7
 DIVIDE               : 27
-DO                   : 7
-END                  : 8
+DO                   : 8
+END                  : 7
 EQ                   : 18
 EQUALS               : 5
 FALSE                : 29
@@ -52,7 +52,7 @@ IDENTIFIER           : 9 13
 IMPL                 : 20
 LESS_EQUALS          : 3
 LESS_THEN            : 1
-LOOP                 : 7
+LOOP                 : 8
 LPAREN               : 30
 MINUS                : 23 25
 NAND                 : 15
@@ -71,8 +71,8 @@ error                :
 
 Nonterminals, with rules where they appear
 
-body                 : 8 12
-expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 10 11 12 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 23 24 24 25 25 26 26 27 27 30 0
+body                 : 7 12
+expression           : 1 1 2 2 3 3 4 4 5 5 6 6 8 8 10 11 12 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 23 24 24 25 25 26 26 27 27 30 0
 
 Parsing method: LALR
 
@@ -85,8 +85,8 @@ state 0
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -108,8 +108,8 @@ state 0
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -163,52 +163,7 @@ state 1
 
 state 2
 
-    (7) expression -> LOOP . expression DO expression
-    (1) expression -> . expression LESS_THEN expression
-    (2) expression -> . expression GREATER_THEN expression
-    (3) expression -> . expression LESS_EQUALS expression
-    (4) expression -> . expression GREATER_EQUALS expression
-    (5) expression -> . expression EQUALS expression
-    (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
-    (9) expression -> . IDENTIFIER
-    (10) expression -> . NOT expression
-    (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . expression AND expression
-    (15) expression -> . expression NAND expression
-    (16) expression -> . expression OR expression
-    (17) expression -> . expression NOR expression
-    (18) expression -> . expression EQ expression
-    (19) expression -> . expression XOR expression
-    (20) expression -> . expression IMPL expression
-    (21) expression -> . NUMBER
-    (22) expression -> . FLOAT
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression TIMES expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . TRUE
-    (29) expression -> . FALSE
-    (30) expression -> . LPAREN expression RPAREN
-
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
-    IDENTIFIER      shift and go to state 4
-    NOT             shift and go to state 5
-    NUMBER          shift and go to state 6
-    FLOAT           shift and go to state 7
-    MINUS           shift and go to state 8
-    TRUE            shift and go to state 9
-    FALSE           shift and go to state 10
-    LPAREN          shift and go to state 11
-
-    expression                     shift and go to state 29
-
-state 3
-
-    (8) expression -> BEGIN . body END
+    (7) expression -> BEGIN . body END
     (11) body -> . expression
     (12) body -> . body SEPARATOR expression
     (1) expression -> . expression LESS_THEN expression
@@ -217,8 +172,8 @@ state 3
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -240,8 +195,8 @@ state 3
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -251,7 +206,52 @@ state 3
     FALSE           shift and go to state 10
     LPAREN          shift and go to state 11
 
-    body                           shift and go to state 30
+    body                           shift and go to state 29
+    expression                     shift and go to state 30
+
+state 3
+
+    (8) expression -> LOOP . expression DO expression
+    (1) expression -> . expression LESS_THEN expression
+    (2) expression -> . expression GREATER_THEN expression
+    (3) expression -> . expression LESS_EQUALS expression
+    (4) expression -> . expression GREATER_EQUALS expression
+    (5) expression -> . expression EQUALS expression
+    (6) expression -> . expression NOT_EQUALS expression
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
+    (9) expression -> . IDENTIFIER
+    (10) expression -> . NOT expression
+    (13) expression -> . IDENTIFIER ASSIGN expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
+    (18) expression -> . expression EQ expression
+    (19) expression -> . expression XOR expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
+    (23) expression -> . MINUS expression
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression TIMES expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+    (30) expression -> . LPAREN expression RPAREN
+
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    NOT             shift and go to state 5
+    NUMBER          shift and go to state 6
+    FLOAT           shift and go to state 7
+    MINUS           shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+    LPAREN          shift and go to state 11
+
     expression                     shift and go to state 31
 
 state 4
@@ -277,9 +277,9 @@ state 4
     TIMES           reduce using rule 9 (expression -> IDENTIFIER .)
     DIVIDE          reduce using rule 9 (expression -> IDENTIFIER .)
     $end            reduce using rule 9 (expression -> IDENTIFIER .)
-    DO              reduce using rule 9 (expression -> IDENTIFIER .)
     END             reduce using rule 9 (expression -> IDENTIFIER .)
     SEPARATOR       reduce using rule 9 (expression -> IDENTIFIER .)
+    DO              reduce using rule 9 (expression -> IDENTIFIER .)
     RPAREN          reduce using rule 9 (expression -> IDENTIFIER .)
     ASSIGN          shift and go to state 32
 
@@ -293,8 +293,8 @@ state 5
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -316,8 +316,8 @@ state 5
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -351,9 +351,9 @@ state 6
     TIMES           reduce using rule 21 (expression -> NUMBER .)
     DIVIDE          reduce using rule 21 (expression -> NUMBER .)
     $end            reduce using rule 21 (expression -> NUMBER .)
-    DO              reduce using rule 21 (expression -> NUMBER .)
     END             reduce using rule 21 (expression -> NUMBER .)
     SEPARATOR       reduce using rule 21 (expression -> NUMBER .)
+    DO              reduce using rule 21 (expression -> NUMBER .)
     RPAREN          reduce using rule 21 (expression -> NUMBER .)
 
 
@@ -379,9 +379,9 @@ state 7
     TIMES           reduce using rule 22 (expression -> FLOAT .)
     DIVIDE          reduce using rule 22 (expression -> FLOAT .)
     $end            reduce using rule 22 (expression -> FLOAT .)
-    DO              reduce using rule 22 (expression -> FLOAT .)
     END             reduce using rule 22 (expression -> FLOAT .)
     SEPARATOR       reduce using rule 22 (expression -> FLOAT .)
+    DO              reduce using rule 22 (expression -> FLOAT .)
     RPAREN          reduce using rule 22 (expression -> FLOAT .)
 
 
@@ -394,8 +394,8 @@ state 8
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -417,8 +417,8 @@ state 8
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -452,9 +452,9 @@ state 9
     TIMES           reduce using rule 28 (expression -> TRUE .)
     DIVIDE          reduce using rule 28 (expression -> TRUE .)
     $end            reduce using rule 28 (expression -> TRUE .)
-    DO              reduce using rule 28 (expression -> TRUE .)
     END             reduce using rule 28 (expression -> TRUE .)
     SEPARATOR       reduce using rule 28 (expression -> TRUE .)
+    DO              reduce using rule 28 (expression -> TRUE .)
     RPAREN          reduce using rule 28 (expression -> TRUE .)
 
 
@@ -480,9 +480,9 @@ state 10
     TIMES           reduce using rule 29 (expression -> FALSE .)
     DIVIDE          reduce using rule 29 (expression -> FALSE .)
     $end            reduce using rule 29 (expression -> FALSE .)
-    DO              reduce using rule 29 (expression -> FALSE .)
     END             reduce using rule 29 (expression -> FALSE .)
     SEPARATOR       reduce using rule 29 (expression -> FALSE .)
+    DO              reduce using rule 29 (expression -> FALSE .)
     RPAREN          reduce using rule 29 (expression -> FALSE .)
 
 
@@ -495,8 +495,8 @@ state 11
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -518,8 +518,8 @@ state 11
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -540,8 +540,8 @@ state 12
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -563,8 +563,8 @@ state 12
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -585,8 +585,8 @@ state 13
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -608,8 +608,8 @@ state 13
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -630,8 +630,8 @@ state 14
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -653,8 +653,8 @@ state 14
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -675,8 +675,8 @@ state 15
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -698,8 +698,8 @@ state 15
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -720,8 +720,8 @@ state 16
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -743,8 +743,8 @@ state 16
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -765,8 +765,8 @@ state 17
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -788,8 +788,8 @@ state 17
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -810,8 +810,8 @@ state 18
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -833,8 +833,8 @@ state 18
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -855,8 +855,8 @@ state 19
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -878,8 +878,8 @@ state 19
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -900,8 +900,8 @@ state 20
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -923,8 +923,8 @@ state 20
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -945,8 +945,8 @@ state 21
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -968,8 +968,8 @@ state 21
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -990,8 +990,8 @@ state 22
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1013,8 +1013,8 @@ state 22
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1035,8 +1035,8 @@ state 23
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1058,8 +1058,8 @@ state 23
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1080,8 +1080,8 @@ state 24
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1103,8 +1103,8 @@ state 24
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1125,8 +1125,8 @@ state 25
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1148,8 +1148,8 @@ state 25
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1170,8 +1170,8 @@ state 26
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1193,8 +1193,8 @@ state 26
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1215,8 +1215,8 @@ state 27
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1238,8 +1238,8 @@ state 27
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1260,8 +1260,8 @@ state 28
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1283,8 +1283,8 @@ state 28
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1298,55 +1298,14 @@ state 28
 
 state 29
 
-    (7) expression -> LOOP expression . DO expression
-    (1) expression -> expression . LESS_THEN expression
-    (2) expression -> expression . GREATER_THEN expression
-    (3) expression -> expression . LESS_EQUALS expression
-    (4) expression -> expression . GREATER_EQUALS expression
-    (5) expression -> expression . EQUALS expression
-    (6) expression -> expression . NOT_EQUALS expression
-    (14) expression -> expression . AND expression
-    (15) expression -> expression . NAND expression
-    (16) expression -> expression . OR expression
-    (17) expression -> expression . NOR expression
-    (18) expression -> expression . EQ expression
-    (19) expression -> expression . XOR expression
-    (20) expression -> expression . IMPL expression
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . TIMES expression
-    (27) expression -> expression . DIVIDE expression
+    (7) expression -> BEGIN body . END
+    (12) body -> body . SEPARATOR expression
 
-    DO              shift and go to state 53
-    LESS_THEN       shift and go to state 12
-    GREATER_THEN    shift and go to state 13
-    LESS_EQUALS     shift and go to state 14
-    GREATER_EQUALS  shift and go to state 15
-    EQUALS          shift and go to state 16
-    NOT_EQUALS      shift and go to state 17
-    AND             shift and go to state 18
-    NAND            shift and go to state 19
-    OR              shift and go to state 20
-    NOR             shift and go to state 21
-    EQ              shift and go to state 22
-    XOR             shift and go to state 23
-    IMPL            shift and go to state 24
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 26
-    TIMES           shift and go to state 27
-    DIVIDE          shift and go to state 28
+    END             shift and go to state 53
+    SEPARATOR       shift and go to state 54
 
 
 state 30
-
-    (8) expression -> BEGIN body . END
-    (12) body -> body . SEPARATOR expression
-
-    END             shift and go to state 54
-    SEPARATOR       shift and go to state 55
-
-
-state 31
 
     (11) body -> expression .
     (1) expression -> expression . LESS_THEN expression
@@ -1388,6 +1347,47 @@ state 31
     DIVIDE          shift and go to state 28
 
 
+state 31
+
+    (8) expression -> LOOP expression . DO expression
+    (1) expression -> expression . LESS_THEN expression
+    (2) expression -> expression . GREATER_THEN expression
+    (3) expression -> expression . LESS_EQUALS expression
+    (4) expression -> expression . GREATER_EQUALS expression
+    (5) expression -> expression . EQUALS expression
+    (6) expression -> expression . NOT_EQUALS expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
+    (18) expression -> expression . EQ expression
+    (19) expression -> expression . XOR expression
+    (20) expression -> expression . IMPL expression
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . TIMES expression
+    (27) expression -> expression . DIVIDE expression
+
+    DO              shift and go to state 55
+    LESS_THEN       shift and go to state 12
+    GREATER_THEN    shift and go to state 13
+    LESS_EQUALS     shift and go to state 14
+    GREATER_EQUALS  shift and go to state 15
+    EQUALS          shift and go to state 16
+    NOT_EQUALS      shift and go to state 17
+    AND             shift and go to state 18
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
+    IMPL            shift and go to state 24
+    PLUS            shift and go to state 25
+    MINUS           shift and go to state 26
+    TIMES           shift and go to state 27
+    DIVIDE          shift and go to state 28
+
+
 state 32
 
     (13) expression -> IDENTIFIER ASSIGN . expression
@@ -1397,8 +1397,8 @@ state 32
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -1420,8 +1420,8 @@ state 32
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -1472,9 +1472,9 @@ state 33
     TIMES           reduce using rule 10 (expression -> NOT expression .)
     DIVIDE          reduce using rule 10 (expression -> NOT expression .)
     $end            reduce using rule 10 (expression -> NOT expression .)
-    DO              reduce using rule 10 (expression -> NOT expression .)
     END             reduce using rule 10 (expression -> NOT expression .)
     SEPARATOR       reduce using rule 10 (expression -> NOT expression .)
+    DO              reduce using rule 10 (expression -> NOT expression .)
     RPAREN          reduce using rule 10 (expression -> NOT expression .)
 
   ! LESS_THEN       [ shift and go to state 12 ]
@@ -1535,9 +1535,9 @@ state 34
     TIMES           reduce using rule 23 (expression -> MINUS expression .)
     DIVIDE          reduce using rule 23 (expression -> MINUS expression .)
     $end            reduce using rule 23 (expression -> MINUS expression .)
-    DO              reduce using rule 23 (expression -> MINUS expression .)
     END             reduce using rule 23 (expression -> MINUS expression .)
     SEPARATOR       reduce using rule 23 (expression -> MINUS expression .)
+    DO              reduce using rule 23 (expression -> MINUS expression .)
     RPAREN          reduce using rule 23 (expression -> MINUS expression .)
 
   ! LESS_THEN       [ shift and go to state 12 ]
@@ -1633,9 +1633,9 @@ state 36
     XOR             reduce using rule 1 (expression -> expression LESS_THEN expression .)
     IMPL            reduce using rule 1 (expression -> expression LESS_THEN expression .)
     $end            reduce using rule 1 (expression -> expression LESS_THEN expression .)
-    DO              reduce using rule 1 (expression -> expression LESS_THEN expression .)
     END             reduce using rule 1 (expression -> expression LESS_THEN expression .)
     SEPARATOR       reduce using rule 1 (expression -> expression LESS_THEN expression .)
+    DO              reduce using rule 1 (expression -> expression LESS_THEN expression .)
     RPAREN          reduce using rule 1 (expression -> expression LESS_THEN expression .)
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
@@ -1696,9 +1696,9 @@ state 37
     XOR             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     IMPL            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     $end            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
-    DO              reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     END             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     SEPARATOR       reduce using rule 2 (expression -> expression GREATER_THEN expression .)
+    DO              reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     RPAREN          reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
@@ -1759,9 +1759,9 @@ state 38
     XOR             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     IMPL            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     $end            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
-    DO              reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     END             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     SEPARATOR       reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
+    DO              reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     RPAREN          reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
@@ -1822,9 +1822,9 @@ state 39
     XOR             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     IMPL            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     $end            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
-    DO              reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     END             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     SEPARATOR       reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
+    DO              reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     RPAREN          reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
@@ -1887,9 +1887,9 @@ state 40
     XOR             reduce using rule 5 (expression -> expression EQUALS expression .)
     IMPL            reduce using rule 5 (expression -> expression EQUALS expression .)
     $end            reduce using rule 5 (expression -> expression EQUALS expression .)
-    DO              reduce using rule 5 (expression -> expression EQUALS expression .)
     END             reduce using rule 5 (expression -> expression EQUALS expression .)
     SEPARATOR       reduce using rule 5 (expression -> expression EQUALS expression .)
+    DO              reduce using rule 5 (expression -> expression EQUALS expression .)
     RPAREN          reduce using rule 5 (expression -> expression EQUALS expression .)
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -1950,9 +1950,9 @@ state 41
     XOR             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     IMPL            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     $end            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
-    DO              reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     END             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     SEPARATOR       reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
+    DO              reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     RPAREN          reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -2005,9 +2005,9 @@ state 42
     NOR             reduce using rule 14 (expression -> expression AND expression .)
     EQ              reduce using rule 14 (expression -> expression AND expression .)
     $end            reduce using rule 14 (expression -> expression AND expression .)
-    DO              reduce using rule 14 (expression -> expression AND expression .)
     END             reduce using rule 14 (expression -> expression AND expression .)
     SEPARATOR       reduce using rule 14 (expression -> expression AND expression .)
+    DO              reduce using rule 14 (expression -> expression AND expression .)
     RPAREN          reduce using rule 14 (expression -> expression AND expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2068,9 +2068,9 @@ state 43
     NOR             reduce using rule 15 (expression -> expression NAND expression .)
     EQ              reduce using rule 15 (expression -> expression NAND expression .)
     $end            reduce using rule 15 (expression -> expression NAND expression .)
-    DO              reduce using rule 15 (expression -> expression NAND expression .)
     END             reduce using rule 15 (expression -> expression NAND expression .)
     SEPARATOR       reduce using rule 15 (expression -> expression NAND expression .)
+    DO              reduce using rule 15 (expression -> expression NAND expression .)
     RPAREN          reduce using rule 15 (expression -> expression NAND expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2129,9 +2129,9 @@ state 44
     NOR             reduce using rule 16 (expression -> expression OR expression .)
     EQ              reduce using rule 16 (expression -> expression OR expression .)
     $end            reduce using rule 16 (expression -> expression OR expression .)
-    DO              reduce using rule 16 (expression -> expression OR expression .)
     END             reduce using rule 16 (expression -> expression OR expression .)
     SEPARATOR       reduce using rule 16 (expression -> expression OR expression .)
+    DO              reduce using rule 16 (expression -> expression OR expression .)
     RPAREN          reduce using rule 16 (expression -> expression OR expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2192,9 +2192,9 @@ state 45
     NOR             reduce using rule 17 (expression -> expression NOR expression .)
     EQ              reduce using rule 17 (expression -> expression NOR expression .)
     $end            reduce using rule 17 (expression -> expression NOR expression .)
-    DO              reduce using rule 17 (expression -> expression NOR expression .)
     END             reduce using rule 17 (expression -> expression NOR expression .)
     SEPARATOR       reduce using rule 17 (expression -> expression NOR expression .)
+    DO              reduce using rule 17 (expression -> expression NOR expression .)
     RPAREN          reduce using rule 17 (expression -> expression NOR expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2265,9 +2265,9 @@ state 46
     XOR             reduce using rule 18 (expression -> expression EQ expression .)
     IMPL            reduce using rule 18 (expression -> expression EQ expression .)
     $end            reduce using rule 18 (expression -> expression EQ expression .)
-    DO              reduce using rule 18 (expression -> expression EQ expression .)
     END             reduce using rule 18 (expression -> expression EQ expression .)
     SEPARATOR       reduce using rule 18 (expression -> expression EQ expression .)
+    DO              reduce using rule 18 (expression -> expression EQ expression .)
     RPAREN          reduce using rule 18 (expression -> expression EQ expression .)
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -2322,9 +2322,9 @@ state 47
     XOR             reduce using rule 19 (expression -> expression XOR expression .)
     IMPL            reduce using rule 19 (expression -> expression XOR expression .)
     $end            reduce using rule 19 (expression -> expression XOR expression .)
-    DO              reduce using rule 19 (expression -> expression XOR expression .)
     END             reduce using rule 19 (expression -> expression XOR expression .)
     SEPARATOR       reduce using rule 19 (expression -> expression XOR expression .)
+    DO              reduce using rule 19 (expression -> expression XOR expression .)
     RPAREN          reduce using rule 19 (expression -> expression XOR expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2385,9 +2385,9 @@ state 48
     XOR             reduce using rule 20 (expression -> expression IMPL expression .)
     IMPL            reduce using rule 20 (expression -> expression IMPL expression .)
     $end            reduce using rule 20 (expression -> expression IMPL expression .)
-    DO              reduce using rule 20 (expression -> expression IMPL expression .)
     END             reduce using rule 20 (expression -> expression IMPL expression .)
     SEPARATOR       reduce using rule 20 (expression -> expression IMPL expression .)
+    DO              reduce using rule 20 (expression -> expression IMPL expression .)
     RPAREN          reduce using rule 20 (expression -> expression IMPL expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2456,9 +2456,9 @@ state 49
     PLUS            reduce using rule 24 (expression -> expression PLUS expression .)
     MINUS           reduce using rule 24 (expression -> expression PLUS expression .)
     $end            reduce using rule 24 (expression -> expression PLUS expression .)
-    DO              reduce using rule 24 (expression -> expression PLUS expression .)
     END             reduce using rule 24 (expression -> expression PLUS expression .)
     SEPARATOR       reduce using rule 24 (expression -> expression PLUS expression .)
+    DO              reduce using rule 24 (expression -> expression PLUS expression .)
     RPAREN          reduce using rule 24 (expression -> expression PLUS expression .)
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
@@ -2519,9 +2519,9 @@ state 50
     PLUS            reduce using rule 25 (expression -> expression MINUS expression .)
     MINUS           reduce using rule 25 (expression -> expression MINUS expression .)
     $end            reduce using rule 25 (expression -> expression MINUS expression .)
-    DO              reduce using rule 25 (expression -> expression MINUS expression .)
     END             reduce using rule 25 (expression -> expression MINUS expression .)
     SEPARATOR       reduce using rule 25 (expression -> expression MINUS expression .)
+    DO              reduce using rule 25 (expression -> expression MINUS expression .)
     RPAREN          reduce using rule 25 (expression -> expression MINUS expression .)
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
@@ -2584,9 +2584,9 @@ state 51
     TIMES           reduce using rule 26 (expression -> expression TIMES expression .)
     DIVIDE          reduce using rule 26 (expression -> expression TIMES expression .)
     $end            reduce using rule 26 (expression -> expression TIMES expression .)
-    DO              reduce using rule 26 (expression -> expression TIMES expression .)
     END             reduce using rule 26 (expression -> expression TIMES expression .)
     SEPARATOR       reduce using rule 26 (expression -> expression TIMES expression .)
+    DO              reduce using rule 26 (expression -> expression TIMES expression .)
     RPAREN          reduce using rule 26 (expression -> expression TIMES expression .)
 
   ! LESS_THEN       [ shift and go to state 12 ]
@@ -2647,9 +2647,9 @@ state 52
     TIMES           reduce using rule 27 (expression -> expression DIVIDE expression .)
     DIVIDE          reduce using rule 27 (expression -> expression DIVIDE expression .)
     $end            reduce using rule 27 (expression -> expression DIVIDE expression .)
-    DO              reduce using rule 27 (expression -> expression DIVIDE expression .)
     END             reduce using rule 27 (expression -> expression DIVIDE expression .)
     SEPARATOR       reduce using rule 27 (expression -> expression DIVIDE expression .)
+    DO              reduce using rule 27 (expression -> expression DIVIDE expression .)
     RPAREN          reduce using rule 27 (expression -> expression DIVIDE expression .)
 
   ! LESS_THEN       [ shift and go to state 12 ]
@@ -2673,15 +2673,43 @@ state 52
 
 state 53
 
-    (7) expression -> LOOP expression DO . expression
+    (7) expression -> BEGIN body END .
+
+    LESS_THEN       reduce using rule 7 (expression -> BEGIN body END .)
+    GREATER_THEN    reduce using rule 7 (expression -> BEGIN body END .)
+    LESS_EQUALS     reduce using rule 7 (expression -> BEGIN body END .)
+    GREATER_EQUALS  reduce using rule 7 (expression -> BEGIN body END .)
+    EQUALS          reduce using rule 7 (expression -> BEGIN body END .)
+    NOT_EQUALS      reduce using rule 7 (expression -> BEGIN body END .)
+    AND             reduce using rule 7 (expression -> BEGIN body END .)
+    NAND            reduce using rule 7 (expression -> BEGIN body END .)
+    OR              reduce using rule 7 (expression -> BEGIN body END .)
+    NOR             reduce using rule 7 (expression -> BEGIN body END .)
+    EQ              reduce using rule 7 (expression -> BEGIN body END .)
+    XOR             reduce using rule 7 (expression -> BEGIN body END .)
+    IMPL            reduce using rule 7 (expression -> BEGIN body END .)
+    PLUS            reduce using rule 7 (expression -> BEGIN body END .)
+    MINUS           reduce using rule 7 (expression -> BEGIN body END .)
+    TIMES           reduce using rule 7 (expression -> BEGIN body END .)
+    DIVIDE          reduce using rule 7 (expression -> BEGIN body END .)
+    $end            reduce using rule 7 (expression -> BEGIN body END .)
+    END             reduce using rule 7 (expression -> BEGIN body END .)
+    SEPARATOR       reduce using rule 7 (expression -> BEGIN body END .)
+    DO              reduce using rule 7 (expression -> BEGIN body END .)
+    RPAREN          reduce using rule 7 (expression -> BEGIN body END .)
+
+
+state 54
+
+    (12) body -> body SEPARATOR . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -2703,8 +2731,8 @@ state 53
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -2716,45 +2744,17 @@ state 53
 
     expression                     shift and go to state 58
 
-state 54
-
-    (8) expression -> BEGIN body END .
-
-    LESS_THEN       reduce using rule 8 (expression -> BEGIN body END .)
-    GREATER_THEN    reduce using rule 8 (expression -> BEGIN body END .)
-    LESS_EQUALS     reduce using rule 8 (expression -> BEGIN body END .)
-    GREATER_EQUALS  reduce using rule 8 (expression -> BEGIN body END .)
-    EQUALS          reduce using rule 8 (expression -> BEGIN body END .)
-    NOT_EQUALS      reduce using rule 8 (expression -> BEGIN body END .)
-    AND             reduce using rule 8 (expression -> BEGIN body END .)
-    NAND            reduce using rule 8 (expression -> BEGIN body END .)
-    OR              reduce using rule 8 (expression -> BEGIN body END .)
-    NOR             reduce using rule 8 (expression -> BEGIN body END .)
-    EQ              reduce using rule 8 (expression -> BEGIN body END .)
-    XOR             reduce using rule 8 (expression -> BEGIN body END .)
-    IMPL            reduce using rule 8 (expression -> BEGIN body END .)
-    PLUS            reduce using rule 8 (expression -> BEGIN body END .)
-    MINUS           reduce using rule 8 (expression -> BEGIN body END .)
-    TIMES           reduce using rule 8 (expression -> BEGIN body END .)
-    DIVIDE          reduce using rule 8 (expression -> BEGIN body END .)
-    $end            reduce using rule 8 (expression -> BEGIN body END .)
-    DO              reduce using rule 8 (expression -> BEGIN body END .)
-    END             reduce using rule 8 (expression -> BEGIN body END .)
-    SEPARATOR       reduce using rule 8 (expression -> BEGIN body END .)
-    RPAREN          reduce using rule 8 (expression -> BEGIN body END .)
-
-
 state 55
 
-    (12) body -> body SEPARATOR . expression
+    (8) expression -> LOOP expression DO . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
     (4) expression -> . expression GREATER_EQUALS expression
     (5) expression -> . expression EQUALS expression
     (6) expression -> . expression NOT_EQUALS expression
-    (7) expression -> . LOOP expression DO expression
-    (8) expression -> . BEGIN body END
+    (7) expression -> . BEGIN body END
+    (8) expression -> . LOOP expression DO expression
     (9) expression -> . IDENTIFIER
     (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
@@ -2776,8 +2776,8 @@ state 55
     (29) expression -> . FALSE
     (30) expression -> . LPAREN expression RPAREN
 
-    LOOP            shift and go to state 2
-    BEGIN           shift and go to state 3
+    BEGIN           shift and go to state 2
+    LOOP            shift and go to state 3
     IDENTIFIER      shift and go to state 4
     NOT             shift and go to state 5
     NUMBER          shift and go to state 6
@@ -2818,9 +2818,9 @@ state 56
     XOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     IMPL            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     $end            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    DO              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     END             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     SEPARATOR       reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
+    DO              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     RPAREN          reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
@@ -2874,93 +2874,13 @@ state 57
     TIMES           reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     DIVIDE          reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     $end            reduce using rule 30 (expression -> LPAREN expression RPAREN .)
-    DO              reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     END             reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     SEPARATOR       reduce using rule 30 (expression -> LPAREN expression RPAREN .)
+    DO              reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     RPAREN          reduce using rule 30 (expression -> LPAREN expression RPAREN .)
 
 
 state 58
-
-    (7) expression -> LOOP expression DO expression .
-    (1) expression -> expression . LESS_THEN expression
-    (2) expression -> expression . GREATER_THEN expression
-    (3) expression -> expression . LESS_EQUALS expression
-    (4) expression -> expression . GREATER_EQUALS expression
-    (5) expression -> expression . EQUALS expression
-    (6) expression -> expression . NOT_EQUALS expression
-    (14) expression -> expression . AND expression
-    (15) expression -> expression . NAND expression
-    (16) expression -> expression . OR expression
-    (17) expression -> expression . NOR expression
-    (18) expression -> expression . EQ expression
-    (19) expression -> expression . XOR expression
-    (20) expression -> expression . IMPL expression
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . TIMES expression
-    (27) expression -> expression . DIVIDE expression
-
-  ! shift/reduce conflict for LESS_THEN resolved as shift
-  ! shift/reduce conflict for GREATER_THEN resolved as shift
-  ! shift/reduce conflict for LESS_EQUALS resolved as shift
-  ! shift/reduce conflict for GREATER_EQUALS resolved as shift
-  ! shift/reduce conflict for EQUALS resolved as shift
-  ! shift/reduce conflict for NOT_EQUALS resolved as shift
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for NAND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for NOR resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for XOR resolved as shift
-  ! shift/reduce conflict for IMPL resolved as shift
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    $end            reduce using rule 7 (expression -> LOOP expression DO expression .)
-    DO              reduce using rule 7 (expression -> LOOP expression DO expression .)
-    END             reduce using rule 7 (expression -> LOOP expression DO expression .)
-    SEPARATOR       reduce using rule 7 (expression -> LOOP expression DO expression .)
-    RPAREN          reduce using rule 7 (expression -> LOOP expression DO expression .)
-    LESS_THEN       shift and go to state 12
-    GREATER_THEN    shift and go to state 13
-    LESS_EQUALS     shift and go to state 14
-    GREATER_EQUALS  shift and go to state 15
-    EQUALS          shift and go to state 16
-    NOT_EQUALS      shift and go to state 17
-    AND             shift and go to state 18
-    NAND            shift and go to state 19
-    OR              shift and go to state 20
-    NOR             shift and go to state 21
-    EQ              shift and go to state 22
-    XOR             shift and go to state 23
-    IMPL            shift and go to state 24
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 26
-    TIMES           shift and go to state 27
-    DIVIDE          shift and go to state 28
-
-  ! LESS_THEN       [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! GREATER_THEN    [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! EQUALS          [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! AND             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! NAND            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! OR              [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! NOR             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! EQ              [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! XOR             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! IMPL            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! PLUS            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! MINUS           [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! TIMES           [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! DIVIDE          [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-
-
-state 59
 
     (12) body -> body SEPARATOR expression .
     (1) expression -> expression . LESS_THEN expression
@@ -3001,23 +2921,66 @@ state 59
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for LESS_THEN in state 58 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THEN in state 58 resolved as shift
-WARNING: shift/reduce conflict for LESS_EQUALS in state 58 resolved as shift
-WARNING: shift/reduce conflict for GREATER_EQUALS in state 58 resolved as shift
-WARNING: shift/reduce conflict for EQUALS in state 58 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 58 resolved as shift
-WARNING: shift/reduce conflict for AND in state 58 resolved as shift
-WARNING: shift/reduce conflict for NAND in state 58 resolved as shift
-WARNING: shift/reduce conflict for OR in state 58 resolved as shift
-WARNING: shift/reduce conflict for NOR in state 58 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 58 resolved as shift
-WARNING: shift/reduce conflict for XOR in state 58 resolved as shift
-WARNING: shift/reduce conflict for IMPL in state 58 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 58 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 58 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 58 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 58 resolved as shift
+
+state 59
+
+    (8) expression -> LOOP expression DO expression .
+    (1) expression -> expression . LESS_THEN expression
+    (2) expression -> expression . GREATER_THEN expression
+    (3) expression -> expression . LESS_EQUALS expression
+    (4) expression -> expression . GREATER_EQUALS expression
+    (5) expression -> expression . EQUALS expression
+    (6) expression -> expression . NOT_EQUALS expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
+    (18) expression -> expression . EQ expression
+    (19) expression -> expression . XOR expression
+    (20) expression -> expression . IMPL expression
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . TIMES expression
+    (27) expression -> expression . DIVIDE expression
+
+    EQ              reduce using rule 8 (expression -> LOOP expression DO expression .)
+    $end            reduce using rule 8 (expression -> LOOP expression DO expression .)
+    END             reduce using rule 8 (expression -> LOOP expression DO expression .)
+    SEPARATOR       reduce using rule 8 (expression -> LOOP expression DO expression .)
+    DO              reduce using rule 8 (expression -> LOOP expression DO expression .)
+    RPAREN          reduce using rule 8 (expression -> LOOP expression DO expression .)
+    LESS_THEN       shift and go to state 12
+    GREATER_THEN    shift and go to state 13
+    LESS_EQUALS     shift and go to state 14
+    GREATER_EQUALS  shift and go to state 15
+    EQUALS          shift and go to state 16
+    NOT_EQUALS      shift and go to state 17
+    AND             shift and go to state 18
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    XOR             shift and go to state 23
+    IMPL            shift and go to state 24
+    PLUS            shift and go to state 25
+    MINUS           shift and go to state 26
+    TIMES           shift and go to state 27
+    DIVIDE          shift and go to state 28
+
+  ! LESS_THEN       [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! GREATER_THEN    [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! EQUALS          [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! AND             [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! NAND            [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! OR              [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! NOR             [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! XOR             [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! IMPL            [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! PLUS            [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! DIVIDE          [ reduce using rule 8 (expression -> LOOP expression DO expression .) ]
+  ! EQ              [ shift and go to state 22 ]
+
