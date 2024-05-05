@@ -23,8 +23,8 @@ def check_generator_module():
 
 ### the parser
 precedence = [
-    ['left', 'LESS_THEN', 'GREATER_THEN', 'LESS_EQUALS', 'GREATER_EQUALS'],
-    ['left', 'EQUALS', 'NOT_EQUALS']
+    ['left', 'EQUALS', 'NOT_EQUALS'],
+    ['left', 'LESS_THEN', 'GREATER_THEN', 'LESS_EQUALS', 'GREATER_EQUALS']
 ] + precedence
 
 def p_expression_binary_comparison(p):

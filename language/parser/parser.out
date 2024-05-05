@@ -2810,13 +2810,7 @@ state 56
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    AND             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    NAND            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    OR              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    NOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     EQ              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    XOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    IMPL            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     $end            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     END             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     SEPARATOR       reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
@@ -2828,6 +2822,12 @@ state 56
     GREATER_EQUALS  shift and go to state 15
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
+    AND             shift and go to state 18
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    XOR             shift and go to state 23
+    IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
     TIMES           shift and go to state 27
@@ -2839,17 +2839,17 @@ state 56
   ! GREATER_EQUALS  [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! EQUALS          [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! NOT_EQUALS      [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! AND             [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! NAND            [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! OR              [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! NOR             [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! XOR             [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
+  ! IMPL            [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! PLUS            [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! MINUS           [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! TIMES           [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! DIVIDE          [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
-  ! AND             [ shift and go to state 18 ]
-  ! NAND            [ shift and go to state 19 ]
-  ! OR              [ shift and go to state 20 ]
-  ! NOR             [ shift and go to state 21 ]
   ! EQ              [ shift and go to state 22 ]
-  ! XOR             [ shift and go to state 23 ]
-  ! IMPL            [ shift and go to state 24 ]
 
 
 state 57

@@ -1,4 +1,4 @@
-from .assign_expr import *
+from .comp_expr import *
 
 # Boolean
 reserved_set |= {
@@ -33,8 +33,8 @@ bool_lexer = lex()
 # Test Lexer
 if __name__ == '__main__':
     data = '''
-    x := 5.6 < (3 + 6.08) and -8 = 2 - 10
-    y := true xor false
+    5.6 < (3 + 6.08) and -8 = 2 - 10
+    true xor false
     '''
 
     bool_lexer.input(data)

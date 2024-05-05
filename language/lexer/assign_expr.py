@@ -1,4 +1,4 @@
-from .comp_expr import *
+from .bool_expr import *
 
 token_set |= {'IDENTIFIER', 'ASSIGN'}
 
@@ -20,8 +20,8 @@ assign_lexer = lex()
 # Test Lexer
 if __name__ == '__main__':
     data = '''
-    x := 5.6 < (3 + 6.08)
-    y := 2 - 10
+    x := 5.6 < (3 + 6.08) and -8 = 2 - 10
+    y := true xor false
     '''
 
     assign_lexer.input(data)

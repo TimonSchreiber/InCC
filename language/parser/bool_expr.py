@@ -1,4 +1,4 @@
-from .assign_expr import *
+from .comp_expr import *
 from ..lexer.bool_expr import tokens, bool_lexer
 import interpreter.all_expr as all_expr
 
