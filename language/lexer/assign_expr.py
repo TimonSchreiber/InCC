@@ -1,4 +1,4 @@
-from .bool_expr import *
+from .comp_expr import *
 
 token_set |= {'IDENTIFIER', 'ASSIGN'}
 

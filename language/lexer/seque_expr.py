@@ -1,4 +1,4 @@
-from .assign_expr import *
+from .bool_expr import *
 
 # Sequences
 token_set |= {'BEGIN', 'END', 'SEPARATOR'}

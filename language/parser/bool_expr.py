@@ -1,4 +1,4 @@
-from .comp_expr import *
+from .assign_expr import *
 from ..lexer.bool_expr import tokens, bool_lexer
 import interpreter.all_expr as all_expr
 
@@ -24,11 +24,16 @@ def check_generator_module():
         raise Exception("code generator doesn't implement all expected functions")
 
 ### the parser
-precedence = [
-    ['left', 'OR', 'NOR'],
-    ['left', 'AND', 'NAND'],
-    ['left', 'XOR', 'IMPL'],
-] + precedence
+# insert above 'ASSIGN' but below 'EQUALS'
+precedence.insert(1, ['left', 'XOR', 'NEQ', 'EQ', 'IMPL'])
+precedence.insert(1, ['left', 'AND', 'NAND'])
+precedence.insert(1, ['left', 'OR', 'NOR'])
+
+# = [
+#     ['left', 'OR', 'NOR'],
+#     ['left', 'AND', 'NAND'],
+#     ['left', 'XOR', 'IMPL'],
+# ] + precedence
 
 
 def p_expression_unary_not(p):
@@ -40,8 +45,9 @@ def p_expression_binary_boolean(p):
                   | expression NAND expression
                   | expression OR expression
                   | expression NOR expression
-                  | expression EQ expression %prec EQUALS
                   | expression XOR expression
+                  | expression EQ expression
+                  | expression NEQ expression
                   | expression IMPL expression'''
     p[0] = gen.BinaryOperatorExpression(p[1], p[2], p[3])
 

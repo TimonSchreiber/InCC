@@ -9,12 +9,14 @@ if __name__ == '__main__':
         {
             x := 1;
             y := 1;
-            z := loop 6 DO
+            z := loop x + y * 6 DO
             {
-                y := y * 2
+                x := x * 2;
+                y := x > 6 neq x > 120
             }
         }
         '''
+    # i = 'y := 128 > 6 neq 128 > 120'
     result = parser.parse(input=i, lexer=lexer)
     print(i,"\n\t",result.eval(env))
     b = 1
@@ -28,8 +30,8 @@ if __name__ == '__main__':
 note:
     1. arith_expr
     2. comp_expr
-    3. bool_expr
     4. assign_expr
+    3. bool_expr
     5. seque_expr
     6. loop_expr
     7. for_expr

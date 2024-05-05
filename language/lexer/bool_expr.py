@@ -1,4 +1,4 @@
-from .comp_expr import *
+from .assign_expr import *
 
 # Boolean
 reserved_set |= {
@@ -9,19 +9,11 @@ reserved_set |= {
     'NAND',
     'OR',
     'NOR',
-    'EQ',
     'XOR',
+    'EQ',
+    'NEQ',
     'IMPL'
 }
-
-t_NOT   = r'not'
-t_AND   = r'and'
-t_NAND  = r'nand'
-t_OR    = r'or'
-t_NOR   = r'nor'
-t_EQ    = r'eq'
-t_XOR   = r'xor|neq'
-t_IMPL  = r'impl'
 
 
 # Combine Tokens

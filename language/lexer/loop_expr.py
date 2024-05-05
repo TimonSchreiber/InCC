@@ -20,7 +20,6 @@ if __name__ == '__main__':
             y := true xor false
         }
     '''
-
     loop_lexer.input(data)
 
     for token in loop_lexer:
