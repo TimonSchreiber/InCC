@@ -27,9 +27,8 @@ def check_generator_module():
 precedence = [
     ['left', 'OR', 'NOR'],
     ['left', 'AND', 'NAND'],
-    ['left', 'EQ', 'XOR', 'IMPL'],
+    ['left', 'XOR', 'IMPL'],
 ] + precedence
-# TODO: precedence of IMPL not mentioned in cpp-reference
 
 
 def p_expression_unary_not(p):
@@ -38,11 +37,11 @@ def p_expression_unary_not(p):
 
 def p_expression_binary_boolean(p):
     '''expression : expression AND expression
-                  | expression OR expression
-                  | expression EQ expression
-                  | expression XOR expression
                   | expression NAND expression
+                  | expression OR expression
                   | expression NOR expression
+                  | expression EQ expression %prec EQUALS
+                  | expression XOR expression
                   | expression IMPL expression'''
     p[0] = gen.BinaryOperatorExpression(p[1], p[2], p[3])
 

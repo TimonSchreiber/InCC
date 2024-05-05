@@ -6,21 +6,21 @@ reserved_set |= {
     'FALSE',
     'NOT',
     'AND',
+    'NAND',
     'OR',
+    'NOR',
     'EQ',
     'XOR',
-    'NAND',
-    'NOR',
     'IMPL'
 }
 
 t_NOT   = r'not'
 t_AND   = r'and'
+t_NAND  = r'nand'
 t_OR    = r'or'
+t_NOR   = r'nor'
 t_EQ    = r'eq'
 t_XOR   = r'xor|neq'
-t_NAND  = r'nand'
-t_NOR   = r'nor'
 t_IMPL  = r'impl'
 
 

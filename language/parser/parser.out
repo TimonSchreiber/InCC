@@ -12,19 +12,19 @@ Rule 6     expression -> expression NOT_EQUALS expression
 Rule 7     expression -> LOOP expression DO expression
 Rule 8     expression -> BEGIN body END
 Rule 9     expression -> IDENTIFIER
-Rule 10    body -> expression
-Rule 11    body -> body SEPARATOR expression
-Rule 12    expression -> NOT expression
+Rule 10    expression -> NOT expression
+Rule 11    body -> expression
+Rule 12    body -> body SEPARATOR expression
 Rule 13    expression -> IDENTIFIER ASSIGN expression
-Rule 14    expression -> NUMBER
-Rule 15    expression -> FLOAT
-Rule 16    expression -> expression AND expression
-Rule 17    expression -> expression OR expression
+Rule 14    expression -> expression AND expression
+Rule 15    expression -> expression NAND expression
+Rule 16    expression -> expression OR expression
+Rule 17    expression -> expression NOR expression
 Rule 18    expression -> expression EQ expression
 Rule 19    expression -> expression XOR expression
-Rule 20    expression -> expression NAND expression
-Rule 21    expression -> expression NOR expression
-Rule 22    expression -> expression IMPL expression
+Rule 20    expression -> expression IMPL expression
+Rule 21    expression -> NUMBER
+Rule 22    expression -> FLOAT
 Rule 23    expression -> MINUS expression
 Rule 24    expression -> expression PLUS expression
 Rule 25    expression -> expression MINUS expression
@@ -36,7 +36,7 @@ Rule 30    expression -> LPAREN expression RPAREN
 
 Terminals, with rules where they appear
 
-AND                  : 16
+AND                  : 14
 ASSIGN               : 13
 BEGIN                : 8
 DIVIDE               : 27
@@ -45,25 +45,25 @@ END                  : 8
 EQ                   : 18
 EQUALS               : 5
 FALSE                : 29
-FLOAT                : 15
+FLOAT                : 22
 GREATER_EQUALS       : 4
 GREATER_THEN         : 2
 IDENTIFIER           : 9 13
-IMPL                 : 22
+IMPL                 : 20
 LESS_EQUALS          : 3
 LESS_THEN            : 1
 LOOP                 : 7
 LPAREN               : 30
 MINUS                : 23 25
-NAND                 : 20
-NOR                  : 21
-NOT                  : 12
+NAND                 : 15
+NOR                  : 17
+NOT                  : 10
 NOT_EQUALS           : 6
-NUMBER               : 14
-OR                   : 17
+NUMBER               : 21
+OR                   : 16
 PLUS                 : 24
 RPAREN               : 30
-SEPARATOR            : 11
+SEPARATOR            : 12
 TIMES                : 26
 TRUE                 : 28
 XOR                  : 19
@@ -71,8 +71,8 @@ error                :
 
 Nonterminals, with rules where they appear
 
-body                 : 8 11
-expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 10 11 12 13 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 24 25 25 26 26 27 27 30 0
+body                 : 8 12
+expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 10 11 12 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 23 24 24 25 25 26 26 27 27 30 0
 
 Parsing method: LALR
 
@@ -88,17 +88,17 @@ state 0
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -130,13 +130,13 @@ state 1
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -149,11 +149,11 @@ state 1
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -173,17 +173,17 @@ state 2
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -209,8 +209,8 @@ state 2
 state 3
 
     (8) expression -> BEGIN . body END
-    (10) body -> . expression
-    (11) body -> . body SEPARATOR expression
+    (11) body -> . expression
+    (12) body -> . body SEPARATOR expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -220,17 +220,17 @@ state 3
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -266,11 +266,11 @@ state 4
     EQUALS          reduce using rule 9 (expression -> IDENTIFIER .)
     NOT_EQUALS      reduce using rule 9 (expression -> IDENTIFIER .)
     AND             reduce using rule 9 (expression -> IDENTIFIER .)
+    NAND            reduce using rule 9 (expression -> IDENTIFIER .)
     OR              reduce using rule 9 (expression -> IDENTIFIER .)
+    NOR             reduce using rule 9 (expression -> IDENTIFIER .)
     EQ              reduce using rule 9 (expression -> IDENTIFIER .)
     XOR             reduce using rule 9 (expression -> IDENTIFIER .)
-    NAND            reduce using rule 9 (expression -> IDENTIFIER .)
-    NOR             reduce using rule 9 (expression -> IDENTIFIER .)
     IMPL            reduce using rule 9 (expression -> IDENTIFIER .)
     PLUS            reduce using rule 9 (expression -> IDENTIFIER .)
     MINUS           reduce using rule 9 (expression -> IDENTIFIER .)
@@ -286,7 +286,7 @@ state 4
 
 state 5
 
-    (12) expression -> NOT . expression
+    (10) expression -> NOT . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -296,17 +296,17 @@ state 5
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -331,58 +331,58 @@ state 5
 
 state 6
 
-    (14) expression -> NUMBER .
+    (21) expression -> NUMBER .
 
-    LESS_THEN       reduce using rule 14 (expression -> NUMBER .)
-    GREATER_THEN    reduce using rule 14 (expression -> NUMBER .)
-    LESS_EQUALS     reduce using rule 14 (expression -> NUMBER .)
-    GREATER_EQUALS  reduce using rule 14 (expression -> NUMBER .)
-    EQUALS          reduce using rule 14 (expression -> NUMBER .)
-    NOT_EQUALS      reduce using rule 14 (expression -> NUMBER .)
-    AND             reduce using rule 14 (expression -> NUMBER .)
-    OR              reduce using rule 14 (expression -> NUMBER .)
-    EQ              reduce using rule 14 (expression -> NUMBER .)
-    XOR             reduce using rule 14 (expression -> NUMBER .)
-    NAND            reduce using rule 14 (expression -> NUMBER .)
-    NOR             reduce using rule 14 (expression -> NUMBER .)
-    IMPL            reduce using rule 14 (expression -> NUMBER .)
-    PLUS            reduce using rule 14 (expression -> NUMBER .)
-    MINUS           reduce using rule 14 (expression -> NUMBER .)
-    TIMES           reduce using rule 14 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 14 (expression -> NUMBER .)
-    $end            reduce using rule 14 (expression -> NUMBER .)
-    DO              reduce using rule 14 (expression -> NUMBER .)
-    END             reduce using rule 14 (expression -> NUMBER .)
-    SEPARATOR       reduce using rule 14 (expression -> NUMBER .)
-    RPAREN          reduce using rule 14 (expression -> NUMBER .)
+    LESS_THEN       reduce using rule 21 (expression -> NUMBER .)
+    GREATER_THEN    reduce using rule 21 (expression -> NUMBER .)
+    LESS_EQUALS     reduce using rule 21 (expression -> NUMBER .)
+    GREATER_EQUALS  reduce using rule 21 (expression -> NUMBER .)
+    EQUALS          reduce using rule 21 (expression -> NUMBER .)
+    NOT_EQUALS      reduce using rule 21 (expression -> NUMBER .)
+    AND             reduce using rule 21 (expression -> NUMBER .)
+    NAND            reduce using rule 21 (expression -> NUMBER .)
+    OR              reduce using rule 21 (expression -> NUMBER .)
+    NOR             reduce using rule 21 (expression -> NUMBER .)
+    EQ              reduce using rule 21 (expression -> NUMBER .)
+    XOR             reduce using rule 21 (expression -> NUMBER .)
+    IMPL            reduce using rule 21 (expression -> NUMBER .)
+    PLUS            reduce using rule 21 (expression -> NUMBER .)
+    MINUS           reduce using rule 21 (expression -> NUMBER .)
+    TIMES           reduce using rule 21 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 21 (expression -> NUMBER .)
+    $end            reduce using rule 21 (expression -> NUMBER .)
+    DO              reduce using rule 21 (expression -> NUMBER .)
+    END             reduce using rule 21 (expression -> NUMBER .)
+    SEPARATOR       reduce using rule 21 (expression -> NUMBER .)
+    RPAREN          reduce using rule 21 (expression -> NUMBER .)
 
 
 state 7
 
-    (15) expression -> FLOAT .
+    (22) expression -> FLOAT .
 
-    LESS_THEN       reduce using rule 15 (expression -> FLOAT .)
-    GREATER_THEN    reduce using rule 15 (expression -> FLOAT .)
-    LESS_EQUALS     reduce using rule 15 (expression -> FLOAT .)
-    GREATER_EQUALS  reduce using rule 15 (expression -> FLOAT .)
-    EQUALS          reduce using rule 15 (expression -> FLOAT .)
-    NOT_EQUALS      reduce using rule 15 (expression -> FLOAT .)
-    AND             reduce using rule 15 (expression -> FLOAT .)
-    OR              reduce using rule 15 (expression -> FLOAT .)
-    EQ              reduce using rule 15 (expression -> FLOAT .)
-    XOR             reduce using rule 15 (expression -> FLOAT .)
-    NAND            reduce using rule 15 (expression -> FLOAT .)
-    NOR             reduce using rule 15 (expression -> FLOAT .)
-    IMPL            reduce using rule 15 (expression -> FLOAT .)
-    PLUS            reduce using rule 15 (expression -> FLOAT .)
-    MINUS           reduce using rule 15 (expression -> FLOAT .)
-    TIMES           reduce using rule 15 (expression -> FLOAT .)
-    DIVIDE          reduce using rule 15 (expression -> FLOAT .)
-    $end            reduce using rule 15 (expression -> FLOAT .)
-    DO              reduce using rule 15 (expression -> FLOAT .)
-    END             reduce using rule 15 (expression -> FLOAT .)
-    SEPARATOR       reduce using rule 15 (expression -> FLOAT .)
-    RPAREN          reduce using rule 15 (expression -> FLOAT .)
+    LESS_THEN       reduce using rule 22 (expression -> FLOAT .)
+    GREATER_THEN    reduce using rule 22 (expression -> FLOAT .)
+    LESS_EQUALS     reduce using rule 22 (expression -> FLOAT .)
+    GREATER_EQUALS  reduce using rule 22 (expression -> FLOAT .)
+    EQUALS          reduce using rule 22 (expression -> FLOAT .)
+    NOT_EQUALS      reduce using rule 22 (expression -> FLOAT .)
+    AND             reduce using rule 22 (expression -> FLOAT .)
+    NAND            reduce using rule 22 (expression -> FLOAT .)
+    OR              reduce using rule 22 (expression -> FLOAT .)
+    NOR             reduce using rule 22 (expression -> FLOAT .)
+    EQ              reduce using rule 22 (expression -> FLOAT .)
+    XOR             reduce using rule 22 (expression -> FLOAT .)
+    IMPL            reduce using rule 22 (expression -> FLOAT .)
+    PLUS            reduce using rule 22 (expression -> FLOAT .)
+    MINUS           reduce using rule 22 (expression -> FLOAT .)
+    TIMES           reduce using rule 22 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 22 (expression -> FLOAT .)
+    $end            reduce using rule 22 (expression -> FLOAT .)
+    DO              reduce using rule 22 (expression -> FLOAT .)
+    END             reduce using rule 22 (expression -> FLOAT .)
+    SEPARATOR       reduce using rule 22 (expression -> FLOAT .)
+    RPAREN          reduce using rule 22 (expression -> FLOAT .)
 
 
 state 8
@@ -397,17 +397,17 @@ state 8
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -441,11 +441,11 @@ state 9
     EQUALS          reduce using rule 28 (expression -> TRUE .)
     NOT_EQUALS      reduce using rule 28 (expression -> TRUE .)
     AND             reduce using rule 28 (expression -> TRUE .)
+    NAND            reduce using rule 28 (expression -> TRUE .)
     OR              reduce using rule 28 (expression -> TRUE .)
+    NOR             reduce using rule 28 (expression -> TRUE .)
     EQ              reduce using rule 28 (expression -> TRUE .)
     XOR             reduce using rule 28 (expression -> TRUE .)
-    NAND            reduce using rule 28 (expression -> TRUE .)
-    NOR             reduce using rule 28 (expression -> TRUE .)
     IMPL            reduce using rule 28 (expression -> TRUE .)
     PLUS            reduce using rule 28 (expression -> TRUE .)
     MINUS           reduce using rule 28 (expression -> TRUE .)
@@ -469,11 +469,11 @@ state 10
     EQUALS          reduce using rule 29 (expression -> FALSE .)
     NOT_EQUALS      reduce using rule 29 (expression -> FALSE .)
     AND             reduce using rule 29 (expression -> FALSE .)
+    NAND            reduce using rule 29 (expression -> FALSE .)
     OR              reduce using rule 29 (expression -> FALSE .)
+    NOR             reduce using rule 29 (expression -> FALSE .)
     EQ              reduce using rule 29 (expression -> FALSE .)
     XOR             reduce using rule 29 (expression -> FALSE .)
-    NAND            reduce using rule 29 (expression -> FALSE .)
-    NOR             reduce using rule 29 (expression -> FALSE .)
     IMPL            reduce using rule 29 (expression -> FALSE .)
     PLUS            reduce using rule 29 (expression -> FALSE .)
     MINUS           reduce using rule 29 (expression -> FALSE .)
@@ -498,17 +498,17 @@ state 11
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -543,17 +543,17 @@ state 12
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -588,17 +588,17 @@ state 13
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -633,17 +633,17 @@ state 14
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -678,17 +678,17 @@ state 15
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -723,17 +723,17 @@ state 16
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -768,17 +768,17 @@ state 17
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -803,7 +803,7 @@ state 17
 
 state 18
 
-    (16) expression -> expression AND . expression
+    (14) expression -> expression AND . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -813,17 +813,17 @@ state 18
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -848,7 +848,7 @@ state 18
 
 state 19
 
-    (17) expression -> expression OR . expression
+    (15) expression -> expression NAND . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -858,17 +858,17 @@ state 19
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -893,7 +893,7 @@ state 19
 
 state 20
 
-    (18) expression -> expression EQ . expression
+    (16) expression -> expression OR . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -903,17 +903,17 @@ state 20
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -938,7 +938,7 @@ state 20
 
 state 21
 
-    (19) expression -> expression XOR . expression
+    (17) expression -> expression NOR . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -948,17 +948,17 @@ state 21
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -983,7 +983,7 @@ state 21
 
 state 22
 
-    (20) expression -> expression NAND . expression
+    (18) expression -> expression EQ . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -993,17 +993,17 @@ state 22
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1028,7 +1028,7 @@ state 22
 
 state 23
 
-    (21) expression -> expression NOR . expression
+    (19) expression -> expression XOR . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1038,17 +1038,17 @@ state 23
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1073,7 +1073,7 @@ state 23
 
 state 24
 
-    (22) expression -> expression IMPL . expression
+    (20) expression -> expression IMPL . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1083,17 +1083,17 @@ state 24
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1128,17 +1128,17 @@ state 25
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1173,17 +1173,17 @@ state 26
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1218,17 +1218,17 @@ state 27
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1263,17 +1263,17 @@ state 28
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1305,13 +1305,13 @@ state 29
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1325,11 +1325,11 @@ state 29
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -1340,7 +1340,7 @@ state 29
 state 30
 
     (8) expression -> BEGIN body . END
-    (11) body -> body . SEPARATOR expression
+    (12) body -> body . SEPARATOR expression
 
     END             shift and go to state 54
     SEPARATOR       shift and go to state 55
@@ -1348,27 +1348,27 @@ state 30
 
 state 31
 
-    (10) body -> expression .
+    (11) body -> expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    END             reduce using rule 10 (body -> expression .)
-    SEPARATOR       reduce using rule 10 (body -> expression .)
+    END             reduce using rule 11 (body -> expression .)
+    SEPARATOR       reduce using rule 11 (body -> expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
     LESS_EQUALS     shift and go to state 14
@@ -1376,11 +1376,11 @@ state 31
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -1400,17 +1400,17 @@ state 32
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -1435,47 +1435,47 @@ state 32
 
 state 33
 
-    (12) expression -> NOT expression .
+    (10) expression -> NOT expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    LESS_THEN       reduce using rule 12 (expression -> NOT expression .)
-    GREATER_THEN    reduce using rule 12 (expression -> NOT expression .)
-    LESS_EQUALS     reduce using rule 12 (expression -> NOT expression .)
-    GREATER_EQUALS  reduce using rule 12 (expression -> NOT expression .)
-    EQUALS          reduce using rule 12 (expression -> NOT expression .)
-    NOT_EQUALS      reduce using rule 12 (expression -> NOT expression .)
-    AND             reduce using rule 12 (expression -> NOT expression .)
-    OR              reduce using rule 12 (expression -> NOT expression .)
-    EQ              reduce using rule 12 (expression -> NOT expression .)
-    XOR             reduce using rule 12 (expression -> NOT expression .)
-    NAND            reduce using rule 12 (expression -> NOT expression .)
-    NOR             reduce using rule 12 (expression -> NOT expression .)
-    IMPL            reduce using rule 12 (expression -> NOT expression .)
-    PLUS            reduce using rule 12 (expression -> NOT expression .)
-    MINUS           reduce using rule 12 (expression -> NOT expression .)
-    TIMES           reduce using rule 12 (expression -> NOT expression .)
-    DIVIDE          reduce using rule 12 (expression -> NOT expression .)
-    $end            reduce using rule 12 (expression -> NOT expression .)
-    DO              reduce using rule 12 (expression -> NOT expression .)
-    END             reduce using rule 12 (expression -> NOT expression .)
-    SEPARATOR       reduce using rule 12 (expression -> NOT expression .)
-    RPAREN          reduce using rule 12 (expression -> NOT expression .)
+    LESS_THEN       reduce using rule 10 (expression -> NOT expression .)
+    GREATER_THEN    reduce using rule 10 (expression -> NOT expression .)
+    LESS_EQUALS     reduce using rule 10 (expression -> NOT expression .)
+    GREATER_EQUALS  reduce using rule 10 (expression -> NOT expression .)
+    EQUALS          reduce using rule 10 (expression -> NOT expression .)
+    NOT_EQUALS      reduce using rule 10 (expression -> NOT expression .)
+    AND             reduce using rule 10 (expression -> NOT expression .)
+    NAND            reduce using rule 10 (expression -> NOT expression .)
+    OR              reduce using rule 10 (expression -> NOT expression .)
+    NOR             reduce using rule 10 (expression -> NOT expression .)
+    EQ              reduce using rule 10 (expression -> NOT expression .)
+    XOR             reduce using rule 10 (expression -> NOT expression .)
+    IMPL            reduce using rule 10 (expression -> NOT expression .)
+    PLUS            reduce using rule 10 (expression -> NOT expression .)
+    MINUS           reduce using rule 10 (expression -> NOT expression .)
+    TIMES           reduce using rule 10 (expression -> NOT expression .)
+    DIVIDE          reduce using rule 10 (expression -> NOT expression .)
+    $end            reduce using rule 10 (expression -> NOT expression .)
+    DO              reduce using rule 10 (expression -> NOT expression .)
+    END             reduce using rule 10 (expression -> NOT expression .)
+    SEPARATOR       reduce using rule 10 (expression -> NOT expression .)
+    RPAREN          reduce using rule 10 (expression -> NOT expression .)
 
   ! LESS_THEN       [ shift and go to state 12 ]
   ! GREATER_THEN    [ shift and go to state 13 ]
@@ -1484,11 +1484,11 @@ state 33
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -1505,13 +1505,13 @@ state 34
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1524,11 +1524,11 @@ state 34
     EQUALS          reduce using rule 23 (expression -> MINUS expression .)
     NOT_EQUALS      reduce using rule 23 (expression -> MINUS expression .)
     AND             reduce using rule 23 (expression -> MINUS expression .)
+    NAND            reduce using rule 23 (expression -> MINUS expression .)
     OR              reduce using rule 23 (expression -> MINUS expression .)
+    NOR             reduce using rule 23 (expression -> MINUS expression .)
     EQ              reduce using rule 23 (expression -> MINUS expression .)
     XOR             reduce using rule 23 (expression -> MINUS expression .)
-    NAND            reduce using rule 23 (expression -> MINUS expression .)
-    NOR             reduce using rule 23 (expression -> MINUS expression .)
     IMPL            reduce using rule 23 (expression -> MINUS expression .)
     PLUS            reduce using rule 23 (expression -> MINUS expression .)
     MINUS           reduce using rule 23 (expression -> MINUS expression .)
@@ -1547,11 +1547,11 @@ state 34
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -1568,13 +1568,13 @@ state 35
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1588,11 +1588,11 @@ state 35
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -1609,13 +1609,13 @@ state 36
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1626,11 +1626,11 @@ state 36
     LESS_EQUALS     reduce using rule 1 (expression -> expression LESS_THEN expression .)
     GREATER_EQUALS  reduce using rule 1 (expression -> expression LESS_THEN expression .)
     AND             reduce using rule 1 (expression -> expression LESS_THEN expression .)
+    NAND            reduce using rule 1 (expression -> expression LESS_THEN expression .)
     OR              reduce using rule 1 (expression -> expression LESS_THEN expression .)
+    NOR             reduce using rule 1 (expression -> expression LESS_THEN expression .)
     EQ              reduce using rule 1 (expression -> expression LESS_THEN expression .)
     XOR             reduce using rule 1 (expression -> expression LESS_THEN expression .)
-    NAND            reduce using rule 1 (expression -> expression LESS_THEN expression .)
-    NOR             reduce using rule 1 (expression -> expression LESS_THEN expression .)
     IMPL            reduce using rule 1 (expression -> expression LESS_THEN expression .)
     $end            reduce using rule 1 (expression -> expression LESS_THEN expression .)
     DO              reduce using rule 1 (expression -> expression LESS_THEN expression .)
@@ -1655,11 +1655,11 @@ state 36
   ! LESS_EQUALS     [ shift and go to state 14 ]
   ! GREATER_EQUALS  [ shift and go to state 15 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -1672,13 +1672,13 @@ state 37
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1689,11 +1689,11 @@ state 37
     LESS_EQUALS     reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     GREATER_EQUALS  reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     AND             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
+    NAND            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     OR              reduce using rule 2 (expression -> expression GREATER_THEN expression .)
+    NOR             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     EQ              reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     XOR             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
-    NAND            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
-    NOR             reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     IMPL            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     $end            reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     DO              reduce using rule 2 (expression -> expression GREATER_THEN expression .)
@@ -1718,11 +1718,11 @@ state 37
   ! LESS_EQUALS     [ shift and go to state 14 ]
   ! GREATER_EQUALS  [ shift and go to state 15 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -1735,13 +1735,13 @@ state 38
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1752,11 +1752,11 @@ state 38
     LESS_EQUALS     reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     GREATER_EQUALS  reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     AND             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
+    NAND            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     OR              reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
+    NOR             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     EQ              reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     XOR             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
-    NAND            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
-    NOR             reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     IMPL            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     $end            reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     DO              reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
@@ -1781,11 +1781,11 @@ state 38
   ! LESS_EQUALS     [ shift and go to state 14 ]
   ! GREATER_EQUALS  [ shift and go to state 15 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -1798,13 +1798,13 @@ state 39
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1815,11 +1815,11 @@ state 39
     LESS_EQUALS     reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     GREATER_EQUALS  reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     AND             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
+    NAND            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     OR              reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
+    NOR             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     EQ              reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     XOR             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
-    NAND            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
-    NOR             reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     IMPL            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     $end            reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     DO              reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
@@ -1844,11 +1844,11 @@ state 39
   ! LESS_EQUALS     [ shift and go to state 14 ]
   ! GREATER_EQUALS  [ shift and go to state 15 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -1861,13 +1861,13 @@ state 40
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1880,11 +1880,11 @@ state 40
     EQUALS          reduce using rule 5 (expression -> expression EQUALS expression .)
     NOT_EQUALS      reduce using rule 5 (expression -> expression EQUALS expression .)
     AND             reduce using rule 5 (expression -> expression EQUALS expression .)
+    NAND            reduce using rule 5 (expression -> expression EQUALS expression .)
     OR              reduce using rule 5 (expression -> expression EQUALS expression .)
+    NOR             reduce using rule 5 (expression -> expression EQUALS expression .)
     EQ              reduce using rule 5 (expression -> expression EQUALS expression .)
     XOR             reduce using rule 5 (expression -> expression EQUALS expression .)
-    NAND            reduce using rule 5 (expression -> expression EQUALS expression .)
-    NOR             reduce using rule 5 (expression -> expression EQUALS expression .)
     IMPL            reduce using rule 5 (expression -> expression EQUALS expression .)
     $end            reduce using rule 5 (expression -> expression EQUALS expression .)
     DO              reduce using rule 5 (expression -> expression EQUALS expression .)
@@ -1907,11 +1907,11 @@ state 40
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -1924,13 +1924,13 @@ state 41
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -1943,11 +1943,11 @@ state 41
     EQUALS          reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     NOT_EQUALS      reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     AND             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
+    NAND            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     OR              reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
+    NOR             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     EQ              reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     XOR             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
-    NAND            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
-    NOR             reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     IMPL            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     $end            reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     DO              reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
@@ -1970,105 +1970,169 @@ state 41
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
 state 42
 
-    (16) expression -> expression AND expression .
+    (14) expression -> expression AND expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    AND             reduce using rule 16 (expression -> expression AND expression .)
-    OR              reduce using rule 16 (expression -> expression AND expression .)
-    NAND            reduce using rule 16 (expression -> expression AND expression .)
-    NOR             reduce using rule 16 (expression -> expression AND expression .)
-    $end            reduce using rule 16 (expression -> expression AND expression .)
-    DO              reduce using rule 16 (expression -> expression AND expression .)
-    END             reduce using rule 16 (expression -> expression AND expression .)
-    SEPARATOR       reduce using rule 16 (expression -> expression AND expression .)
-    RPAREN          reduce using rule 16 (expression -> expression AND expression .)
+    AND             reduce using rule 14 (expression -> expression AND expression .)
+    NAND            reduce using rule 14 (expression -> expression AND expression .)
+    OR              reduce using rule 14 (expression -> expression AND expression .)
+    NOR             reduce using rule 14 (expression -> expression AND expression .)
+    EQ              reduce using rule 14 (expression -> expression AND expression .)
+    $end            reduce using rule 14 (expression -> expression AND expression .)
+    DO              reduce using rule 14 (expression -> expression AND expression .)
+    END             reduce using rule 14 (expression -> expression AND expression .)
+    SEPARATOR       reduce using rule 14 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 14 (expression -> expression AND expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
     LESS_EQUALS     shift and go to state 14
     GREATER_EQUALS  shift and go to state 15
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
 
-  ! LESS_THEN       [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! GREATER_THEN    [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! EQUALS          [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! EQ              [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! XOR             [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! IMPL            [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! PLUS            [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! MINUS           [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! TIMES           [ reduce using rule 16 (expression -> expression AND expression .) ]
-  ! DIVIDE          [ reduce using rule 16 (expression -> expression AND expression .) ]
+  ! LESS_THEN       [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! GREATER_THEN    [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! EQUALS          [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! XOR             [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! IMPL            [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! PLUS            [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 14 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 14 (expression -> expression AND expression .) ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
 
 
 state 43
 
-    (17) expression -> expression OR expression .
+    (15) expression -> expression NAND expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    OR              reduce using rule 17 (expression -> expression OR expression .)
-    NOR             reduce using rule 17 (expression -> expression OR expression .)
-    $end            reduce using rule 17 (expression -> expression OR expression .)
-    DO              reduce using rule 17 (expression -> expression OR expression .)
-    END             reduce using rule 17 (expression -> expression OR expression .)
-    SEPARATOR       reduce using rule 17 (expression -> expression OR expression .)
-    RPAREN          reduce using rule 17 (expression -> expression OR expression .)
+    AND             reduce using rule 15 (expression -> expression NAND expression .)
+    NAND            reduce using rule 15 (expression -> expression NAND expression .)
+    OR              reduce using rule 15 (expression -> expression NAND expression .)
+    NOR             reduce using rule 15 (expression -> expression NAND expression .)
+    EQ              reduce using rule 15 (expression -> expression NAND expression .)
+    $end            reduce using rule 15 (expression -> expression NAND expression .)
+    DO              reduce using rule 15 (expression -> expression NAND expression .)
+    END             reduce using rule 15 (expression -> expression NAND expression .)
+    SEPARATOR       reduce using rule 15 (expression -> expression NAND expression .)
+    RPAREN          reduce using rule 15 (expression -> expression NAND expression .)
+    LESS_THEN       shift and go to state 12
+    GREATER_THEN    shift and go to state 13
+    LESS_EQUALS     shift and go to state 14
+    GREATER_EQUALS  shift and go to state 15
+    EQUALS          shift and go to state 16
+    NOT_EQUALS      shift and go to state 17
+    XOR             shift and go to state 23
+    IMPL            shift and go to state 24
+    PLUS            shift and go to state 25
+    MINUS           shift and go to state 26
+    TIMES           shift and go to state 27
+    DIVIDE          shift and go to state 28
+
+  ! LESS_THEN       [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! GREATER_THEN    [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! EQUALS          [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! XOR             [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! IMPL            [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! PLUS            [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! MINUS           [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! TIMES           [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! DIVIDE          [ reduce using rule 15 (expression -> expression NAND expression .) ]
+  ! AND             [ shift and go to state 18 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+
+
+state 44
+
+    (16) expression -> expression OR expression .
+    (1) expression -> expression . LESS_THEN expression
+    (2) expression -> expression . GREATER_THEN expression
+    (3) expression -> expression . LESS_EQUALS expression
+    (4) expression -> expression . GREATER_EQUALS expression
+    (5) expression -> expression . EQUALS expression
+    (6) expression -> expression . NOT_EQUALS expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
+    (18) expression -> expression . EQ expression
+    (19) expression -> expression . XOR expression
+    (20) expression -> expression . IMPL expression
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . TIMES expression
+    (27) expression -> expression . DIVIDE expression
+
+    OR              reduce using rule 16 (expression -> expression OR expression .)
+    NOR             reduce using rule 16 (expression -> expression OR expression .)
+    EQ              reduce using rule 16 (expression -> expression OR expression .)
+    $end            reduce using rule 16 (expression -> expression OR expression .)
+    DO              reduce using rule 16 (expression -> expression OR expression .)
+    END             reduce using rule 16 (expression -> expression OR expression .)
+    SEPARATOR       reduce using rule 16 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 16 (expression -> expression OR expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
     LESS_EQUALS     shift and go to state 14
@@ -2076,35 +2140,97 @@ state 43
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
+    NAND            shift and go to state 19
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
 
-  ! LESS_THEN       [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! GREATER_THEN    [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! EQUALS          [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! AND             [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! EQ              [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! XOR             [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! NAND            [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! IMPL            [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! PLUS            [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! MINUS           [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! TIMES           [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! DIVIDE          [ reduce using rule 17 (expression -> expression OR expression .) ]
-  ! OR              [ shift and go to state 19 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! LESS_THEN       [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! GREATER_THEN    [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! EQUALS          [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! AND             [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! NAND            [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! XOR             [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! IMPL            [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! PLUS            [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression OR expression .) ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
 
 
-state 44
+state 45
+
+    (17) expression -> expression NOR expression .
+    (1) expression -> expression . LESS_THEN expression
+    (2) expression -> expression . GREATER_THEN expression
+    (3) expression -> expression . LESS_EQUALS expression
+    (4) expression -> expression . GREATER_EQUALS expression
+    (5) expression -> expression . EQUALS expression
+    (6) expression -> expression . NOT_EQUALS expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
+    (18) expression -> expression . EQ expression
+    (19) expression -> expression . XOR expression
+    (20) expression -> expression . IMPL expression
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . TIMES expression
+    (27) expression -> expression . DIVIDE expression
+
+    OR              reduce using rule 17 (expression -> expression NOR expression .)
+    NOR             reduce using rule 17 (expression -> expression NOR expression .)
+    EQ              reduce using rule 17 (expression -> expression NOR expression .)
+    $end            reduce using rule 17 (expression -> expression NOR expression .)
+    DO              reduce using rule 17 (expression -> expression NOR expression .)
+    END             reduce using rule 17 (expression -> expression NOR expression .)
+    SEPARATOR       reduce using rule 17 (expression -> expression NOR expression .)
+    RPAREN          reduce using rule 17 (expression -> expression NOR expression .)
+    LESS_THEN       shift and go to state 12
+    GREATER_THEN    shift and go to state 13
+    LESS_EQUALS     shift and go to state 14
+    GREATER_EQUALS  shift and go to state 15
+    EQUALS          shift and go to state 16
+    NOT_EQUALS      shift and go to state 17
+    AND             shift and go to state 18
+    NAND            shift and go to state 19
+    XOR             shift and go to state 23
+    IMPL            shift and go to state 24
+    PLUS            shift and go to state 25
+    MINUS           shift and go to state 26
+    TIMES           shift and go to state 27
+    DIVIDE          shift and go to state 28
+
+  ! LESS_THEN       [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! GREATER_THEN    [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! EQUALS          [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! AND             [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! NAND            [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! XOR             [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! IMPL            [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! PLUS            [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! MINUS           [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! TIMES           [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! DIVIDE          [ reduce using rule 17 (expression -> expression NOR expression .) ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+
+
+state 46
 
     (18) expression -> expression EQ expression .
     (1) expression -> expression . LESS_THEN expression
@@ -2113,61 +2239,61 @@ state 44
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
+    LESS_THEN       reduce using rule 18 (expression -> expression EQ expression .)
+    GREATER_THEN    reduce using rule 18 (expression -> expression EQ expression .)
+    LESS_EQUALS     reduce using rule 18 (expression -> expression EQ expression .)
+    GREATER_EQUALS  reduce using rule 18 (expression -> expression EQ expression .)
+    EQUALS          reduce using rule 18 (expression -> expression EQ expression .)
+    NOT_EQUALS      reduce using rule 18 (expression -> expression EQ expression .)
     AND             reduce using rule 18 (expression -> expression EQ expression .)
+    NAND            reduce using rule 18 (expression -> expression EQ expression .)
     OR              reduce using rule 18 (expression -> expression EQ expression .)
+    NOR             reduce using rule 18 (expression -> expression EQ expression .)
     EQ              reduce using rule 18 (expression -> expression EQ expression .)
     XOR             reduce using rule 18 (expression -> expression EQ expression .)
-    NAND            reduce using rule 18 (expression -> expression EQ expression .)
-    NOR             reduce using rule 18 (expression -> expression EQ expression .)
     IMPL            reduce using rule 18 (expression -> expression EQ expression .)
     $end            reduce using rule 18 (expression -> expression EQ expression .)
     DO              reduce using rule 18 (expression -> expression EQ expression .)
     END             reduce using rule 18 (expression -> expression EQ expression .)
     SEPARATOR       reduce using rule 18 (expression -> expression EQ expression .)
     RPAREN          reduce using rule 18 (expression -> expression EQ expression .)
-    LESS_THEN       shift and go to state 12
-    GREATER_THEN    shift and go to state 13
-    LESS_EQUALS     shift and go to state 14
-    GREATER_EQUALS  shift and go to state 15
-    EQUALS          shift and go to state 16
-    NOT_EQUALS      shift and go to state 17
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
 
-  ! LESS_THEN       [ reduce using rule 18 (expression -> expression EQ expression .) ]
-  ! GREATER_THEN    [ reduce using rule 18 (expression -> expression EQ expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 18 (expression -> expression EQ expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 18 (expression -> expression EQ expression .) ]
-  ! EQUALS          [ reduce using rule 18 (expression -> expression EQ expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 18 (expression -> expression EQ expression .) ]
   ! PLUS            [ reduce using rule 18 (expression -> expression EQ expression .) ]
   ! MINUS           [ reduce using rule 18 (expression -> expression EQ expression .) ]
   ! TIMES           [ reduce using rule 18 (expression -> expression EQ expression .) ]
   ! DIVIDE          [ reduce using rule 18 (expression -> expression EQ expression .) ]
+  ! LESS_THEN       [ shift and go to state 12 ]
+  ! GREATER_THEN    [ shift and go to state 13 ]
+  ! LESS_EQUALS     [ shift and go to state 14 ]
+  ! GREATER_EQUALS  [ shift and go to state 15 ]
+  ! EQUALS          [ shift and go to state 16 ]
+  ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
-state 45
+state 47
 
     (19) expression -> expression XOR expression .
     (1) expression -> expression . LESS_THEN expression
@@ -2176,24 +2302,24 @@ state 45
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 19 (expression -> expression XOR expression .)
+    NAND            reduce using rule 19 (expression -> expression XOR expression .)
     OR              reduce using rule 19 (expression -> expression XOR expression .)
+    NOR             reduce using rule 19 (expression -> expression XOR expression .)
     EQ              reduce using rule 19 (expression -> expression XOR expression .)
     XOR             reduce using rule 19 (expression -> expression XOR expression .)
-    NAND            reduce using rule 19 (expression -> expression XOR expression .)
-    NOR             reduce using rule 19 (expression -> expression XOR expression .)
     IMPL            reduce using rule 19 (expression -> expression XOR expression .)
     $end            reduce using rule 19 (expression -> expression XOR expression .)
     DO              reduce using rule 19 (expression -> expression XOR expression .)
@@ -2222,173 +2348,47 @@ state 45
   ! TIMES           [ reduce using rule 19 (expression -> expression XOR expression .) ]
   ! DIVIDE          [ reduce using rule 19 (expression -> expression XOR expression .) ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
-
-
-state 46
-
-    (20) expression -> expression NAND expression .
-    (1) expression -> expression . LESS_THEN expression
-    (2) expression -> expression . GREATER_THEN expression
-    (3) expression -> expression . LESS_EQUALS expression
-    (4) expression -> expression . GREATER_EQUALS expression
-    (5) expression -> expression . EQUALS expression
-    (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
-    (18) expression -> expression . EQ expression
-    (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . TIMES expression
-    (27) expression -> expression . DIVIDE expression
-
-    AND             reduce using rule 20 (expression -> expression NAND expression .)
-    OR              reduce using rule 20 (expression -> expression NAND expression .)
-    NAND            reduce using rule 20 (expression -> expression NAND expression .)
-    NOR             reduce using rule 20 (expression -> expression NAND expression .)
-    $end            reduce using rule 20 (expression -> expression NAND expression .)
-    DO              reduce using rule 20 (expression -> expression NAND expression .)
-    END             reduce using rule 20 (expression -> expression NAND expression .)
-    SEPARATOR       reduce using rule 20 (expression -> expression NAND expression .)
-    RPAREN          reduce using rule 20 (expression -> expression NAND expression .)
-    LESS_THEN       shift and go to state 12
-    GREATER_THEN    shift and go to state 13
-    LESS_EQUALS     shift and go to state 14
-    GREATER_EQUALS  shift and go to state 15
-    EQUALS          shift and go to state 16
-    NOT_EQUALS      shift and go to state 17
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    IMPL            shift and go to state 24
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 26
-    TIMES           shift and go to state 27
-    DIVIDE          shift and go to state 28
-
-  ! LESS_THEN       [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! GREATER_THEN    [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! EQUALS          [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! EQ              [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! XOR             [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! IMPL            [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! PLUS            [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! TIMES           [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! DIVIDE          [ reduce using rule 20 (expression -> expression NAND expression .) ]
-  ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
-
-
-state 47
-
-    (21) expression -> expression NOR expression .
-    (1) expression -> expression . LESS_THEN expression
-    (2) expression -> expression . GREATER_THEN expression
-    (3) expression -> expression . LESS_EQUALS expression
-    (4) expression -> expression . GREATER_EQUALS expression
-    (5) expression -> expression . EQUALS expression
-    (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
-    (18) expression -> expression . EQ expression
-    (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . TIMES expression
-    (27) expression -> expression . DIVIDE expression
-
-    OR              reduce using rule 21 (expression -> expression NOR expression .)
-    NOR             reduce using rule 21 (expression -> expression NOR expression .)
-    $end            reduce using rule 21 (expression -> expression NOR expression .)
-    DO              reduce using rule 21 (expression -> expression NOR expression .)
-    END             reduce using rule 21 (expression -> expression NOR expression .)
-    SEPARATOR       reduce using rule 21 (expression -> expression NOR expression .)
-    RPAREN          reduce using rule 21 (expression -> expression NOR expression .)
-    LESS_THEN       shift and go to state 12
-    GREATER_THEN    shift and go to state 13
-    LESS_EQUALS     shift and go to state 14
-    GREATER_EQUALS  shift and go to state 15
-    EQUALS          shift and go to state 16
-    NOT_EQUALS      shift and go to state 17
-    AND             shift and go to state 18
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    IMPL            shift and go to state 24
-    PLUS            shift and go to state 25
-    MINUS           shift and go to state 26
-    TIMES           shift and go to state 27
-    DIVIDE          shift and go to state 28
-
-  ! LESS_THEN       [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! GREATER_THEN    [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! EQUALS          [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! AND             [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! EQ              [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! XOR             [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! NAND            [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! IMPL            [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! PLUS            [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! MINUS           [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! TIMES           [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! DIVIDE          [ reduce using rule 21 (expression -> expression NOR expression .) ]
-  ! OR              [ shift and go to state 19 ]
-  ! NOR             [ shift and go to state 23 ]
 
 
 state 48
 
-    (22) expression -> expression IMPL expression .
+    (20) expression -> expression IMPL expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    AND             reduce using rule 22 (expression -> expression IMPL expression .)
-    OR              reduce using rule 22 (expression -> expression IMPL expression .)
-    EQ              reduce using rule 22 (expression -> expression IMPL expression .)
-    XOR             reduce using rule 22 (expression -> expression IMPL expression .)
-    NAND            reduce using rule 22 (expression -> expression IMPL expression .)
-    NOR             reduce using rule 22 (expression -> expression IMPL expression .)
-    IMPL            reduce using rule 22 (expression -> expression IMPL expression .)
-    $end            reduce using rule 22 (expression -> expression IMPL expression .)
-    DO              reduce using rule 22 (expression -> expression IMPL expression .)
-    END             reduce using rule 22 (expression -> expression IMPL expression .)
-    SEPARATOR       reduce using rule 22 (expression -> expression IMPL expression .)
-    RPAREN          reduce using rule 22 (expression -> expression IMPL expression .)
+    AND             reduce using rule 20 (expression -> expression IMPL expression .)
+    NAND            reduce using rule 20 (expression -> expression IMPL expression .)
+    OR              reduce using rule 20 (expression -> expression IMPL expression .)
+    NOR             reduce using rule 20 (expression -> expression IMPL expression .)
+    EQ              reduce using rule 20 (expression -> expression IMPL expression .)
+    XOR             reduce using rule 20 (expression -> expression IMPL expression .)
+    IMPL            reduce using rule 20 (expression -> expression IMPL expression .)
+    $end            reduce using rule 20 (expression -> expression IMPL expression .)
+    DO              reduce using rule 20 (expression -> expression IMPL expression .)
+    END             reduce using rule 20 (expression -> expression IMPL expression .)
+    SEPARATOR       reduce using rule 20 (expression -> expression IMPL expression .)
+    RPAREN          reduce using rule 20 (expression -> expression IMPL expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
     LESS_EQUALS     shift and go to state 14
@@ -2400,22 +2400,22 @@ state 48
     TIMES           shift and go to state 27
     DIVIDE          shift and go to state 28
 
-  ! LESS_THEN       [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! GREATER_THEN    [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! LESS_EQUALS     [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! GREATER_EQUALS  [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! EQUALS          [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! NOT_EQUALS      [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! PLUS            [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! MINUS           [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! TIMES           [ reduce using rule 22 (expression -> expression IMPL expression .) ]
-  ! DIVIDE          [ reduce using rule 22 (expression -> expression IMPL expression .) ]
+  ! LESS_THEN       [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! GREATER_THEN    [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! LESS_EQUALS     [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! GREATER_EQUALS  [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! EQUALS          [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! NOT_EQUALS      [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! PLUS            [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression IMPL expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression IMPL expression .) ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -2428,13 +2428,13 @@ state 49
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -2447,11 +2447,11 @@ state 49
     EQUALS          reduce using rule 24 (expression -> expression PLUS expression .)
     NOT_EQUALS      reduce using rule 24 (expression -> expression PLUS expression .)
     AND             reduce using rule 24 (expression -> expression PLUS expression .)
+    NAND            reduce using rule 24 (expression -> expression PLUS expression .)
     OR              reduce using rule 24 (expression -> expression PLUS expression .)
+    NOR             reduce using rule 24 (expression -> expression PLUS expression .)
     EQ              reduce using rule 24 (expression -> expression PLUS expression .)
     XOR             reduce using rule 24 (expression -> expression PLUS expression .)
-    NAND            reduce using rule 24 (expression -> expression PLUS expression .)
-    NOR             reduce using rule 24 (expression -> expression PLUS expression .)
     IMPL            reduce using rule 24 (expression -> expression PLUS expression .)
     PLUS            reduce using rule 24 (expression -> expression PLUS expression .)
     MINUS           reduce using rule 24 (expression -> expression PLUS expression .)
@@ -2472,11 +2472,11 @@ state 49
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -2491,13 +2491,13 @@ state 50
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -2510,11 +2510,11 @@ state 50
     EQUALS          reduce using rule 25 (expression -> expression MINUS expression .)
     NOT_EQUALS      reduce using rule 25 (expression -> expression MINUS expression .)
     AND             reduce using rule 25 (expression -> expression MINUS expression .)
+    NAND            reduce using rule 25 (expression -> expression MINUS expression .)
     OR              reduce using rule 25 (expression -> expression MINUS expression .)
+    NOR             reduce using rule 25 (expression -> expression MINUS expression .)
     EQ              reduce using rule 25 (expression -> expression MINUS expression .)
     XOR             reduce using rule 25 (expression -> expression MINUS expression .)
-    NAND            reduce using rule 25 (expression -> expression MINUS expression .)
-    NOR             reduce using rule 25 (expression -> expression MINUS expression .)
     IMPL            reduce using rule 25 (expression -> expression MINUS expression .)
     PLUS            reduce using rule 25 (expression -> expression MINUS expression .)
     MINUS           reduce using rule 25 (expression -> expression MINUS expression .)
@@ -2535,11 +2535,11 @@ state 50
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -2554,13 +2554,13 @@ state 51
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -2573,11 +2573,11 @@ state 51
     EQUALS          reduce using rule 26 (expression -> expression TIMES expression .)
     NOT_EQUALS      reduce using rule 26 (expression -> expression TIMES expression .)
     AND             reduce using rule 26 (expression -> expression TIMES expression .)
+    NAND            reduce using rule 26 (expression -> expression TIMES expression .)
     OR              reduce using rule 26 (expression -> expression TIMES expression .)
+    NOR             reduce using rule 26 (expression -> expression TIMES expression .)
     EQ              reduce using rule 26 (expression -> expression TIMES expression .)
     XOR             reduce using rule 26 (expression -> expression TIMES expression .)
-    NAND            reduce using rule 26 (expression -> expression TIMES expression .)
-    NOR             reduce using rule 26 (expression -> expression TIMES expression .)
     IMPL            reduce using rule 26 (expression -> expression TIMES expression .)
     PLUS            reduce using rule 26 (expression -> expression TIMES expression .)
     MINUS           reduce using rule 26 (expression -> expression TIMES expression .)
@@ -2596,11 +2596,11 @@ state 51
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -2617,13 +2617,13 @@ state 52
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -2636,11 +2636,11 @@ state 52
     EQUALS          reduce using rule 27 (expression -> expression DIVIDE expression .)
     NOT_EQUALS      reduce using rule 27 (expression -> expression DIVIDE expression .)
     AND             reduce using rule 27 (expression -> expression DIVIDE expression .)
+    NAND            reduce using rule 27 (expression -> expression DIVIDE expression .)
     OR              reduce using rule 27 (expression -> expression DIVIDE expression .)
+    NOR             reduce using rule 27 (expression -> expression DIVIDE expression .)
     EQ              reduce using rule 27 (expression -> expression DIVIDE expression .)
     XOR             reduce using rule 27 (expression -> expression DIVIDE expression .)
-    NAND            reduce using rule 27 (expression -> expression DIVIDE expression .)
-    NOR             reduce using rule 27 (expression -> expression DIVIDE expression .)
     IMPL            reduce using rule 27 (expression -> expression DIVIDE expression .)
     PLUS            reduce using rule 27 (expression -> expression DIVIDE expression .)
     MINUS           reduce using rule 27 (expression -> expression DIVIDE expression .)
@@ -2659,11 +2659,11 @@ state 52
   ! EQUALS          [ shift and go to state 16 ]
   ! NOT_EQUALS      [ shift and go to state 17 ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
   ! PLUS            [ shift and go to state 25 ]
   ! MINUS           [ shift and go to state 26 ]
@@ -2683,17 +2683,17 @@ state 53
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -2727,11 +2727,11 @@ state 54
     EQUALS          reduce using rule 8 (expression -> BEGIN body END .)
     NOT_EQUALS      reduce using rule 8 (expression -> BEGIN body END .)
     AND             reduce using rule 8 (expression -> BEGIN body END .)
+    NAND            reduce using rule 8 (expression -> BEGIN body END .)
     OR              reduce using rule 8 (expression -> BEGIN body END .)
+    NOR             reduce using rule 8 (expression -> BEGIN body END .)
     EQ              reduce using rule 8 (expression -> BEGIN body END .)
     XOR             reduce using rule 8 (expression -> BEGIN body END .)
-    NAND            reduce using rule 8 (expression -> BEGIN body END .)
-    NOR             reduce using rule 8 (expression -> BEGIN body END .)
     IMPL            reduce using rule 8 (expression -> BEGIN body END .)
     PLUS            reduce using rule 8 (expression -> BEGIN body END .)
     MINUS           reduce using rule 8 (expression -> BEGIN body END .)
@@ -2746,7 +2746,7 @@ state 54
 
 state 55
 
-    (11) body -> body SEPARATOR . expression
+    (12) body -> body SEPARATOR . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -2756,17 +2756,17 @@ state 55
     (7) expression -> . LOOP expression DO expression
     (8) expression -> . BEGIN body END
     (9) expression -> . IDENTIFIER
-    (12) expression -> . NOT expression
+    (10) expression -> . NOT expression
     (13) expression -> . IDENTIFIER ASSIGN expression
-    (14) expression -> . NUMBER
-    (15) expression -> . FLOAT
-    (16) expression -> . expression AND expression
-    (17) expression -> . expression OR expression
+    (14) expression -> . expression AND expression
+    (15) expression -> . expression NAND expression
+    (16) expression -> . expression OR expression
+    (17) expression -> . expression NOR expression
     (18) expression -> . expression EQ expression
     (19) expression -> . expression XOR expression
-    (20) expression -> . expression NAND expression
-    (21) expression -> . expression NOR expression
-    (22) expression -> . expression IMPL expression
+    (20) expression -> . expression IMPL expression
+    (21) expression -> . NUMBER
+    (22) expression -> . FLOAT
     (23) expression -> . MINUS expression
     (24) expression -> . expression PLUS expression
     (25) expression -> . expression MINUS expression
@@ -2798,24 +2798,24 @@ state 56
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
+    NAND            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     OR              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
+    NOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     EQ              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     XOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    NAND            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
-    NOR             reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     IMPL            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     $end            reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
     DO              reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .)
@@ -2844,11 +2844,11 @@ state 56
   ! TIMES           [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! DIVIDE          [ reduce using rule 13 (expression -> IDENTIFIER ASSIGN expression .) ]
   ! AND             [ shift and go to state 18 ]
-  ! OR              [ shift and go to state 19 ]
-  ! EQ              [ shift and go to state 20 ]
-  ! XOR             [ shift and go to state 21 ]
-  ! NAND            [ shift and go to state 22 ]
-  ! NOR             [ shift and go to state 23 ]
+  ! NAND            [ shift and go to state 19 ]
+  ! OR              [ shift and go to state 20 ]
+  ! NOR             [ shift and go to state 21 ]
+  ! EQ              [ shift and go to state 22 ]
+  ! XOR             [ shift and go to state 23 ]
   ! IMPL            [ shift and go to state 24 ]
 
 
@@ -2863,11 +2863,11 @@ state 57
     EQUALS          reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     NOT_EQUALS      reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     AND             reduce using rule 30 (expression -> LPAREN expression RPAREN .)
+    NAND            reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     OR              reduce using rule 30 (expression -> LPAREN expression RPAREN .)
+    NOR             reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     EQ              reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     XOR             reduce using rule 30 (expression -> LPAREN expression RPAREN .)
-    NAND            reduce using rule 30 (expression -> LPAREN expression RPAREN .)
-    NOR             reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     IMPL            reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     PLUS            reduce using rule 30 (expression -> LPAREN expression RPAREN .)
     MINUS           reduce using rule 30 (expression -> LPAREN expression RPAREN .)
@@ -2889,13 +2889,13 @@ state 58
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
@@ -2908,11 +2908,11 @@ state 58
   ! shift/reduce conflict for EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
   ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
   ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
   ! shift/reduce conflict for EQ resolved as shift
   ! shift/reduce conflict for XOR resolved as shift
-  ! shift/reduce conflict for NAND resolved as shift
-  ! shift/reduce conflict for NOR resolved as shift
   ! shift/reduce conflict for IMPL resolved as shift
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
@@ -2930,11 +2930,11 @@ state 58
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -2948,11 +2948,11 @@ state 58
   ! EQUALS          [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! NOT_EQUALS      [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! AND             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
+  ! NAND            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! OR              [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
+  ! NOR             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! EQ              [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! XOR             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! NAND            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
-  ! NOR             [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! IMPL            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! PLUS            [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
   ! MINUS           [ reduce using rule 7 (expression -> LOOP expression DO expression .) ]
@@ -2962,27 +2962,27 @@ state 58
 
 state 59
 
-    (11) body -> body SEPARATOR expression .
+    (12) body -> body SEPARATOR expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
     (4) expression -> expression . GREATER_EQUALS expression
     (5) expression -> expression . EQUALS expression
     (6) expression -> expression . NOT_EQUALS expression
-    (16) expression -> expression . AND expression
-    (17) expression -> expression . OR expression
+    (14) expression -> expression . AND expression
+    (15) expression -> expression . NAND expression
+    (16) expression -> expression . OR expression
+    (17) expression -> expression . NOR expression
     (18) expression -> expression . EQ expression
     (19) expression -> expression . XOR expression
-    (20) expression -> expression . NAND expression
-    (21) expression -> expression . NOR expression
-    (22) expression -> expression . IMPL expression
+    (20) expression -> expression . IMPL expression
     (24) expression -> expression . PLUS expression
     (25) expression -> expression . MINUS expression
     (26) expression -> expression . TIMES expression
     (27) expression -> expression . DIVIDE expression
 
-    END             reduce using rule 11 (body -> body SEPARATOR expression .)
-    SEPARATOR       reduce using rule 11 (body -> body SEPARATOR expression .)
+    END             reduce using rule 12 (body -> body SEPARATOR expression .)
+    SEPARATOR       reduce using rule 12 (body -> body SEPARATOR expression .)
     LESS_THEN       shift and go to state 12
     GREATER_THEN    shift and go to state 13
     LESS_EQUALS     shift and go to state 14
@@ -2990,11 +2990,11 @@ state 59
     EQUALS          shift and go to state 16
     NOT_EQUALS      shift and go to state 17
     AND             shift and go to state 18
-    OR              shift and go to state 19
-    EQ              shift and go to state 20
-    XOR             shift and go to state 21
-    NAND            shift and go to state 22
-    NOR             shift and go to state 23
+    NAND            shift and go to state 19
+    OR              shift and go to state 20
+    NOR             shift and go to state 21
+    EQ              shift and go to state 22
+    XOR             shift and go to state 23
     IMPL            shift and go to state 24
     PLUS            shift and go to state 25
     MINUS           shift and go to state 26
@@ -3011,11 +3011,11 @@ WARNING: shift/reduce conflict for GREATER_EQUALS in state 58 resolved as shift
 WARNING: shift/reduce conflict for EQUALS in state 58 resolved as shift
 WARNING: shift/reduce conflict for NOT_EQUALS in state 58 resolved as shift
 WARNING: shift/reduce conflict for AND in state 58 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 58 resolved as shift
 WARNING: shift/reduce conflict for OR in state 58 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 58 resolved as shift
 WARNING: shift/reduce conflict for EQ in state 58 resolved as shift
 WARNING: shift/reduce conflict for XOR in state 58 resolved as shift
-WARNING: shift/reduce conflict for NAND in state 58 resolved as shift
-WARNING: shift/reduce conflict for NOR in state 58 resolved as shift
 WARNING: shift/reduce conflict for IMPL in state 58 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 58 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 58 resolved as shift
