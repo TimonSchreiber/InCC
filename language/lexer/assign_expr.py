@@ -1,6 +1,9 @@
 from .comp_expr import *
 
-token_set |= {'IDENTIFIER', 'ASSIGN'}
+token_set |= {
+    'IDENTIFIER',
+    'ASSIGN'
+}
 
 t_ASSIGN = r':='
 
@@ -13,18 +16,3 @@ def t_IDENTIFIER(t):
 
 # Combine Tokens
 tokens = list(token_set | reserved_set)
-
-# Create Lexer
-# assign_lexer = lex()
-
-# # Test Lexer
-# if __name__ == '__main__':
-#     data = '''
-#     x := 5.6 < (3 + 6.08) and -8 = 2 - 10
-#     y := true xor false
-#     '''
-
-#     assign_lexer.input(data)
-
-#     for token in assign_lexer:
-#         print(token)

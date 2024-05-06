@@ -1,9 +1,5 @@
-# from ply.lex import lex
-
-# Initial reserved key words
 reserved_set = set()
 
-# Arithmetics
 token_set = {
    'FLOAT',
    'NUMBER',
@@ -43,20 +39,3 @@ def t_error(t):
 
 # Combine Tokens
 tokens = list(token_set | reserved_set)
-
-# Create Lexer
-
-
-# Test Lexer
-if __name__ == '__main__':
-    from ply.lex import lex
-    arith_lexer = lex()
-    data = '''
-    5.6 * (3 + 6.08)
-    -8 / 2 - 10
-    '''
-
-    arith_lexer.input(data)
-
-    for token in arith_lexer:
-        print(token)
