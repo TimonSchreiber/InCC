@@ -3,16 +3,17 @@ from ply.yacc import yacc
 
 from language.lexer.ite_expr import *
 from language.parser.ite_expr import *
-
 from language.parser.code_generation import set_generator_module, check_generator_module
+
 from interpreter import all_expr
+from interpreter.enviroment import Enviroment
 
 set_generator_module(all_expr)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = {}
+env = Enviroment({})
 
 i = '''
 {
