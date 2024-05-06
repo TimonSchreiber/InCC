@@ -1,5 +1,7 @@
 import operator
 
+# TODO: split this into files for each lexer-parser pair
+
 binary_operators = {
     # arithmetic
     '+': operator.add,
@@ -120,30 +122,43 @@ class LoopExpression(InterpretedExpression):
         return (r, env)
 
 class ForExpression(InterpretedExpression):
-    def __init__(self, start, test, change, body):
+    def __init__(self, start, condition, change, body):
         self.start = start
-        self.test = test
+        self.condition = condition
         self.change = change
         self.body = body
 
     def eval(self, env):
         _, env = self.start.eval(env)
-        t, env = self.test.eval(env)
+        t, env = self.condition.eval(env)
         r = None
         while t:
             r, env = self.body.eval(env)
             _, env = self.change.eval(env)
-            t, env = self.test.eval(env)
+            t, env = self.condition.eval(env)
+        return (r, env)
+
+class WhileExpression(InterpretedExpression):
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+
+    def eval(self, env):
+        t, env = self.condition.eval(env)
+        r = None
+        while t:
+            r, env = self.body.eval(env)
+            t, env = self.condition(env)
         return (r, env)
 
 class ITEExpression(InterpretedExpression):
-    def __init__(self, test, ifbody, elsebody):
-        self.test = test
+    def __init__(self, condition, ifbody, elsebody):
+        self.condition = condition
         self.ifbody = ifbody
         self.elsebody = elsebody
 
     def eval(self, env):
-        t, env = self.test.eval(env)
+        t, env = self.condition.eval(env)
         if t:
             return self.ifbody.eval(env)
         elif self.elsebody:

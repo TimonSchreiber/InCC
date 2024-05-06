@@ -28,20 +28,29 @@ if __name__ == '__main__':
                     b := b+1
         }
         '''
+    i = '''
+    {
+    y := 51;
+    y := 51
+    }
+'''
     result = parser.parse(input=i, lexer=lexer)
     print(i,"\n\t",result.eval(env))
 
 
 '''
 note:
-    1. arith_expr
-    2. comp_expr
-    4. assign_expr
-    3. bool_expr
-    5. seque_expr
-    6. loop_expr
-    7. for_expr
-    8. ite_expr (If Then Else)
+    01. arith_expr
+    02. comp_expr
+    04. assign_expr
+    03. bool_expr
+    05. seque_expr
+    06. loop_expr
+    07. for_expr
+    09. while_expr
+    08. ite_expr (If Then Else)
+    10. lock_expr ~
+    11. local_expr ~
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 TODO: precedence of IMPL not mentioned in cpp-reference
@@ -56,9 +65,9 @@ TODO: precedence of IMPL not mentioned in cpp-reference
 [x] if expr then expr
 [x] if expr then expr else expr
 
-[o] While expr Do expr
+[x] While expr Do expr
 
-[o] Loacl ident assign expr In expr
+[o] Local ident assign expr In expr
 
 class LetExpr()
 def init(self, var, value, body):
