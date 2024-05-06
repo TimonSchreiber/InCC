@@ -148,7 +148,7 @@ class WhileExpression(InterpretedExpression):
         r = None
         while t:
             r, env = self.body.eval(env)
-            t, env = self.condition(env)
+            t, env = self.condition.eval(env)
         return (r, env)
 
 class ITEExpression(InterpretedExpression):

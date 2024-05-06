@@ -25,15 +25,12 @@ if __name__ == '__main__':
                             a := a + 1
                         }
                 else
-                    b := b+1
+                    b := b+1;
+            while x > z do
+                x := x - 1
         }
         '''
-    i = '''
-    {
-    y := 51;
-    y := 51
-    }
-'''
+
     result = parser.parse(input=i, lexer=lexer)
     print(i,"\n\t",result.eval(env))
 
@@ -75,4 +72,5 @@ def init(self, var, value, body):
 
 def eval(env):
     ?, env = self. -->> Vsiehe skript Seite 50 <<
+
 '''
