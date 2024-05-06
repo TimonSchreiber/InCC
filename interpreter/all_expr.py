@@ -1,7 +1,5 @@
 import operator
 
-# TODO: split this into files for each lexer-parser pair
-
 binary_operators = {
     # arithmetic
     '+': operator.add,
