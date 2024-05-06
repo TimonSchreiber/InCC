@@ -9,11 +9,12 @@ reserved_set |= {
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-ite_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    ite_lexer = lex()
     data = '''
     if x > 9 THEN
     for i:=0; i < x+5; i:= i+2 do

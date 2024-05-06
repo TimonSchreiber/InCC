@@ -1,5 +1,5 @@
 from .arith_expr import *
-from ..lexer.comp_expr import tokens, comp_lexer
+from ..lexer.comp_expr import tokens#, comp_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -39,12 +39,12 @@ def p_expression_binary_comparison(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-comp_parser = yacc(start='expression')
+# comp_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = comp_parser.parse(input=i, lexer=comp_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = comp_parser.parse(input=i, lexer=comp_lexer)
+#         print(i,"\n\t",result.eval(env))

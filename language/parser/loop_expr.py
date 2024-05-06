@@ -1,5 +1,5 @@
 from .seque_expr import *
-from ..lexer.loop_expr import tokens, loop_lexer
+from ..lexer.loop_expr import tokens#, loop_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -40,12 +40,12 @@ def p_expression_loop(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-loop_parser = yacc(start='expression')
+# loop_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = loop_parser.parse(input=i, lexer=loop_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = loop_parser.parse(input=i, lexer=loop_lexer)
+#         print(i,"\n\t",result.eval(env))

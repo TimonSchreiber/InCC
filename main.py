@@ -1,38 +1,41 @@
-from language.parser.ite_expr import ite_parser as parser
-from language.lexer.ite_expr import ite_lexer as lexer
+from ply.lex import lex
+from ply.yacc import yacc
+from language.lexer.ite_expr import *
+from language.parser.ite_expr import *
 
-if __name__ == '__main__':
-    env = {}
-    # while True:
-    #     i=input("repl > ")
-    i = '''
-        {
-            x := 4;
-            y := 4;
-            z:=if x > y then
-                if x > y then
-                    y := y + 1
+lexer = lex()
+parser = yacc(start='expression')
+env = {}
+# while True:
+#     i=input("repl > ")
+i = '''
+    {
+        x := 4;
+        y := 4;
+        z:=if x > y then
+            if x > y then
+                y := y + 1
+        else
+            x*y;
+        z := 2;
+        a := 0;
+        b := 0;
+        loop x do
+            if z >= 0 then
+                loop y do
+                    {
+                        z := z - 1;
+                        a := a + 1
+                    }
             else
-                x*y;
-            z := 2;
-            a := 0;
-            b := 0;
-            loop x do
-                if z >= 0 then
-                    loop y do
-                        {
-                            z := z - 1;
-                            a := a + 1
-                        }
-                else
-                    b := b+1;
-            while x > z do
-                x := x - 1
-        }
-        '''
+                b := b+1;
+        while x > z do
+            x := x - 1
+    }
+    '''
 
-    result = parser.parse(input=i, lexer=lexer)
-    print(i,"\n\t",result.eval(env))
+result = parser.parse(input=i, lexer=lexer)
+print(i,"\n\t",result.eval(env))
 
 
 '''

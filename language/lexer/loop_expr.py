@@ -8,11 +8,12 @@ reserved_set |= {
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-loop_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    loop_lexer = lex()
     data = '''
     loop 5 do
         x := {

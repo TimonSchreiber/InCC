@@ -1,5 +1,5 @@
 from .comp_expr import *
-from ..lexer.assign_expr import tokens, assign_lexer
+from ..lexer.assign_expr import tokens#, assign_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -44,12 +44,12 @@ def p_expression_assign(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-assign_parser = yacc(start='expression')
+# assign_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = assign_parser.parse(input=i, lexer=assign_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = assign_parser.parse(input=i, lexer=assign_lexer)
+#         print(i,"\n\t",result.eval(env))

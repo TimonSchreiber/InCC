@@ -1,5 +1,5 @@
 from .while_expr import *
-from ..lexer.ite_expr import tokens, ite_lexer
+from ..lexer.ite_expr import tokens#, ite_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -44,12 +44,12 @@ def p_expression_ite(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-ite_parser = yacc(start='expression')
+# ite_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = ite_parser.parse(input=i, lexer=ite_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = ite_parser.parse(input=i, lexer=ite_lexer)
+#         print(i,"\n\t",result.eval(env))

@@ -31,12 +31,12 @@ Rule 25    body -> body SEPARATOR expression
 Rule 26    expression -> NUMBER
 Rule 27    expression -> FLOAT
 Rule 28    expression -> MINUS expression
-Rule 29    expression -> expression PLUS expression
-Rule 30    expression -> expression MINUS expression
-Rule 31    expression -> expression TIMES expression
-Rule 32    expression -> expression DIVIDE expression
-Rule 33    expression -> TRUE
-Rule 34    expression -> FALSE
+Rule 29    expression -> TRUE
+Rule 30    expression -> FALSE
+Rule 31    expression -> expression PLUS expression
+Rule 32    expression -> expression MINUS expression
+Rule 33    expression -> expression TIMES expression
+Rule 34    expression -> expression DIVIDE expression
 Rule 35    expression -> LPAREN expression RPAREN
 
 Terminals, with rules where they appear
@@ -44,13 +44,13 @@ Terminals, with rules where they appear
 AND                  : 15
 ASSIGN               : 14
 BEGIN                : 13
-DIVIDE               : 32
+DIVIDE               : 34
 DO                   : 7 8 12
 ELSE                 : 23
 END                  : 13
 EQ                   : 20
 EQUALS               : 5
-FALSE                : 34
+FALSE                : 30
 FLOAT                : 27
 FOR                  : 7
 GREATER_EQUALS       : 4
@@ -62,7 +62,7 @@ LESS_EQUALS          : 3
 LESS_THEN            : 1
 LOOP                 : 12
 LPAREN               : 35
-MINUS                : 28 30
+MINUS                : 28 32
 NAND                 : 16
 NEQ                  : 21
 NOR                  : 18
@@ -70,12 +70,12 @@ NOT                  : 10
 NOT_EQUALS           : 6
 NUMBER               : 26
 OR                   : 17
-PLUS                 : 29
+PLUS                 : 31
 RPAREN               : 35
 SEPARATOR            : 7 7 25
 THEN                 : 11 23
-TIMES                : 31
-TRUE                 : 33
+TIMES                : 33
+TRUE                 : 29
 WHILE                : 8
 XOR                  : 19
 error                : 
@@ -83,7 +83,7 @@ error                :
 Nonterminals, with rules where they appear
 
 body                 : 13 25
-expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 7 7 8 8 10 11 11 12 12 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 23 24 25 28 29 29 30 30 31 31 32 32 35 0
+expression           : 1 1 2 2 3 3 4 4 5 5 6 6 7 7 7 7 8 8 10 11 11 12 12 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 23 24 25 28 31 31 32 32 33 33 34 34 35 0
 
 Parsing method: LALR
 
@@ -116,12 +116,12 @@ state 0
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -157,10 +157,10 @@ state 1
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       shift and go to state 15
     GREATER_THEN    shift and go to state 16
@@ -211,12 +211,12 @@ state 2
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -264,12 +264,12 @@ state 3
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -350,12 +350,12 @@ state 5
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -404,12 +404,12 @@ state 6
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -457,12 +457,12 @@ state 7
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -512,12 +512,12 @@ state 8
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -628,12 +628,12 @@ state 11
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -654,64 +654,64 @@ state 11
 
 state 12
 
-    (33) expression -> TRUE .
+    (29) expression -> TRUE .
 
-    LESS_THEN       reduce using rule 33 (expression -> TRUE .)
-    GREATER_THEN    reduce using rule 33 (expression -> TRUE .)
-    LESS_EQUALS     reduce using rule 33 (expression -> TRUE .)
-    GREATER_EQUALS  reduce using rule 33 (expression -> TRUE .)
-    EQUALS          reduce using rule 33 (expression -> TRUE .)
-    NOT_EQUALS      reduce using rule 33 (expression -> TRUE .)
-    AND             reduce using rule 33 (expression -> TRUE .)
-    NAND            reduce using rule 33 (expression -> TRUE .)
-    OR              reduce using rule 33 (expression -> TRUE .)
-    NOR             reduce using rule 33 (expression -> TRUE .)
-    XOR             reduce using rule 33 (expression -> TRUE .)
-    EQ              reduce using rule 33 (expression -> TRUE .)
-    NEQ             reduce using rule 33 (expression -> TRUE .)
-    IMPL            reduce using rule 33 (expression -> TRUE .)
-    PLUS            reduce using rule 33 (expression -> TRUE .)
-    MINUS           reduce using rule 33 (expression -> TRUE .)
-    TIMES           reduce using rule 33 (expression -> TRUE .)
-    DIVIDE          reduce using rule 33 (expression -> TRUE .)
-    $end            reduce using rule 33 (expression -> TRUE .)
-    SEPARATOR       reduce using rule 33 (expression -> TRUE .)
-    DO              reduce using rule 33 (expression -> TRUE .)
-    THEN            reduce using rule 33 (expression -> TRUE .)
-    END             reduce using rule 33 (expression -> TRUE .)
-    RPAREN          reduce using rule 33 (expression -> TRUE .)
-    ELSE            reduce using rule 33 (expression -> TRUE .)
+    LESS_THEN       reduce using rule 29 (expression -> TRUE .)
+    GREATER_THEN    reduce using rule 29 (expression -> TRUE .)
+    LESS_EQUALS     reduce using rule 29 (expression -> TRUE .)
+    GREATER_EQUALS  reduce using rule 29 (expression -> TRUE .)
+    EQUALS          reduce using rule 29 (expression -> TRUE .)
+    NOT_EQUALS      reduce using rule 29 (expression -> TRUE .)
+    AND             reduce using rule 29 (expression -> TRUE .)
+    NAND            reduce using rule 29 (expression -> TRUE .)
+    OR              reduce using rule 29 (expression -> TRUE .)
+    NOR             reduce using rule 29 (expression -> TRUE .)
+    XOR             reduce using rule 29 (expression -> TRUE .)
+    EQ              reduce using rule 29 (expression -> TRUE .)
+    NEQ             reduce using rule 29 (expression -> TRUE .)
+    IMPL            reduce using rule 29 (expression -> TRUE .)
+    PLUS            reduce using rule 29 (expression -> TRUE .)
+    MINUS           reduce using rule 29 (expression -> TRUE .)
+    TIMES           reduce using rule 29 (expression -> TRUE .)
+    DIVIDE          reduce using rule 29 (expression -> TRUE .)
+    $end            reduce using rule 29 (expression -> TRUE .)
+    SEPARATOR       reduce using rule 29 (expression -> TRUE .)
+    DO              reduce using rule 29 (expression -> TRUE .)
+    THEN            reduce using rule 29 (expression -> TRUE .)
+    END             reduce using rule 29 (expression -> TRUE .)
+    RPAREN          reduce using rule 29 (expression -> TRUE .)
+    ELSE            reduce using rule 29 (expression -> TRUE .)
 
 
 state 13
 
-    (34) expression -> FALSE .
+    (30) expression -> FALSE .
 
-    LESS_THEN       reduce using rule 34 (expression -> FALSE .)
-    GREATER_THEN    reduce using rule 34 (expression -> FALSE .)
-    LESS_EQUALS     reduce using rule 34 (expression -> FALSE .)
-    GREATER_EQUALS  reduce using rule 34 (expression -> FALSE .)
-    EQUALS          reduce using rule 34 (expression -> FALSE .)
-    NOT_EQUALS      reduce using rule 34 (expression -> FALSE .)
-    AND             reduce using rule 34 (expression -> FALSE .)
-    NAND            reduce using rule 34 (expression -> FALSE .)
-    OR              reduce using rule 34 (expression -> FALSE .)
-    NOR             reduce using rule 34 (expression -> FALSE .)
-    XOR             reduce using rule 34 (expression -> FALSE .)
-    EQ              reduce using rule 34 (expression -> FALSE .)
-    NEQ             reduce using rule 34 (expression -> FALSE .)
-    IMPL            reduce using rule 34 (expression -> FALSE .)
-    PLUS            reduce using rule 34 (expression -> FALSE .)
-    MINUS           reduce using rule 34 (expression -> FALSE .)
-    TIMES           reduce using rule 34 (expression -> FALSE .)
-    DIVIDE          reduce using rule 34 (expression -> FALSE .)
-    $end            reduce using rule 34 (expression -> FALSE .)
-    SEPARATOR       reduce using rule 34 (expression -> FALSE .)
-    DO              reduce using rule 34 (expression -> FALSE .)
-    THEN            reduce using rule 34 (expression -> FALSE .)
-    END             reduce using rule 34 (expression -> FALSE .)
-    RPAREN          reduce using rule 34 (expression -> FALSE .)
-    ELSE            reduce using rule 34 (expression -> FALSE .)
+    LESS_THEN       reduce using rule 30 (expression -> FALSE .)
+    GREATER_THEN    reduce using rule 30 (expression -> FALSE .)
+    LESS_EQUALS     reduce using rule 30 (expression -> FALSE .)
+    GREATER_EQUALS  reduce using rule 30 (expression -> FALSE .)
+    EQUALS          reduce using rule 30 (expression -> FALSE .)
+    NOT_EQUALS      reduce using rule 30 (expression -> FALSE .)
+    AND             reduce using rule 30 (expression -> FALSE .)
+    NAND            reduce using rule 30 (expression -> FALSE .)
+    OR              reduce using rule 30 (expression -> FALSE .)
+    NOR             reduce using rule 30 (expression -> FALSE .)
+    XOR             reduce using rule 30 (expression -> FALSE .)
+    EQ              reduce using rule 30 (expression -> FALSE .)
+    NEQ             reduce using rule 30 (expression -> FALSE .)
+    IMPL            reduce using rule 30 (expression -> FALSE .)
+    PLUS            reduce using rule 30 (expression -> FALSE .)
+    MINUS           reduce using rule 30 (expression -> FALSE .)
+    TIMES           reduce using rule 30 (expression -> FALSE .)
+    DIVIDE          reduce using rule 30 (expression -> FALSE .)
+    $end            reduce using rule 30 (expression -> FALSE .)
+    SEPARATOR       reduce using rule 30 (expression -> FALSE .)
+    DO              reduce using rule 30 (expression -> FALSE .)
+    THEN            reduce using rule 30 (expression -> FALSE .)
+    END             reduce using rule 30 (expression -> FALSE .)
+    RPAREN          reduce using rule 30 (expression -> FALSE .)
+    ELSE            reduce using rule 30 (expression -> FALSE .)
 
 
 state 14
@@ -743,12 +743,12 @@ state 14
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -796,12 +796,12 @@ state 15
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -849,12 +849,12 @@ state 16
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -902,12 +902,12 @@ state 17
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -955,12 +955,12 @@ state 18
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1008,12 +1008,12 @@ state 19
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1061,12 +1061,12 @@ state 20
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1114,12 +1114,12 @@ state 21
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1167,12 +1167,12 @@ state 22
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1220,12 +1220,12 @@ state 23
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1273,12 +1273,12 @@ state 24
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1326,12 +1326,12 @@ state 25
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1379,12 +1379,12 @@ state 26
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1432,12 +1432,12 @@ state 27
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1485,12 +1485,12 @@ state 28
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1511,7 +1511,7 @@ state 28
 
 state 29
 
-    (29) expression -> expression PLUS . expression
+    (31) expression -> expression PLUS . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1538,12 +1538,12 @@ state 29
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1564,7 +1564,7 @@ state 29
 
 state 30
 
-    (30) expression -> expression MINUS . expression
+    (32) expression -> expression MINUS . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1591,12 +1591,12 @@ state 30
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1617,7 +1617,7 @@ state 30
 
 state 31
 
-    (31) expression -> expression TIMES . expression
+    (33) expression -> expression TIMES . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1644,12 +1644,12 @@ state 31
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1670,7 +1670,7 @@ state 31
 
 state 32
 
-    (32) expression -> expression DIVIDE . expression
+    (34) expression -> expression DIVIDE . expression
     (1) expression -> . expression LESS_THEN expression
     (2) expression -> . expression GREATER_THEN expression
     (3) expression -> . expression LESS_EQUALS expression
@@ -1697,12 +1697,12 @@ state 32
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1738,10 +1738,10 @@ state 33
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     SEPARATOR       shift and go to state 61
     LESS_THEN       shift and go to state 15
@@ -1781,10 +1781,10 @@ state 34
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     DO              shift and go to state 62
     LESS_THEN       shift and go to state 15
@@ -1836,12 +1836,12 @@ state 35
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -1877,10 +1877,10 @@ state 36
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 10 (expression -> NOT expression .)
     GREATER_THEN    reduce using rule 10 (expression -> NOT expression .)
@@ -1946,10 +1946,10 @@ state 37
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     THEN            shift and go to state 64
     LESS_THEN       shift and go to state 15
@@ -1989,10 +1989,10 @@ state 38
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     DO              shift and go to state 65
     LESS_THEN       shift and go to state 15
@@ -2041,10 +2041,10 @@ state 40
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     END             reduce using rule 24 (body -> expression .)
     SEPARATOR       reduce using rule 24 (body -> expression .)
@@ -2085,10 +2085,10 @@ state 41
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 28 (expression -> MINUS expression .)
     GREATER_THEN    reduce using rule 28 (expression -> MINUS expression .)
@@ -2153,10 +2153,10 @@ state 42
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     RPAREN          shift and go to state 68
     LESS_THEN       shift and go to state 15
@@ -2196,10 +2196,10 @@ state 43
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 1 (expression -> expression LESS_THEN expression .)
     GREATER_THEN    reduce using rule 1 (expression -> expression LESS_THEN expression .)
@@ -2264,10 +2264,10 @@ state 44
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 2 (expression -> expression GREATER_THEN expression .)
     GREATER_THEN    reduce using rule 2 (expression -> expression GREATER_THEN expression .)
@@ -2332,10 +2332,10 @@ state 45
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
     GREATER_THEN    reduce using rule 3 (expression -> expression LESS_EQUALS expression .)
@@ -2400,10 +2400,10 @@ state 46
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     LESS_THEN       reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
     GREATER_THEN    reduce using rule 4 (expression -> expression GREATER_EQUALS expression .)
@@ -2468,10 +2468,10 @@ state 47
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     EQUALS          reduce using rule 5 (expression -> expression EQUALS expression .)
     NOT_EQUALS      reduce using rule 5 (expression -> expression EQUALS expression .)
@@ -2536,10 +2536,10 @@ state 48
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     EQUALS          reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
     NOT_EQUALS      reduce using rule 6 (expression -> expression NOT_EQUALS expression .)
@@ -2604,10 +2604,10 @@ state 49
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 15 (expression -> expression AND expression .)
     NAND            reduce using rule 15 (expression -> expression AND expression .)
@@ -2672,10 +2672,10 @@ state 50
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 16 (expression -> expression NAND expression .)
     NAND            reduce using rule 16 (expression -> expression NAND expression .)
@@ -2740,10 +2740,10 @@ state 51
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     OR              reduce using rule 17 (expression -> expression OR expression .)
     NOR             reduce using rule 17 (expression -> expression OR expression .)
@@ -2808,10 +2808,10 @@ state 52
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     OR              reduce using rule 18 (expression -> expression NOR expression .)
     NOR             reduce using rule 18 (expression -> expression NOR expression .)
@@ -2876,10 +2876,10 @@ state 53
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 19 (expression -> expression XOR expression .)
     NAND            reduce using rule 19 (expression -> expression XOR expression .)
@@ -2944,10 +2944,10 @@ state 54
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 20 (expression -> expression EQ expression .)
     NAND            reduce using rule 20 (expression -> expression EQ expression .)
@@ -3012,10 +3012,10 @@ state 55
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 21 (expression -> expression NEQ expression .)
     NAND            reduce using rule 21 (expression -> expression NEQ expression .)
@@ -3080,10 +3080,10 @@ state 56
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     AND             reduce using rule 22 (expression -> expression IMPL expression .)
     NAND            reduce using rule 22 (expression -> expression IMPL expression .)
@@ -3133,7 +3133,7 @@ state 56
 
 state 57
 
-    (29) expression -> expression PLUS expression .
+    (31) expression -> expression PLUS expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
@@ -3148,39 +3148,39 @@ state 57
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
-    LESS_THEN       reduce using rule 29 (expression -> expression PLUS expression .)
-    GREATER_THEN    reduce using rule 29 (expression -> expression PLUS expression .)
-    LESS_EQUALS     reduce using rule 29 (expression -> expression PLUS expression .)
-    GREATER_EQUALS  reduce using rule 29 (expression -> expression PLUS expression .)
-    EQUALS          reduce using rule 29 (expression -> expression PLUS expression .)
-    NOT_EQUALS      reduce using rule 29 (expression -> expression PLUS expression .)
-    AND             reduce using rule 29 (expression -> expression PLUS expression .)
-    NAND            reduce using rule 29 (expression -> expression PLUS expression .)
-    OR              reduce using rule 29 (expression -> expression PLUS expression .)
-    NOR             reduce using rule 29 (expression -> expression PLUS expression .)
-    XOR             reduce using rule 29 (expression -> expression PLUS expression .)
-    EQ              reduce using rule 29 (expression -> expression PLUS expression .)
-    NEQ             reduce using rule 29 (expression -> expression PLUS expression .)
-    IMPL            reduce using rule 29 (expression -> expression PLUS expression .)
-    PLUS            reduce using rule 29 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 29 (expression -> expression PLUS expression .)
-    $end            reduce using rule 29 (expression -> expression PLUS expression .)
-    SEPARATOR       reduce using rule 29 (expression -> expression PLUS expression .)
-    DO              reduce using rule 29 (expression -> expression PLUS expression .)
-    THEN            reduce using rule 29 (expression -> expression PLUS expression .)
-    END             reduce using rule 29 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 29 (expression -> expression PLUS expression .)
-    ELSE            reduce using rule 29 (expression -> expression PLUS expression .)
+    LESS_THEN       reduce using rule 31 (expression -> expression PLUS expression .)
+    GREATER_THEN    reduce using rule 31 (expression -> expression PLUS expression .)
+    LESS_EQUALS     reduce using rule 31 (expression -> expression PLUS expression .)
+    GREATER_EQUALS  reduce using rule 31 (expression -> expression PLUS expression .)
+    EQUALS          reduce using rule 31 (expression -> expression PLUS expression .)
+    NOT_EQUALS      reduce using rule 31 (expression -> expression PLUS expression .)
+    AND             reduce using rule 31 (expression -> expression PLUS expression .)
+    NAND            reduce using rule 31 (expression -> expression PLUS expression .)
+    OR              reduce using rule 31 (expression -> expression PLUS expression .)
+    NOR             reduce using rule 31 (expression -> expression PLUS expression .)
+    XOR             reduce using rule 31 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 31 (expression -> expression PLUS expression .)
+    NEQ             reduce using rule 31 (expression -> expression PLUS expression .)
+    IMPL            reduce using rule 31 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 31 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 31 (expression -> expression PLUS expression .)
+    $end            reduce using rule 31 (expression -> expression PLUS expression .)
+    SEPARATOR       reduce using rule 31 (expression -> expression PLUS expression .)
+    DO              reduce using rule 31 (expression -> expression PLUS expression .)
+    THEN            reduce using rule 31 (expression -> expression PLUS expression .)
+    END             reduce using rule 31 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 31 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 31 (expression -> expression PLUS expression .)
     TIMES           shift and go to state 31
     DIVIDE          shift and go to state 32
 
-  ! TIMES           [ reduce using rule 29 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 29 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 31 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 31 (expression -> expression PLUS expression .) ]
   ! LESS_THEN       [ shift and go to state 15 ]
   ! GREATER_THEN    [ shift and go to state 16 ]
   ! LESS_EQUALS     [ shift and go to state 17 ]
@@ -3201,7 +3201,7 @@ state 57
 
 state 58
 
-    (30) expression -> expression MINUS expression .
+    (32) expression -> expression MINUS expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
@@ -3216,39 +3216,39 @@ state 58
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
-    LESS_THEN       reduce using rule 30 (expression -> expression MINUS expression .)
-    GREATER_THEN    reduce using rule 30 (expression -> expression MINUS expression .)
-    LESS_EQUALS     reduce using rule 30 (expression -> expression MINUS expression .)
-    GREATER_EQUALS  reduce using rule 30 (expression -> expression MINUS expression .)
-    EQUALS          reduce using rule 30 (expression -> expression MINUS expression .)
-    NOT_EQUALS      reduce using rule 30 (expression -> expression MINUS expression .)
-    AND             reduce using rule 30 (expression -> expression MINUS expression .)
-    NAND            reduce using rule 30 (expression -> expression MINUS expression .)
-    OR              reduce using rule 30 (expression -> expression MINUS expression .)
-    NOR             reduce using rule 30 (expression -> expression MINUS expression .)
-    XOR             reduce using rule 30 (expression -> expression MINUS expression .)
-    EQ              reduce using rule 30 (expression -> expression MINUS expression .)
-    NEQ             reduce using rule 30 (expression -> expression MINUS expression .)
-    IMPL            reduce using rule 30 (expression -> expression MINUS expression .)
-    PLUS            reduce using rule 30 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 30 (expression -> expression MINUS expression .)
-    $end            reduce using rule 30 (expression -> expression MINUS expression .)
-    SEPARATOR       reduce using rule 30 (expression -> expression MINUS expression .)
-    DO              reduce using rule 30 (expression -> expression MINUS expression .)
-    THEN            reduce using rule 30 (expression -> expression MINUS expression .)
-    END             reduce using rule 30 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 30 (expression -> expression MINUS expression .)
-    ELSE            reduce using rule 30 (expression -> expression MINUS expression .)
+    LESS_THEN       reduce using rule 32 (expression -> expression MINUS expression .)
+    GREATER_THEN    reduce using rule 32 (expression -> expression MINUS expression .)
+    LESS_EQUALS     reduce using rule 32 (expression -> expression MINUS expression .)
+    GREATER_EQUALS  reduce using rule 32 (expression -> expression MINUS expression .)
+    EQUALS          reduce using rule 32 (expression -> expression MINUS expression .)
+    NOT_EQUALS      reduce using rule 32 (expression -> expression MINUS expression .)
+    AND             reduce using rule 32 (expression -> expression MINUS expression .)
+    NAND            reduce using rule 32 (expression -> expression MINUS expression .)
+    OR              reduce using rule 32 (expression -> expression MINUS expression .)
+    NOR             reduce using rule 32 (expression -> expression MINUS expression .)
+    XOR             reduce using rule 32 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 32 (expression -> expression MINUS expression .)
+    NEQ             reduce using rule 32 (expression -> expression MINUS expression .)
+    IMPL            reduce using rule 32 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 32 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 32 (expression -> expression MINUS expression .)
+    $end            reduce using rule 32 (expression -> expression MINUS expression .)
+    SEPARATOR       reduce using rule 32 (expression -> expression MINUS expression .)
+    DO              reduce using rule 32 (expression -> expression MINUS expression .)
+    THEN            reduce using rule 32 (expression -> expression MINUS expression .)
+    END             reduce using rule 32 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 32 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 32 (expression -> expression MINUS expression .)
     TIMES           shift and go to state 31
     DIVIDE          shift and go to state 32
 
-  ! TIMES           [ reduce using rule 30 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 30 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 32 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 32 (expression -> expression MINUS expression .) ]
   ! LESS_THEN       [ shift and go to state 15 ]
   ! GREATER_THEN    [ shift and go to state 16 ]
   ! LESS_EQUALS     [ shift and go to state 17 ]
@@ -3269,7 +3269,7 @@ state 58
 
 state 59
 
-    (31) expression -> expression TIMES expression .
+    (33) expression -> expression TIMES expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
@@ -3284,36 +3284,36 @@ state 59
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
-    LESS_THEN       reduce using rule 31 (expression -> expression TIMES expression .)
-    GREATER_THEN    reduce using rule 31 (expression -> expression TIMES expression .)
-    LESS_EQUALS     reduce using rule 31 (expression -> expression TIMES expression .)
-    GREATER_EQUALS  reduce using rule 31 (expression -> expression TIMES expression .)
-    EQUALS          reduce using rule 31 (expression -> expression TIMES expression .)
-    NOT_EQUALS      reduce using rule 31 (expression -> expression TIMES expression .)
-    AND             reduce using rule 31 (expression -> expression TIMES expression .)
-    NAND            reduce using rule 31 (expression -> expression TIMES expression .)
-    OR              reduce using rule 31 (expression -> expression TIMES expression .)
-    NOR             reduce using rule 31 (expression -> expression TIMES expression .)
-    XOR             reduce using rule 31 (expression -> expression TIMES expression .)
-    EQ              reduce using rule 31 (expression -> expression TIMES expression .)
-    NEQ             reduce using rule 31 (expression -> expression TIMES expression .)
-    IMPL            reduce using rule 31 (expression -> expression TIMES expression .)
-    PLUS            reduce using rule 31 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 31 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 31 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 31 (expression -> expression TIMES expression .)
-    $end            reduce using rule 31 (expression -> expression TIMES expression .)
-    SEPARATOR       reduce using rule 31 (expression -> expression TIMES expression .)
-    DO              reduce using rule 31 (expression -> expression TIMES expression .)
-    THEN            reduce using rule 31 (expression -> expression TIMES expression .)
-    END             reduce using rule 31 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 31 (expression -> expression TIMES expression .)
-    ELSE            reduce using rule 31 (expression -> expression TIMES expression .)
+    LESS_THEN       reduce using rule 33 (expression -> expression TIMES expression .)
+    GREATER_THEN    reduce using rule 33 (expression -> expression TIMES expression .)
+    LESS_EQUALS     reduce using rule 33 (expression -> expression TIMES expression .)
+    GREATER_EQUALS  reduce using rule 33 (expression -> expression TIMES expression .)
+    EQUALS          reduce using rule 33 (expression -> expression TIMES expression .)
+    NOT_EQUALS      reduce using rule 33 (expression -> expression TIMES expression .)
+    AND             reduce using rule 33 (expression -> expression TIMES expression .)
+    NAND            reduce using rule 33 (expression -> expression TIMES expression .)
+    OR              reduce using rule 33 (expression -> expression TIMES expression .)
+    NOR             reduce using rule 33 (expression -> expression TIMES expression .)
+    XOR             reduce using rule 33 (expression -> expression TIMES expression .)
+    EQ              reduce using rule 33 (expression -> expression TIMES expression .)
+    NEQ             reduce using rule 33 (expression -> expression TIMES expression .)
+    IMPL            reduce using rule 33 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 33 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 33 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 33 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 33 (expression -> expression TIMES expression .)
+    $end            reduce using rule 33 (expression -> expression TIMES expression .)
+    SEPARATOR       reduce using rule 33 (expression -> expression TIMES expression .)
+    DO              reduce using rule 33 (expression -> expression TIMES expression .)
+    THEN            reduce using rule 33 (expression -> expression TIMES expression .)
+    END             reduce using rule 33 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 33 (expression -> expression TIMES expression .)
+    ELSE            reduce using rule 33 (expression -> expression TIMES expression .)
 
   ! LESS_THEN       [ shift and go to state 15 ]
   ! GREATER_THEN    [ shift and go to state 16 ]
@@ -3337,7 +3337,7 @@ state 59
 
 state 60
 
-    (32) expression -> expression DIVIDE expression .
+    (34) expression -> expression DIVIDE expression .
     (1) expression -> expression . LESS_THEN expression
     (2) expression -> expression . GREATER_THEN expression
     (3) expression -> expression . LESS_EQUALS expression
@@ -3352,36 +3352,36 @@ state 60
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
-    LESS_THEN       reduce using rule 32 (expression -> expression DIVIDE expression .)
-    GREATER_THEN    reduce using rule 32 (expression -> expression DIVIDE expression .)
-    LESS_EQUALS     reduce using rule 32 (expression -> expression DIVIDE expression .)
-    GREATER_EQUALS  reduce using rule 32 (expression -> expression DIVIDE expression .)
-    EQUALS          reduce using rule 32 (expression -> expression DIVIDE expression .)
-    NOT_EQUALS      reduce using rule 32 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 32 (expression -> expression DIVIDE expression .)
-    NAND            reduce using rule 32 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 32 (expression -> expression DIVIDE expression .)
-    NOR             reduce using rule 32 (expression -> expression DIVIDE expression .)
-    XOR             reduce using rule 32 (expression -> expression DIVIDE expression .)
-    EQ              reduce using rule 32 (expression -> expression DIVIDE expression .)
-    NEQ             reduce using rule 32 (expression -> expression DIVIDE expression .)
-    IMPL            reduce using rule 32 (expression -> expression DIVIDE expression .)
-    PLUS            reduce using rule 32 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 32 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 32 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 32 (expression -> expression DIVIDE expression .)
-    $end            reduce using rule 32 (expression -> expression DIVIDE expression .)
-    SEPARATOR       reduce using rule 32 (expression -> expression DIVIDE expression .)
-    DO              reduce using rule 32 (expression -> expression DIVIDE expression .)
-    THEN            reduce using rule 32 (expression -> expression DIVIDE expression .)
-    END             reduce using rule 32 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 32 (expression -> expression DIVIDE expression .)
-    ELSE            reduce using rule 32 (expression -> expression DIVIDE expression .)
+    LESS_THEN       reduce using rule 34 (expression -> expression DIVIDE expression .)
+    GREATER_THEN    reduce using rule 34 (expression -> expression DIVIDE expression .)
+    LESS_EQUALS     reduce using rule 34 (expression -> expression DIVIDE expression .)
+    GREATER_EQUALS  reduce using rule 34 (expression -> expression DIVIDE expression .)
+    EQUALS          reduce using rule 34 (expression -> expression DIVIDE expression .)
+    NOT_EQUALS      reduce using rule 34 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 34 (expression -> expression DIVIDE expression .)
+    NAND            reduce using rule 34 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 34 (expression -> expression DIVIDE expression .)
+    NOR             reduce using rule 34 (expression -> expression DIVIDE expression .)
+    XOR             reduce using rule 34 (expression -> expression DIVIDE expression .)
+    EQ              reduce using rule 34 (expression -> expression DIVIDE expression .)
+    NEQ             reduce using rule 34 (expression -> expression DIVIDE expression .)
+    IMPL            reduce using rule 34 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 34 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 34 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 34 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 34 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 34 (expression -> expression DIVIDE expression .)
+    SEPARATOR       reduce using rule 34 (expression -> expression DIVIDE expression .)
+    DO              reduce using rule 34 (expression -> expression DIVIDE expression .)
+    THEN            reduce using rule 34 (expression -> expression DIVIDE expression .)
+    END             reduce using rule 34 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 34 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 34 (expression -> expression DIVIDE expression .)
 
   ! LESS_THEN       [ shift and go to state 15 ]
   ! GREATER_THEN    [ shift and go to state 16 ]
@@ -3432,12 +3432,12 @@ state 61
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -3485,12 +3485,12 @@ state 62
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -3526,10 +3526,10 @@ state 63
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 14 (expression -> IDENTIFIER ASSIGN expression .)
     SEPARATOR       reduce using rule 14 (expression -> IDENTIFIER ASSIGN expression .)
@@ -3607,12 +3607,12 @@ state 64
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -3660,12 +3660,12 @@ state 65
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -3744,12 +3744,12 @@ state 67
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -3816,10 +3816,10 @@ state 69
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     SEPARATOR       shift and go to state 74
     LESS_THEN       shift and go to state 15
@@ -3859,10 +3859,10 @@ state 70
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 8 (expression -> WHILE expression DO expression .)
     SEPARATOR       reduce using rule 8 (expression -> WHILE expression DO expression .)
@@ -3928,10 +3928,10 @@ state 71
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 11 (expression -> IF expression THEN expression .)
     SEPARATOR       reduce using rule 11 (expression -> IF expression THEN expression .)
@@ -3997,10 +3997,10 @@ state 72
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 12 (expression -> LOOP expression DO expression .)
     SEPARATOR       reduce using rule 12 (expression -> LOOP expression DO expression .)
@@ -4065,10 +4065,10 @@ state 73
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     END             reduce using rule 25 (body -> body SEPARATOR expression .)
     SEPARATOR       reduce using rule 25 (body -> body SEPARATOR expression .)
@@ -4121,12 +4121,12 @@ state 74
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -4174,12 +4174,12 @@ state 75
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -4215,10 +4215,10 @@ state 76
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     DO              shift and go to state 78
     LESS_THEN       shift and go to state 15
@@ -4258,10 +4258,10 @@ state 77
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 23 (expression -> IF expression THEN expression ELSE expression .)
     SEPARATOR       reduce using rule 23 (expression -> IF expression THEN expression ELSE expression .)
@@ -4338,12 +4338,12 @@ state 78
     (26) expression -> . NUMBER
     (27) expression -> . FLOAT
     (28) expression -> . MINUS expression
-    (29) expression -> . expression PLUS expression
-    (30) expression -> . expression MINUS expression
-    (31) expression -> . expression TIMES expression
-    (32) expression -> . expression DIVIDE expression
-    (33) expression -> . TRUE
-    (34) expression -> . FALSE
+    (29) expression -> . TRUE
+    (30) expression -> . FALSE
+    (31) expression -> . expression PLUS expression
+    (32) expression -> . expression MINUS expression
+    (33) expression -> . expression TIMES expression
+    (34) expression -> . expression DIVIDE expression
     (35) expression -> . LPAREN expression RPAREN
 
     FOR             shift and go to state 2
@@ -4379,10 +4379,10 @@ state 79
     (20) expression -> expression . EQ expression
     (21) expression -> expression . NEQ expression
     (22) expression -> expression . IMPL expression
-    (29) expression -> expression . PLUS expression
-    (30) expression -> expression . MINUS expression
-    (31) expression -> expression . TIMES expression
-    (32) expression -> expression . DIVIDE expression
+    (31) expression -> expression . PLUS expression
+    (32) expression -> expression . MINUS expression
+    (33) expression -> expression . TIMES expression
+    (34) expression -> expression . DIVIDE expression
 
     $end            reduce using rule 7 (expression -> FOR expression SEPARATOR expression SEPARATOR expression DO expression .)
     SEPARATOR       reduce using rule 7 (expression -> FOR expression SEPARATOR expression SEPARATOR expression DO expression .)

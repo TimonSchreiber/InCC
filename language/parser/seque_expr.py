@@ -1,5 +1,5 @@
 from .bool_expr import *
-from ..lexer.seque_expr import tokens, seque_lexer
+from ..lexer.seque_expr import tokens#, seque_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -45,12 +45,12 @@ def p_bodyn(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-seque_parser = yacc(start='expression')
+# seque_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = seque_parser.parse(input=i, lexer=seque_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = seque_parser.parse(input=i, lexer=seque_lexer)
+#         print(i,"\n\t",result.eval(env))

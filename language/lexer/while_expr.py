@@ -7,11 +7,12 @@ reserved_set |= {
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-while_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    while_lexer = lex()
     data = '''
     {
         x := 1;

@@ -19,11 +19,12 @@ reserved_set |= {
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-bool_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    bool_lexer = lex()
     data = '''
     5.6 < (3 + 6.08) and -8 = 2 - 10
     true xor false

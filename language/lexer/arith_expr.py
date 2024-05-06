@@ -1,4 +1,4 @@
-from ply.lex import lex
+# from ply.lex import lex
 
 # Initial reserved key words
 reserved_set = set()
@@ -45,11 +45,12 @@ def t_error(t):
 tokens = list(token_set | reserved_set)
 
 # Create Lexer
-arith_lexer = lex()
 
 
 # Test Lexer
 if __name__ == '__main__':
+    from ply.lex import lex
+    arith_lexer = lex()
     data = '''
     5.6 * (3 + 6.08)
     -8 / 2 - 10

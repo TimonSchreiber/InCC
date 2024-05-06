@@ -20,11 +20,12 @@ t_NOT_EQUALS        = r'!='
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-comp_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    comp_lexer = lex()
     data = '''
     5.6 < (3 + 6.08)
     -8 = 2 - 10

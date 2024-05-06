@@ -1,5 +1,5 @@
 from .assign_expr import *
-from ..lexer.bool_expr import tokens, bool_lexer
+from ..lexer.bool_expr import tokens#, bool_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -56,12 +56,12 @@ def p_expression_boolean_value(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-bool_parser = yacc(start='expression')
+# bool_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = bool_parser.parse(input=i, lexer=bool_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = bool_parser.parse(input=i, lexer=bool_lexer)
+#         print(i,"\n\t",result.eval(env))

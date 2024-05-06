@@ -11,11 +11,12 @@ t_SEPARATOR = r';'
 # Combine Tokens
 tokens = list(token_set | reserved_set)
 
-# Create Lexer
-seque_lexer = lex()
 
 # Test Lexer
 if __name__ == '__main__':
+    # Create Lexer
+    from ply.lex import lex
+    seque_lexer = lex()
     data = '''
     x := {
         5.6 < (3 + 6.08) and -8 = 2 - 10;

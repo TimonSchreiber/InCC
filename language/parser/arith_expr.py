@@ -1,5 +1,6 @@
-from ply.yacc import yacc
-from ..lexer.arith_expr import tokens, arith_lexer
+# from ply.yacc import yacc
+# from ply.lex import lex
+from ..lexer.arith_expr import tokens#, arith_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -66,12 +67,13 @@ def p_error(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-arith_parser = yacc(start='expression')
 
 # testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = arith_parser.parse(input=i, lexer=arith_lexer)
-        print(i,"\n\t",result.eval(env))
+# if __name__ == '__main__':
+#     from ply.yacc import yacc
+#     arith_parser = yacc(start='expression')
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = arith_parser.parse(input=i, lexer=lex())
+#         print(i,"\n\t",result.eval(env))

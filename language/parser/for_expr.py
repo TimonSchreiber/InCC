@@ -1,5 +1,5 @@
 from .loop_expr import *
-from ..lexer.for_expr import tokens, for_lexer
+from ..lexer.for_expr import tokens#, for_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
@@ -35,12 +35,12 @@ def p_expression_for(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-for_parser = yacc(start='expression')
+# for_parser = yacc(start='expression')
 
-# testing
-if __name__ == '__main__':
-    env = {}
-    while True:
-        i=input("repl > ")
-        result = for_parser.parse(input=i, lexer=for_lexer)
-        print(i,"\n\t",result.eval(env))
+# # testing
+# if __name__ == '__main__':
+#     env = {}
+#     while True:
+#         i=input("repl > ")
+#         result = for_parser.parse(input=i, lexer=for_lexer)
+#         print(i,"\n\t",result.eval(env))
