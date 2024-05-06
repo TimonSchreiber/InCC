@@ -115,21 +115,38 @@ class LoopExpression(InterpretedExpression):
     def eval(self, env):
         n, env = self.number.eval(env)
         r = None
-        for _ in range(n):
+        for _ in range(int(n)):
             r, env = self.body.eval(env)
         return (r, env)
 
 class ForExpression(InterpretedExpression):
-    def __init__(self, start, test, cont, body):
+    def __init__(self, start, test, change, body):
         self.start = start
         self.test = test
-        self.cont = cont
+        self.change = change
         self.body = body
 
     def eval(self, env):
-        env = self.start.eval(env)
+        _, env = self.start.eval(env)
+        t, env = self.test.eval(env)
         r = None
-        while not self.test.eval(env):
+        while t:
             r, env = self.body.eval(env)
-            env = self.cont.eval(env)
+            _, env = self.change.eval(env)
+            t, env = self.test.eval(env)
         return (r, env)
+
+class ITEExpression(InterpretedExpression):
+    def __init__(self, test, ifbody, elsebody):
+        self.test = test
+        self.ifbody = ifbody
+        self.elsebody = elsebody
+
+    def eval(self, env):
+        t, env = self.test.eval(env)
+        if t:
+            return self.ifbody.eval(env)
+        elif self.elsebody:
+            return self.elsebody.eval(env)
+        else:
+            return (None, env)

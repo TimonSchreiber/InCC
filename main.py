@@ -1,5 +1,5 @@
-from language.parser.for_expr import for_parser as parser, precedence
-from language.lexer.for_expr import for_lexer as lexer
+from language.parser.ite_expr import ite_parser as parser
+from language.lexer.ite_expr import ite_lexer as lexer
 
 if __name__ == '__main__':
     env = {}
@@ -7,20 +7,29 @@ if __name__ == '__main__':
     #     i=input("repl > ")
     i = '''
         {
-            y := 0;
-            z := for x := 0; x > 3; x := x + 1 DO
-            {
-                y := y + 2
-            }
+            x := 4;
+            y := 4;
+            z:=if x > y then
+                if x > y then
+                    y := y + 1
+            else
+                x*y;
+            z := 2;
+            a := 0;
+            b := 0;
+            loop x do
+                if z >= 0 then
+                    loop y do
+                        {
+                            z := z - 1;
+                            a := a + 1
+                        }
+                else
+                    b := b+1
         }
         '''
     result = parser.parse(input=i, lexer=lexer)
     print(i,"\n\t",result.eval(env))
-    b = 1
-    for lst in precedence:
-        print(f'{b} -> {lst}')
-        # print(lst)
-        b = b+1
 
 
 '''
@@ -34,29 +43,27 @@ note:
     7. for_expr
     8. ite_expr (If Then Else)
 
-
 https://en.cppreference.com/w/cpp/language/operator_precedence
 TODO: precedence of IMPL not mentioned in cpp-reference
 '''
 
 '''
-Loop / For
----
-loop expr do expr
-for assign; bool_expr; assign do expr
-[for assign; bool_expr; assign do lock var expr]  <--  optional
+[x] loop expr do expr
+[x] for assign; bool_expr; assign do expr
+[O] [for assign; bool_expr; assign do lock var expr]  <--  optional
+        -> Lock ident In expr
+
+[x] if expr then expr
+[x] if expr then expr else expr
+
+[o] While expr Do expr
+
+[o] Loacl ident assign expr In expr
+
+class LetExpr()
+def init(self, var, value, body):
+    ...
+
+def eval(env):
+    ?, env = self. -->> Vsiehe skript Seite 50 <<
 '''
-# Was ist der Rückgabewert der Loop-Expression?
-# Das Ergebnis der letzen Expression im Körper?
-#   -> Was, wenn der Körper gar nicht ausgeführt wurde? 'None'?!
-
-
-'''
-If Then Else
----
-
-IF bool_expr THEN expr
-IF bool_expr THEN expr ELSE expr
-'''
-
-# precedence 'ELSE' > 'THEN'

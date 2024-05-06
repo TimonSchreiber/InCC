@@ -1,11 +1,11 @@
-from .loop_expr import *
-from ..lexer.for_expr import tokens, for_lexer
+from .for_expr import *
+from ..lexer.ite_expr import tokens, ite_lexer
 import interpreter.all_expr as all_expr
 
 ### the generator
 # these items are expected to be implemented in module generate (see below)
 used_procedures_and_classes |= {
-    'ForExpression'
+    'ITEExpression'
 }
 
 gen = None
@@ -24,10 +24,19 @@ def check_generator_module():
         raise Exception("code generator doesn't implement all expected functions")
 
 ### the parser
+precedence = [
+    ['left', 'THEN'],
+    ['left', 'ELSE']
+] + precedence
 
-def p_expression_for(p):
-    'expression : FOR expression SEPARATOR expression SEPARATOR expression DO expression'
-    p[0] = gen.ForExpression(p[2], p[4], p[6], p[8])
+
+def p_expression_it(p):
+    'expression : IF expression THEN expression'
+    p[0] = gen.ITEExpression(p[2], p[4], None)
+
+def p_expression_ite(p):
+    'expression : IF expression THEN expression ELSE expression'
+    p[0] = gen.ITEExpression(p[2], p[4], p[6])
 
 
 ### the REPL
@@ -35,12 +44,12 @@ def p_expression_for(p):
 set_generator_module(all_expr)
 check_generator_module()
 
-for_parser = yacc(start='expression')
+ite_parser = yacc(start='expression')
 
 # testing
 if __name__ == '__main__':
     env = {}
     while True:
         i=input("repl > ")
-        result = for_parser.parse(input=i, lexer=for_lexer)
+        result = ite_parser.parse(input=i, lexer=ite_lexer)
         print(i,"\n\t",result.eval(env))

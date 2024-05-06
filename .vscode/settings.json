@@ -1,22 +1,22 @@
-{
-    "python.autoComplete.extraPaths": [
-        "./incc/language/lexer",
-        "./language/lexer",
-        "./lexer",
-        "./incc/language/parser",
-        "./language/parser",
-        "./parser",
-        "./incc/interpreter",
-        "./interpreter",
-    ],
-    "python.analysis.extraPaths": [
-        "./incc/language/lexer",
-        "./language/lexer",
-        "./lexer",
-        "./incc/language/parser",
-        "./language/parser",
-        "./parser",
-        "./incc/interpreter",
-        "./interpreter",
-    ]
-}
+// {
+//     "python.autoComplete.extraPaths": [
+//         "./incc/language/lexer",
+//         "./language/lexer",
+//         "./lexer",
+//         "./incc/language/parser",
+//         "./language/parser",
+//         "./parser",
+//         "./incc/interpreter",
+//         "./interpreter",
+//     ],
+//     "python.analysis.extraPaths": [
+//         "./incc/language/lexer",
+//         "./language/lexer",
+//         "./lexer",
+//         "./incc/language/parser",
+//         "./language/parser",
+//         "./parser",
+//         "./incc/interpreter",
+//         "./interpreter",
+//     ]
+// }

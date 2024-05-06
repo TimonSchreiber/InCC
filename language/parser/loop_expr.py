@@ -25,10 +25,9 @@ def check_generator_module():
 
 
 ### the parser
-# Insert after 'UMINUS'
-precedence = precedence + [
+precedence = [
     ['left', 'DO']
-]
+] + precedence
 
 
 def p_expression_loop(p):
