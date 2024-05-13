@@ -28,14 +28,12 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
-
 # Ignore and Error handling
 t_ignore  = ' \t\n'
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-
 
 # Combine Tokens
 tokens = list(token_set | reserved_set)

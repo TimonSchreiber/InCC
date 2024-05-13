@@ -13,6 +13,5 @@ def t_IDENTIFIER(t):
     t.type = val if val in reserved_set else 'IDENTIFIER'
     return t
 
-
 # Combine Tokens
 tokens = list(token_set | reserved_set)

@@ -16,6 +16,5 @@ t_GREATER_EQUALS    = r'>='
 t_EQUALS            = r'='
 t_NOT_EQUALS        = r'!='
 
-
 # Combine Tokens
 tokens = list(token_set | reserved_set)

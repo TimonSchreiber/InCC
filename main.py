@@ -1,8 +1,8 @@
 from ply.lex import lex
 from ply.yacc import yacc
 
-from language.lexer.ite_expr import *
-from language.parser.ite_expr import *
+from language.lexer.local_expr import *
+from language.parser.local_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
 from interpreter import all_expr
@@ -15,8 +15,7 @@ lexer = lex()
 parser = yacc(start='expression')
 env = Enviroment({})
 
-i = '''
-{
+i = '''{
     x := 4;
     y := 4;
     z:=if x > y then
@@ -38,11 +37,10 @@ i = '''
             b := b+1;
     while x > z do
         x := x - 1
-}
-'''
+}'''
 
 result = parser.parse(input=i, lexer=lexer)
-print(i,"\n\t",result.eval(env))
+print(i,"\n",result.eval(env))
 
 
 '''
@@ -54,10 +52,10 @@ note:
     05. seque_expr
     06. loop_expr
     07. for_expr
-    09. while_expr
-    08. ite_expr (If Then Else)
-    10. lock_expr ~
-    11. local_expr ~
+    08. while_expr
+    09. ite_expr (If Then Else)
+    10. TODO: lock_expr
+    11. TODO: local_expr
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 '''

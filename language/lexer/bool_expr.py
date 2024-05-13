@@ -14,6 +14,5 @@ reserved_set |= {
     'IMPL'
 }
 
-
 # Combine Tokens
 tokens = list(token_set | reserved_set)

@@ -9,5 +9,5 @@
 - [ ] create separate REPL class
 - [ ] `Lock id[(, id)*] In expr`
 - [ ] `Local id assign expr In expr`
-- [ ] change generic expressions in loop/for/while into assign_expr/bool_expr/...
+- [ ] change generic expressions in loop/for/while into assign_expr/- ol_expr/...
 - [ ] split interpreter.all_expr into files matching lexer/|parser/

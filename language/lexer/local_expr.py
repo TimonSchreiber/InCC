@@ -1,9 +1,7 @@
-from .while_expr import *
+from .lock_expr import *
 
 reserved_set |= {
-    'IF',
-    'THEN',
-    'ELSE'
+    'LOCAL'
 }
 
 # Combine Tokens

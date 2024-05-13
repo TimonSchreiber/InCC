@@ -36,4 +36,4 @@ class Enviroment(dict):
         if '..' not in self:
             return self
         else:
-            self['..'].get_root()
+            return self['..'].get_root()

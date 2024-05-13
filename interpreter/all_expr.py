@@ -1,5 +1,7 @@
 import operator
 
+from .enviroment import Enviroment
+
 binary_operators = {
     # arithmetic
     '+': operator.add,
@@ -163,3 +165,27 @@ class ITEExpression(InterpretedExpression):
             return self.elsebody.eval(env)
         else:
             return (None, env)
+
+class LockExpression(InterpretedExpression):
+    def __init__(self, var, body):
+        self.var = var
+        self.body = body
+
+    def eval(self, env):
+        pass ## TODO!!
+
+class LocalExpression(InterpretedExpression):
+    def __init__(self, var, value, body):
+        self.var = var
+        self.value = value
+        self.body = body
+
+    def eval(self, env):
+        val, env1 = self.value.eval(env)
+        env2 = Enviroment({self.var: val})
+        env2.set_parent(env1)
+        y, env3 = self.body.eval(env2)
+        return (y, env1)
+# TODO: what is env3? can I discard it? -> y, _ = self.body.eval(env2)
+# Can env1 also be named env? env is not needed...
+

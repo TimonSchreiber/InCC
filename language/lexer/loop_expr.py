@@ -5,6 +5,5 @@ reserved_set |= {
     'DO'
 }
 
-
 # Combine Tokens
 tokens = list(token_set | reserved_set)
