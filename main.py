@@ -5,17 +5,17 @@ from language.lexer.local_expr import *
 from language.parser.local_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
-from interpreter import all_expr
+from interpreter import local_expr as interp
 from interpreter.enviroment import Enviroment
 
-set_generator_module(all_expr)
+set_generator_module(interp)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
 env = Enviroment({})
 
-i = '''{
+a = '''{
     x := 4;
     y := 4;
     z:=if x > y then
@@ -39,8 +39,18 @@ i = '''{
         x := x - 1
 }'''
 
-result = parser.parse(input=i, lexer=lexer)
-print(i,"\n",result.eval(env))
+b = '''{
+    a := 3;
+    lock a in
+    {
+        b := a + 2;
+        a := a * a;
+        c := a + 2
+    }
+}'''
+
+result = parser.parse(input=b, lexer=lexer)
+print(a,"\n",result.eval(env))
 
 
 '''
