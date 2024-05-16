@@ -1,6 +1,6 @@
 from .assign_expr import *
 
-binary_operators.update({
+binary_operators |= {
     'and':  operator.and_,
     'or':   operator.or_,
     'eq':   operator.eq,
@@ -9,11 +9,11 @@ binary_operators.update({
     'nand': lambda a,b: not (a and b),
     'nor':  lambda a,b: not (a or b),
     'impl': lambda a,b: (not a) | b
-})
+}
 
-unary_operators.update({
+unary_operators |= {
     'NOT': operator.not_
-})
+}
 
 boolean_values = {
     'TRUE':  True,

@@ -8,7 +8,6 @@ def find_dict_for(d, key):
 
 
 class Enviroment(dict):
-
     def __getitem__(self, key):
         if key in self:
             return dict.__getitem__(self, key)

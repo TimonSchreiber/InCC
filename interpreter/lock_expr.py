@@ -6,7 +6,6 @@ class LockExpression(InterpretedExpression):
         self.body = body
 
     def eval(self, env):
-        val = self.var
-        r, env = self.body.eval(env)
-        env[self.var: val]
-        return (r, env)
+        r, env1 = self.body.eval(env)
+        return (r, env1)
+    # TODO ??

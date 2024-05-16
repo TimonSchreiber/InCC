@@ -39,9 +39,10 @@ a = '''{
         x := x - 1
 }'''
 
-b = '''{
+a = '''{
     a := 3;
-    lock a in
+    b := 4;
+    local a := 4 in
     {
         b := a + 2;
         a := a * a;
@@ -49,8 +50,30 @@ b = '''{
     }
 }'''
 
-result = parser.parse(input=b, lexer=lexer)
-print(a,"\n",result.eval(env))
+i = '''{
+    a := 3;
+    b := 4;
+    lock a in
+    {
+        a := 4;
+        b := a * b;
+        c := True
+    }
+}'''
+
+a = '''{
+    a := 5;
+    b := 1;
+    while a > 0 do
+    {
+        a := a - 1;
+        b := b * 2;
+        c := True
+    }
+}'''
+
+result = parser.parse(input=i, lexer=lexer)
+print(i,"\n",result.eval(env))
 
 
 '''
