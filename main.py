@@ -15,62 +15,59 @@ lexer = lex()
 parser = yacc(start='expression')
 env = Enviroment({})
 
-a = '''{
+i = '''
+{
+    a := 3;
+    b := 4;
+    c := True;
     x := 4;
     y := 4;
-    z:=if x > y then
-        if x > y then
-            y := y + 1
-    else
-        x*y;
-    z := 2;
-    a := 0;
-    b := 0;
-    loop x do
-        if z >= 0 then
-            loop y do
-                {
-                    z := z - 1;
-                    a := a + 1
-                }
-        else
-            b := b+1;
-    while x > z do
-        x := x - 1
-}'''
 
-a = '''{
-    a := 3;
-    b := 4;
-    local a := 4 in
-    {
-        b := a + 2;
-        a := a * a;
-        c := a + 2
-    }
-}'''
 
-i = '''{
-    a := 3;
-    b := 4;
-    lock a in
-    {
-        a := 4;
-        b := a * b;
-        c := True
-    }
-}'''
+    # z :=
+    # if x > y then
+    #     if x > y then
+    #         y := y + 1
+    #     else
+    #         x*y;
+    # z := 2;
+    # a := 0;
+    # b := 0;
+    # loop x do
+    #     if z >= 0 then
+    #         loop y do
+    #             {
+    #                 z := z - 1;
+    #                 a := a + 1
+    #             }
+    #     else
+    #         b := b+1;
+    # while x > z do
+    #     x := x - 1
 
-a = '''{
-    a := 5;
-    b := 1;
+    # local a := 4 in
+    # {
+    #     b := a + 2;
+    #     a := a * a;
+    #     c := a + 2
+    # }
+
+    # lock a in
+    # {
+    #     a := 4;
+    #     b := a * b;
+    #     c := True
+    # }
+
     while a > 0 do
     {
         a := a - 1;
         b := b * 2;
-        c := True
+        c := c xor True;
+        d := 6
     }
-}'''
+}
+'''
 
 result = parser.parse(input=i, lexer=lexer)
 print(i,"\n",result.eval(env))
