@@ -1,4 +1,4 @@
-from .bool_expr import *
+from .boolean_expr import *
 
 token_set |= {
     'BEGIN',

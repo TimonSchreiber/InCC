@@ -1,6 +1,6 @@
 from .code_generation import gen
-from .comp_expr import *
-from ..lexer.assign_expr import tokens
+from .comparison_expr import *
+from ..lexer.assignment_expr import tokens
 
 used_procedures_and_classes |= {
     'VariableExpression',

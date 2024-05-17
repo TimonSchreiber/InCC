@@ -1,4 +1,4 @@
-from .arith_expr import *
+from .arithmetic_expr import *
 
 token_set |= {
     'LESS_THEN',

@@ -1,5 +1,5 @@
 from .code_generation import gen
-from ..lexer.arith_expr import tokens
+from ..lexer.arithmetic_expr import tokens
 
 used_procedures_and_classes = {
     'SelfEvaluatingExpression',

@@ -75,11 +75,11 @@ print(i,"\n",result.eval(env))
 
 '''
 note:
-    01. arith_expr
-    02. comp_expr
-    04. assign_expr
-    03. bool_expr
-    05. seque_expr
+    01. arithmetic_expr
+    02. comparison_expr
+    04. assignment_expr
+    03. boolean_expr
+    05. sequence_expr
     06. loop_expr
     07. for_expr
     08. while_expr

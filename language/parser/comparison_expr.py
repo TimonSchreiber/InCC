@@ -1,6 +1,6 @@
 from .code_generation import gen
-from .arith_expr import *
-from ..lexer.comp_expr import tokens
+from .arithmetic_expr import *
+from ..lexer.comparison_expr import tokens
 
 precedence = [
     ['left', 'EQUALS', 'NOT_EQUALS'],

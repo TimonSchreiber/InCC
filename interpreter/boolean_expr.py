@@ -1,4 +1,4 @@
-from .assign_expr import *
+from .assignment_expr import *
 
 binary_operators |= {
     'and':  operator.and_,

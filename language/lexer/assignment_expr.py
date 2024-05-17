@@ -1,4 +1,4 @@
-from .comp_expr import *
+from .comparison_expr import *
 
 token_set |= {
     'IDENTIFIER',

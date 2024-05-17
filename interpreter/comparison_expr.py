@@ -1,4 +1,4 @@
-from .arith_expr import *
+from .arithmetic_expr import *
 
 binary_operators |= {
     '<':  operator.lt,

@@ -1,6 +1,6 @@
 from .code_generation import gen
-from .assign_expr import *
-from ..lexer.bool_expr import tokens
+from .assignment_expr import *
+from ..lexer.boolean_expr import tokens
 
 used_procedures_and_classes |= {
     'BooleanValueExpression'
