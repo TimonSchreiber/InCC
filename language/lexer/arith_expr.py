@@ -31,6 +31,8 @@ def t_NUMBER(t):
 # Ignore and Error handling
 t_ignore  = ' \t\n'
 
+t_ignore_COMMENT = r'\#.*'
+
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
