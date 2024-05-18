@@ -13,7 +13,7 @@ check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = Enviroment({})
+env = Enviroment()
 
 i = '''
 {
@@ -46,32 +46,34 @@ i = '''
     #     x := x - 1
 
     # local a := 4 in
-    # {
-    #     b := a + 2;
-    #     a := a * a;
-    #     c := a + 2
-    # }
+    #     local b := 7 in
+    #     {
+    #         d := a + b;
+    #         a := a * a;
+    #         c := a + 2;
+    #         e := True
+    #     }
 
-    # lock a in
-    # {
-    #     a := 4;
-    #     b := a * b;
-    #     c := True
-    # }
+    for i := 0; i < 5; i := i+1 do
+        lock a in
+        {
+            a := 4;
+            b := a * b;
+            c := True
+        }
 
-    while a > 0 do
-    {
-        a := a - 1;
-        b := b * 2;
-        c := c xor True;
-        d := 6
-    }
+    # while a > 0 do
+    # {
+    #     a := a - 1;
+    #     b := b * 2;
+    #     c := c xor True;
+    #     d := 6
+    # }
 }
 '''
-
 result = parser.parse(input=i, lexer=lexer)
-print(i,"\n",result.eval(env))
-
+i = '\n'.join(filter(lambda str : (not str.lstrip().startswith('#')) and len(str) > 0, i.splitlines()))
+print(i, "\n", result.eval(env))
 
 '''
 note:
@@ -84,8 +86,8 @@ note:
     07. for_expr
     08. while_expr
     09. ite_expr (If Then Else)
-    10. TODO: lock_expr
-    11. TODO: local_expr
+    10. lock_expr
+    11. local_expr (acts like letrec)
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 '''
