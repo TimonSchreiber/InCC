@@ -1,11 +1,11 @@
 from ply.lex import lex
 from ply.yacc import yacc
 
-from language.lexer.local_expr import *
-from language.parser.local_expr import *
+from language.lexer.lambda_expr import *
+from language.parser.lambda_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
-from interpreter import local_expr as interp
+from interpreter import lambda_expr as interp
 from interpreter.enviroment import Enviroment
 
 set_generator_module(interp)
@@ -17,12 +17,11 @@ env = Enviroment()
 
 i = '''
 {
-    a := 3;
-    b := 4;
-    c := True;
-    x := 4;
-    y := 4;
-
+    # a := 3;
+    # b := 4;
+    # c := True;
+    # x := 4;
+    # y := 4;
 
     # z :=
     # if x > y then
@@ -54,13 +53,13 @@ i = '''
     #         e := True
     #     }
 
-    for i := 0; i < 5; i := i+1 do
-        lock a in
-        {
-            a := 4;
-            b := a * b;
-            c := True
-        }
+    # for i := 0; i < 5; i := i+1 do
+    #     lock a in
+    #     {
+    #         a := 4;
+    #         b := a * b;
+    #         c := True
+    #     }
 
     # while a > 0 do
     # {
@@ -69,6 +68,11 @@ i = '''
     #     c := c xor True;
     #     d := 6
     # }
+
+    a := x -> x+1;
+    b := a(2);
+    c := 4;
+    d := c + 5
 }
 '''
 result = parser.parse(input=i, lexer=lexer)
@@ -88,6 +92,9 @@ note:
     09. ite_expr (If Then Else)
     10. lock_expr
     11. local_expr (acts like letrec)
+    12. lambda_expr
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 '''
+
+# (True, {'a': 16, 'b': 7, 'c': 18, 'x': 4, 'y': 4})

@@ -9,8 +9,8 @@ class LocalExpression(InterpretedExpression):
     def eval(self, env):
        env1 = Enviroment()
        env1.set_parent(env)
-       val, env2 = self.value.eval(env1)
-       env2[self.var] = val
-       y, _ = self.body.eval(env2)
+       val, env1 = self.value.eval(env1)
+       env1[self.var] = val
+       y, _ = self.body.eval(env1)
        return y, env
 

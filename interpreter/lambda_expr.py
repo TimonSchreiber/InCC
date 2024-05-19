@@ -9,9 +9,9 @@ class LambdaExpression(InterpretedExpression):
         def lmbd(value):
             new_env = Enviroment({self.var: value})
             new_env.set_parent(def_env)
-            y, e = self.body.eval(new_env)
+            y, _ = self.body.eval(new_env)
             return y
-        return lmbd, def_env
+        return (lmbd, def_env)
 
 class CallExpression(InterpretedExpression):
     def __init__(self, name, value):
@@ -22,3 +22,4 @@ class CallExpression(InterpretedExpression):
         f, env = self.name.eval(env)
         v, env = self.value.eval(env)
         return (f(v), env)
+    # TODO: call this function f?
