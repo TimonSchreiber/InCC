@@ -13,6 +13,6 @@ class AssignmentExpression(InterpretedExpression):
         self.e = e
 
     def eval(self, env):
-        value, env1 = self.e.eval(env)
-        env1[self.v] = value
-        return (value, env1)
+        value, env = self.e.eval(env)
+        env[self.v] = value
+        return (value, env)

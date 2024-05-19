@@ -11,7 +11,8 @@ used_procedures_and_classes = {
 precedence = [
     ['left', 'PLUS', 'MINUS'],
     ['left', 'TIMES', 'DIVIDE'],
-    ['right', 'UMINUS']
+    ['right', 'UMINUS'],
+    ['right', 'LPAREN', 'RPAREN']
 ]
 
 def p_expression_number(p):
@@ -34,6 +35,5 @@ def p_expression_parenthesis(p):
     'expression : LPAREN expression RPAREN'
     p[0] = gen().ParenthesisExpression(p[2])
 
-
 def p_error(p):
-    print("Syntax error in input!")
+    print(f'Syntax error: {p.value}')

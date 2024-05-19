@@ -1,6 +1,6 @@
 from .code_generation import gen
 from .boolean_expr import *
-from ..lexer.sequence_expr import tokens
+from ..lexer.sequences_expr import tokens
 
 used_procedures_and_classes |= {
     'SequenceExpression'
@@ -10,7 +10,7 @@ precedence = precedence + [
     ['left', 'SEPARATOR']
 ]
 
-def p_expression_sequence(p):
+def p_expression_sequences(p):
     'expression : BEGIN body END'
     p[0] = gen().SequenceExpression(p[2])
 

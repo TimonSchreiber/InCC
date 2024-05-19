@@ -1,4 +1,4 @@
-from .sequence_expr import *
+from .sequences_expr import *
 
 reserved_set |= {
     'LOOP',

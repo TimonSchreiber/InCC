@@ -13,12 +13,13 @@ class Enviroment(dict):
         self.locked_variables = set()
 
     def __getitem__(self, key):
+        # if type(key) is int or key.isdigit():
+        #     return int(key)
         if key in self:
             return dict.__getitem__(self, key)
-        elif '..' in self and self['..'] is not None:
+        if '..' in self and self['..'] is not None:
             return self['..'][key]
-        else:
-            raise Exception(f'accessing undefined variable {key} in enviroment {self}')
+        raise Exception(f'accessing undefined variable {key} in enviroment {self}')
 
     def __setitem__(self, key, value):
         if (key in self.locked_variables):

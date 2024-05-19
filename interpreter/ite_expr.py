@@ -10,7 +10,6 @@ class ITEExpression(InterpretedExpression):
         t, env = self.condition.eval(env)
         if t:
             return self.ifbody.eval(env)
-        elif self.elsebody:
+        if self.elsebody:
             return self.elsebody.eval(env)
-        else:
-            return (None, env)
+        return (None, env)

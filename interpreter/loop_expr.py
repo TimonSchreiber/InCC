@@ -1,4 +1,4 @@
-from .sequence_expr import *
+from .sequences_expr import *
 
 class LoopExpression(InterpretedExpression):
     def __init__(self, number, body):

@@ -25,9 +25,9 @@ class BinaryOperatorExpression(InterpretedExpression):
         self.e2 = e2
 
     def eval(self, env):
-        x, env1 = self.e1.eval(env)
-        y, env2 = self.e2.eval(env1)
-        return (binary_operators[self.op](x, y), env2)
+        x, env = self.e1.eval(env)
+        y, env = self.e2.eval(env)
+        return (binary_operators[self.op](x, y), env)
 
 class UnaryOperatorExpression(InterpretedExpression):
     def __init__(self, op, e1):
@@ -35,8 +35,8 @@ class UnaryOperatorExpression(InterpretedExpression):
         self.e1 = e1
 
     def eval(self, env):
-        x, env1 = self.e1.eval(env)
-        return (unary_operators[self.op](x), env1)
+        x, env = self.e1.eval(env)
+        return (unary_operators[self.op](x), env)
 
 class ParenthesisExpression(InterpretedExpression):
     def __init__(self, e1):
