@@ -7,7 +7,8 @@
 - [x] `While expr Do expr`
 - [x] create separate Enviroment class
 - [ ] create separate REPL class
-- [ ] `Lock id[(, id)*] In expr`
-- [ ] `Local id assign expr In expr`
-- [ ] change generic expressions in loop/for/while into assign_expr/- ol_expr/...
-- [ ] split interpreter.all_expr into files matching lexer/|parser/
+- [x] `Lock id[(, id)*] In expr`
+- [x] `Local id assign expr In expr`
+- [ ] change generic expressions in loop/for/while/ite into assign_expr/- bool_expr/...
+- [x] split interpreter.all_expr into files matching lexer/|parser/
+- [x] Lambda: `[id :=] var -> expr`
