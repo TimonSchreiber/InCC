@@ -4017,6 +4017,25 @@ state 70
     (35) expression -> expression . TIMES expression
     (36) expression -> expression . DIVIDE expression
 
+  ! shift/reduce conflict for LESS_THEN resolved as shift
+  ! shift/reduce conflict for GREATER_THEN resolved as shift
+  ! shift/reduce conflict for LESS_EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER_EQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for NOT_EQUALS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+  ! shift/reduce conflict for IMPL resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
     $end            reduce using rule 16 (expression -> IDENTIFIER ARROW expression .)
     SEPARATOR       reduce using rule 16 (expression -> IDENTIFIER ARROW expression .)
     DO              reduce using rule 16 (expression -> IDENTIFIER ARROW expression .)
@@ -5455,3 +5474,25 @@ state 94
   ! TIMES           [ reduce using rule 1 (expression -> FOR expression SEPARATOR expression SEPARATOR expression DO expression .) ]
   ! DIVIDE          [ reduce using rule 1 (expression -> FOR expression SEPARATOR expression SEPARATOR expression DO expression .) ]
 
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LESS_THEN in state 70 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THEN in state 70 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUALS in state 70 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUALS in state 70 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 70 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUALS in state 70 resolved as shift
+WARNING: shift/reduce conflict for AND in state 70 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 70 resolved as shift
+WARNING: shift/reduce conflict for OR in state 70 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 70 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 70 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 70 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 70 resolved as shift
+WARNING: shift/reduce conflict for IMPL in state 70 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 70 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 70 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 70 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 70 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 70 resolved as shift
