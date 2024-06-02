@@ -1,7 +1,6 @@
 counter = '''
-{ counter := s ->
-    local acc := s in n ->
-        acc := acc + n
+{ counter := s -> local acc := s in n -> acc := acc + n
+; counter := acc -> {x -> { acc := acc + x; acc }}
 ; c := counter(0)
 ; a1 := c(1)
 ; a2 := c(1)
@@ -20,6 +19,7 @@ if __name__ == '__main__':
 
     from interpreter import lambda_expr
     from interpreter.enviroment import Enviroment
+    from language.parser.lambda_expr import precedence
 
     set_generator_module(lambda_expr)
     check_generator_module(used_procedures_and_classes)
@@ -30,3 +30,6 @@ if __name__ == '__main__':
 
     result = parser.parse(input=counter, lexer=lexer)
     print(counter, "\n", result.eval(env))
+
+    # for p in precedence:
+    #     print(*p)

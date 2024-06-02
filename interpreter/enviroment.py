@@ -23,8 +23,7 @@ class Enviroment(dict):
 
     def __setitem__(self, key, value):
         if (key in self.locked_variables):
-            pass    ## also possible to print message or raise Exception
-            # raise Exception(...) | print(f'changing locked variable {key} in enviroment {self}')
+            raise Exception(f'changing locked variable {key} in enviroment {self}')
         d = find_dict_for(self, key)
         if d is None:
             d = self

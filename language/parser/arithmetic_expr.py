@@ -12,7 +12,7 @@ precedence = [
     ['left', 'PLUS', 'MINUS'],
     ['left', 'TIMES', 'DIVIDE'],
     ['right', 'UMINUS'],
-    ['right', 'LPAREN', 'RPAREN']
+    ['right', 'LPAREN']
 ]
 
 def p_expression_number(p):

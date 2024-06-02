@@ -7,9 +7,9 @@ used_procedures_and_classes |= {
     'CallExpression'
 }
 
-# precedence = [
-#     ['left', 'ARROW']
-# ] + precedence
+precedence = [
+    ['left', 'ARROW']
+] + precedence
 
 def p_expression_lambda(p):
     'expression : IDENTIFIER ARROW expression'

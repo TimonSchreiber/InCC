@@ -16,67 +16,70 @@ parser = yacc(start='expression')
 env = Enviroment()
 
 example = '''
-{
-    a := 3;
-    b := 4;
-    c := True;
-    x := 4;
-    y := 4;
+{ x := True
+; local x := False in
+    b := 1
+; lock x in
+    a := 3
+    # b := 4;
+    # c := True;
+    # x := 4;
+    # y := 4;
 
-    z :=
-    if x > y then
-        if x > y then
-            y := y + 1
-        else
-            x*y;
-    z := 2;
-    a := 0;
-    b := 0;
-    loop x do
-        if z >= 0 then
-            loop y do
-                {
-                    z := z - 1;
-                    a := a + 1
-                }
-        else
-            b := b+1;
-    while x > z do
-        x := x - 1;
+    # z :=
+    # if x > y then
+    #     if x > y then
+    #         y := y + 1
+    #     else
+    #         x*y;
+    # z := 2;
+    # a := 0;
+    # b := 0;
+    # loop x do
+    #     if z >= 0 then
+    #         loop y do
+    #             {
+    #                 z := z - 1;
+    #                 a := a + 1
+    #             }
+    #     else
+    #         b := b+1;
+    # while x > z do
+    #     x := x - 1;
 
-    local a := 4 in
-        local b := 7 in
-        {
-            d := a + b;
-            a := a * a;
-            c := a + 2;
-            e := True
-        };
+    # local a := 4 in
+    #     local b := 7 in
+    #     {
+    #         d := a + b;
+    #         a := a * a;
+    #         c := a + 2;
+    #         e := True
+    #     };
 
-    for i := 0; i < 5; i := i+1 do
-        lock a in
-        {
-            a := 4;
-            b := a * b;
-            c := True
-        };
+    # for i := 0; i < 5; i := i+1 do
+    #     lock a in
+    #     {
+    #         a := 4;
+    #         b := a * b;
+    #         c := True
+    #     };
 
-    while a > 0 do
-    {
-        a := a - 1;
-        b := b * 2;
-        c := c xor True;
-        d := 6
-    };
+    # while a > 0 do
+    # {
+    #     a := a - 1;
+    #     b := b * 2;
+    #     c := c xor True;
+    #     d := 6
+    # };
 
-    a := x -> x+1;
-    b := a(2);
-    c := b + a(7)
+    # a := x -> x+1;
+    # b := a(2);
+    # c := b + a(7)
 }
 '''
 
 result = parser.parse(input=example, lexer=lexer)
-example = '\n'.join(filter(lambda s : not s.lstrip().startswith('#'), example.splitlines()))
+example = '\n'.join(filter(lambda s : not s.lstrip().startswith('#') and len(s) > 0, example.splitlines()))
 print(example, "\n", result.eval(env))
 
 '''
@@ -93,6 +96,7 @@ note:
     10. lock_expr
     11. local_expr (acts like letrec)
     12. lambda_expr
+    13. ...
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 '''
