@@ -1,5 +1,7 @@
-import operator
-from .enviroment import Enviroment
+# import operator
+# from .enviroment import Enviroment
+
+from .datatypes import *
 
 binary_operators = {
     # arithmetic

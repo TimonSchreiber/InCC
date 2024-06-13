@@ -10,10 +10,16 @@
  - [x] `Lock id[(, id)*] In expr` TODO: for now only one id allowed...
  - [x] `Local id assign expr In expr`
  - [ ] change generic expressions in loop/for/while/ite into assign_expr/- bool_expr/...
- - [x] split interpreter.all_expr into files matching lexer/|parser/
+ - [x] split interpreter.all_expr into files matching lexer/ and parser/
  - [x] Lambda: `[id :=] var -> expr`
- - [ ] Lambda: `[id :=] -> expr`
- - [ ] Lambda: `[id :=] v1, v2, ... -> expr`
- - [ ] String, Char Datatypes
- - [ ] List: list(v1,v2,...)
- - [ ] Array: [v1,v2,...] (optional array(v1,v2,...))
+ - [x] Lambda: `[id :=] -> expr`
+ - [x] Lambda: `[id :=] v1, v2, ... -> expr`
+ - [x] String, Char Datatypes
+ - [x] List: `list(v1,v2,...)`
+ - [x] List: `head` and `tail` implementation
+ - [x] Array: `[v1,v2,...]` (optional `array(v1,v2,...)`)
+ - [x] Array access: `id[expr]`
+ - [ ] Struct: `[id := ] struct {assign [, assign]*} `
+ - [ ] Struct member access: `id.id`
+ - [ ] Struct extension: `[id :=] extend struct_id {assign [, assign]*}`
+ - [ ] Closure implementieren?? Was genau ist closure?

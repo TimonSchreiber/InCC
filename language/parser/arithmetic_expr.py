@@ -1,8 +1,9 @@
 from .code_generation import gen
+from .datatypes import *
 from ..lexer.arithmetic_expr import tokens
 
 used_procedures_and_classes = {
-    'SelfEvaluatingExpression',
+    # 'SelfEvaluatingExpression',
     'BinaryOperatorExpression',
     'UnaryOperatorExpression',
     'ParenthesisExpression'
@@ -15,10 +16,10 @@ precedence = [
     ['right', 'LPAREN']
 ]
 
-def p_expression_number(p):
-    '''expression : NUMBER
-                  | FLOAT'''
-    p[0] = gen().SelfEvaluatingExpression(p[1])
+# def p_expression_number(p):
+#     '''expression : NUMBER
+#                   | FLOAT'''
+#     p[0] = gen().SelfEvaluatingExpression(p[1])
 
 def p_expression_unary_minus(p):
     '''expression : MINUS expression %prec UMINUS'''
@@ -35,5 +36,5 @@ def p_expression_parenthesis(p):
     'expression : LPAREN expression RPAREN'
     p[0] = gen().ParenthesisExpression(p[2])
 
-def p_error(p):
-    print(f'Syntax error: {p.value}')
+# def p_error(p):
+#     print(f'Syntax error: {p.value}')

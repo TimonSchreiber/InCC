@@ -11,6 +11,5 @@ class LocalExpression(InterpretedExpression):
        env1.set_parent(env)
        val, env1 = self.value.eval(env1)
        env1[self.var] = val
-       y, _ = self.body.eval(env1)
-       return y, env
-
+       r, _ = self.body.eval(env1)
+       return r, env

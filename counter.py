@@ -1,6 +1,6 @@
 counter = '''
-{ counter := s -> local acc := s in n -> acc := acc + n
-; counter := acc -> {x -> { acc := acc + x; acc }}
+{ counter := acc -> {x -> { acc := acc + x}}
+; counter := x -> y -> x := x + y
 ; c := counter(0)
 ; a1 := c(1)
 ; a2 := c(1)
