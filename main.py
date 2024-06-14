@@ -16,7 +16,7 @@ parser = yacc(start='expression')
 env = Enviroment(
     {'head': lambda_expr.head,
      'tail': lambda_expr.tail,
-    #  'cons': lambda_expr.cons
+     'cons': lambda_expr.cons
     }
 )
 
@@ -146,6 +146,7 @@ example = '''
 ; lst := list(1,2,4,8)
 ; e := head(lst)
 ; f := tail(lst)
+; h := cons('A', f)
 }'''
 
 # example = '''

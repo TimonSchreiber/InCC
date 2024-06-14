@@ -21,30 +21,30 @@ def head(l):
 def tail(l):
     return l[1]
 
-# def cons(l1, l2):
-#     return (l1, l2)
+def cons(l1, l2):
+    return (l1, l2)
 
 class ListExpression(InterpretedExpression):
-    def __init__(self, vals):
-        self.vals = array2list(vals)
+    def __init__(self, arr):
+        self.lst = array2list(arr)
 
     def eval(self, env):
-        if self.vals is None:
-            return None, env
-        return ((self.vals[0].eval(env)[0], self.vals[1].eval(env)[0]), env)
+        if self.lst is None:
+            return (None, env)
+        return ((self.lst[0].eval(env)[0], self.lst[1].eval(env)[0]), env)
 
 class ArrayExpression(InterpretedExpression):
-    def __init__(self, vals):
-        self.vals = vals
+    def __init__(self, arr):
+        self.arr = arr
 
     def eval(self, env):
-        return ([self.vals[i].eval(env)[0] for i in range(len(self.vals))], env)
+        return ([self.arr[i].eval(env)[0] for i in range(len(self.arr))], env)
 
 class ArrayAccessExpression(InterpretedExpression):
-    def __init__(self, name, index):
-        self.name = name
+    def __init__(self, arr, index):
+        self.arr = arr
         self.index = index
 
     def eval(self, env):
         i, env = self.index.eval(env)
-        return (env[self.name][i], env)
+        return (env[self.arr][i], env)
