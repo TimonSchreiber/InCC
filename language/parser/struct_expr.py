@@ -8,9 +8,9 @@ used_procedures_and_classes |= {
     'StructExtendExpression'
 }
 
-precedence = [
+precedence = precedence + [
     ['left', 'DOT']
-] + precedence
+]
 
 def p_expression_struct(p):
     'expression : STRUCT BEGIN struct_body END'
