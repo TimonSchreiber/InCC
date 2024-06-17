@@ -1,6 +1,8 @@
 import operator  # used in arithmetic_expr
 from .enviroment import Enviroment  # used in local- and lambda_expr
 
+env = Enviroment()
+
 class InterpretedExpression:
     def eval(self, env):
         raise Exception('eval unimplemented')
@@ -32,6 +34,12 @@ class ListExpression(InterpretedExpression):
         if self.lst is None:
             return (None, env)
         return ((self.lst[0].eval(env)[0], self.lst[1].eval(env)[0]), env)
+
+env |= {
+    'head': head,
+    'tail': tail,
+    'cons': cons
+}
 
 class ArrayExpression(InterpretedExpression):
     def __init__(self, arr):

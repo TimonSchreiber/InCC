@@ -6,27 +6,24 @@ from language.parser.lambda_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
 from interpreter import lambda_expr
-from interpreter.enviroment import Enviroment
+# from interpreter.enviroment import Enviroment
 
 set_generator_module(lambda_expr)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = Enviroment(
-    {'head': lambda_expr.head,
-     'tail': lambda_expr.tail,
-     'cons': lambda_expr.cons
-    }
-)
+env = lambda_expr.env
 
-def unraw(s: str) -> str:
-    return s \
-        .replace(r'\'', '\'') \
-        .replace(r'\"', '\"') \
-        .replace(r'\\', '\\') \
-        .replace(r'\n', '\n') \
-        .replace(r'\t', '\t')
+
+# TODO: Delete if not used
+# def unraw(s: str) -> str:
+#     return s \
+#         .replace(r'\'', '\'') \
+#         .replace(r'\"', '\"') \
+#         .replace(r'\\', '\\') \
+#         .replace(r'\n', '\n') \
+#         .replace(r'\t', '\t')
 
 example = '''
 {
@@ -147,25 +144,56 @@ example = '''
 ; e := head(lst)
 ; f := tail(lst)
 ; h := cons('A', f)
+; i := [[1,2],3,4]
+; j := i[0]
+; k := j[0]
+; l := [3+b]
 }'''
+
+example = '''
+{ a := 'a'
+; b := "a"
+; c := '\n'
+; d := "hello\tworld\n!"
+}
+'''
 
 # example = '''
 # { a := 'a'
-# ; b := '\n'
-# ; c := '\t'
-# ; d := '\\'
-# ; e := b = '\t'
-# ; f := "test"
-# ; g := "a\nb"
-# ; h := "Hello \"world\"!"
+# # ; b := '\n'
+# # ; c := '\t'
+# # ; d := '\\'
+# # ; e := b = '\t
+# '''
+
+# example = '''
+# { a := 5
+# ; f := x -> x+1
+# ; b := f(a)
 # }'''
+
+a =6
+'''
+; f := "test"
+; g := "a\nb"
+; h := "Hello \"world\"!"
+}'''
 
 '''
 # ; h := "Hello "world"!"
 # ; i := "\t\n\r\'\"\\"'''
 
-result = parser.parse(input=unraw(example), lexer=lexer)
-# example = '\n'.join(repr(example).strip('\"').split(';'))
+# example = '''
+# { a := 5
+# ; s := struct
+#     { x := 1
+#     ; y := a
+#     ; f:= x -> a := x
+#     }
+# }'''
+
+result = parser.parse(input=example, lexer=lexer)
+# # example = '\n'.join(repr(example).strip('\"').split(';'))
 print(example, '\n', result.eval(env))
 
 # for p in precedence:
