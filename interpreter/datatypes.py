@@ -35,6 +35,7 @@ class ListExpression(InterpretedExpression):
             return (None, env)
         return ((self.lst[0].eval(env)[0], self.lst[1].eval(env)[0]), env)
 
+# Add list functions to the enviroment
 env |= {
     'head': head,
     'tail': tail,

@@ -1,10 +1,6 @@
-# import operator
-# from .enviroment import Enviroment
-
 from .datatypes import *
 
 binary_operators = {
-    # arithmetic
     '+': operator.add,
     '-': operator.sub,
     '*': operator.mul,
@@ -12,7 +8,6 @@ binary_operators = {
 }
 
 unary_operators = {
-    # arithmetic
     '-': operator.neg
 }
 
