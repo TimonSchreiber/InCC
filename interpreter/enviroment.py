@@ -1,24 +1,25 @@
 def find_dict_for(d, key):
     if key in d:
         return d
-    elif '..' in d and d['..'] is not None:
-        return find_dict_for(d['..'], key)
-    else:
-        return None
+    if d.parent is not None:
+        return find_dict_for(d.parent, key)
+        # return find_dict_for(d.get_parent(), key)
+    return None
 
 
 class Enviroment(dict):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.locked_variables = set()
+        self.locked_variables = {'.', '..'}# set()
+        self.parent: Enviroment = None
 
     def __getitem__(self, key):
         # if type(key) is int or key.isdigit():
         #     return int(key)
         if key in self:
             return dict.__getitem__(self, key)
-        if '..' in self and self['..'] is not None:
-            return self['..'][key]
+        if self.parent:
+            return self.parent[key]
         raise Exception(f'accessing undefined variable {key} in enviroment {self}')
 
     def __setitem__(self, key, value):
@@ -30,19 +31,24 @@ class Enviroment(dict):
         dict.__setitem__(d, key, value)
 
     def set_parent(self, parent):
-        dict.__setitem__(self, '..', parent)
+        self.parent = parent
 
     def get_parent(self):
-        if '..' in self and self['..'] is not None:
-            return self['..']
-        else:
-            return None
+        return self.parent
 
-    def get_root(self):
-        if '..' not in self:
-            return self
+    def get_vals(self):
+        """
+        self.items()    -> List of (key, value) tuples of THIS dict (no parent)
+        dict(...)       -> convert back to dict
+        Enviroment(...) -> convert to Enviroment
+        """
+        return Enviroment(dict(self.items()))
+
+    def __str__(self):
+        if self.parent:
+            return str(self.parent) + dict.__str__(self)
         else:
-            return self['..'].get_root()
+            return dict.__str__(self)
 
     def lock_variable(self, key):
         self.locked_variables.add(key)
