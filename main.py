@@ -1,44 +1,31 @@
 from ply.lex import lex
 from ply.yacc import yacc
 
-from language.lexer.lambda_expr import *
-from language.parser.lambda_expr import *
+from language.lexer.struct_expr import *
+from language.parser.struct_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
-from interpreter import lambda_expr
+from interpreter import struct_expr
 # from interpreter.enviroment import Enviroment
 
-set_generator_module(lambda_expr)
+set_generator_module(struct_expr)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = lambda_expr.env
-
-
-# TODO: Delete if not used
-# def unraw(s: str) -> str:
-#     return s \
-#         .replace(r'\'', '\'') \
-#         .replace(r'\"', '\"') \
-#         .replace(r'\\', '\\') \
-#         .replace(r'\n', '\n') \
-#         .replace(r'\t', '\t')
+env = struct_expr.env
 
 example = '''
-{
-    x := True;
-    local x := False in
-        b := 1;
-    lock x in
-    {
-        a := 3;
-        b := 4;
-        c := True;
-        y := 4
-    };
-
-    z :=
+{ x := True
+; local x := False in
+    b := 1
+; lock x in
+    { a := 3
+    ; b := 4
+    ; c := True
+    ; y := 4
+    }
+; z :=
     if x > y then
         if x > y then
             y := y + 1
@@ -94,6 +81,7 @@ example = '''
 }
 '''
 
+# local as letrec
 example = '''
 {
     g := local gauss := x ->
@@ -111,31 +99,6 @@ example = '''
 '''
 
 example = '''
-{ a1 := []
-; a2 := [1]
-; a3 := [1,2]
-; a4 := [1,2,'c']
-; b := 4
-; a5 := [1, 2, 3, b]
-; a6 := [1, 2+3, 4+b, b+1]
-# ; a7 := array()
-# ; a8 := array(1,2,3)
-}'''
-
-example = '''
-{
-    a := 2;
-    b1 := list(1, a, 2);
-    b2 := list(3, a+4);
-    b3 := list(3, a+4, 5);
-    b4 := list(6, 7+a);
-    b5 := list(6, 7+a, 8)
-    # b6 := list(9, a+10, a+11, 12);
-    # b7 := list(13, 14+a, a+15, 16);
-    # b8 := list(17, 18+a, 19+a, 20)
-}'''
-
-example = '''
 { arr := [1,2,4,8]
 ; b := arr[0]
 ; c := arr[3]
@@ -148,15 +111,16 @@ example = '''
 ; j := i[0]
 ; k := j[0]
 ; l := [3+b]
+# ; m := [3+b, b]
 }'''
 
-example = '''
-{ a := 'a'
-; b := "a"
-; c := '\n'
-; d := "hello\tworld\n!"
-}
-'''
+# example = '''
+# { a := 'a'
+# ; b := "a"
+# ; c := '\n'
+# ; d := "hello\tworld\n!"
+# }
+# '''
 
 # example = '''
 # { a := 'a'
@@ -172,25 +136,47 @@ example = '''
 # ; b := f(a)
 # }'''
 
-a =6
-'''
-; f := "test"
-; g := "a\nb"
-; h := "Hello \"world\"!"
-}'''
-
-'''
-# ; h := "Hello "world"!"
-# ; i := "\t\n\r\'\"\\"'''
-
-# example = '''
-# { a := 5
-# ; s := struct
-#     { x := 1
-#     ; y := a
-#     ; f:= x -> a := x
-#     }
+# '''
+# ; f := "test"
+# ; g := "a\nb"
+# ; h := "Hello \"world\"!"
 # }'''
+
+# '''
+# # ; h := "Hello "world"!"
+# # ; i := "\t\n\r\'\"\\"'''
+
+# struct
+example = '''
+{ a := 5
+; local a := 6 in
+    b := 2 * a
+; c := for i := a; i >= 0; i := i-1 do
+    a := a+1
+; lock c in
+    a := a - c / 2
+; s := struct
+    { x := c+2
+    ; y := 3
+    ; fz := x-> x*c
+    ; a := True
+    }
+; d := s.x
+; e := s.fz(2)
+; t := extend s
+    { x := 47
+    ; z := 11
+    }
+; f := t.z
+; g := t.x
+; h := t..x
+; u := extend t
+    { fz := x,y -> x+y
+    ; y := a        # TODO: how to access x from s and not x from t
+    }
+; j := u.fz(3,4)
+; k := u..fz(3)
+}'''
 
 result = parser.parse(input=example, lexer=lexer)
 # # example = '\n'.join(repr(example).strip('\"').split(';'))
@@ -200,8 +186,6 @@ print(example, '\n', result.eval(env))
 #     print(*p)
 
 '''
-notes:
-    1 shift reduce conflict with 'comma' in state 4
 order:
     00. datatypes
     01. arithmetic_expr

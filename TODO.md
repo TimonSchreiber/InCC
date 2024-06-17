@@ -19,7 +19,8 @@
  - [x] List: `head` and `tail` implementation
  - [x] Array: `[v1,v2,...]` (optional `array(v1,v2,...)`)
  - [x] Array access: `id[expr]`
- - [ ] Struct: `[id := ] struct {assign [, assign]*} `
- - [ ] Struct member access: `id.id`
- - [ ] Struct extension: `[id :=] extend struct_id {assign [, assign]*}`
- - [ ] Closure implementieren?? Was genau ist closure?
+ - [ ] Array: `[3+id1, id2]` not working, but `[id1+3, id2]` works
+ - [x] Struct: `[id := ] struct {assign [, assign]*} `
+ - [x] Struct member access: `id.id`
+ - [x] Struct extension: `[id :=] extend struct_id {assign [, assign]*}`
+ - [ ] Struct: how to access higher lvl members inside struct -> `extend a {x:=1} extend b {x:=2} extend c {y := a.x or .x or ..x}
