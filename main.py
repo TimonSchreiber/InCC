@@ -172,10 +172,20 @@ example = '''
 ; h := t..x
 ; u := extend t
     { fz := x,y -> x+y
-    ; y := a        # TODO: how to access x from s and not x from t
+    ; y := x        # TODO: how to access x from s and not x from t
     }
 ; j := u.fz(3,4)
 ; k := u..fz(3)
+}'''
+
+example = '''
+{ a := 1
+; b := struct { a := 2 }
+; c := extend b { a := 3 }
+; d := extend c { a := 4 }
+; e := extend d { a := 5 }
+; f := extend e { a := 6 }
+; arr := [a, f.....a, f....a, f...a, f..a, f.a]
 }'''
 
 result = parser.parse(input=example, lexer=lexer)
