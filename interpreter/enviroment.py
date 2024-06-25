@@ -1,16 +1,23 @@
+
 def find_dict_for(d, key):
     if key in d:
         return d
     if d.parent is not None:
         return find_dict_for(d.parent, key)
-        # return find_dict_for(d.get_parent(), key)
+    return None
+
+def get_parent_dict(d, n, key):
+    if n <= 1:
+        return d
+    if d.parent is not None:
+        return get_parent_dict(d.parent, n-1, key)
     return None
 
 
 class Enviroment(dict):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.locked_variables = {'.', '..'}# set()
+        self.locked_variables = set()
         self.parent: Enviroment = None
 
     def __getitem__(self, key):
@@ -44,14 +51,20 @@ class Enviroment(dict):
         """
         return Enviroment(dict(self.items()))
 
-    def __str__(self):
-        if self.parent:
-            return str(self.parent) + dict.__str__(self)
-        else:
-            return dict.__str__(self)
+    def get_item(self, n, key):
+        d = get_parent_dict(self, n, key)
+        if d is not None:
+            return d[key]
+        raise Exception(f'Inheritance hirachy has not enough layers.')
 
     def lock_variable(self, key):
         self.locked_variables.add(key)
 
     def unlock_variable(self, key):
         self.locked_variables.remove(key)
+
+    # def __str__(self):
+    #     if self.parent:
+    #         return str(self.parent) + dict.__str__(self)
+    #     else:
+    #         return dict.__str__(self)

@@ -19,8 +19,11 @@
  - [x] List: `head` and `tail` implementation
  - [x] Array: `[v1,v2,...]` (optional `array(v1,v2,...)`)
  - [x] Array access: `id[expr]`
- - [ ] Array: `[3+id1, id2]` not working, but `[id1+3, id2]` works
+ - [x] Array: `[3+id1, id2]` not working, but `[id1+3, id2]` works
  - [x] Struct: `[id := ] struct {assign [, assign]*} `
  - [x] Struct member access: `id.id`
  - [x] Struct extension: `[id :=] extend struct_id {assign [, assign]*}`
- - [ ] Struct: how to access higher lvl members inside struct -> `extend a {x:=1} extend b {x:=2} extend c {y := a.x or .x or ..x}
+ - [x] Struct: how to access higher lvl members inside struct -> `extend a {x:=1} extend b {x:=2} extend c {y := a.x or .x or ..x}
+ - [x] Enviroment: Make the dot notation part of the env and not structs, bcs `s := extend {x := 5} {x := 2 + ..x}`
+ - [x] Struct: Anonyme structs => `s := extend struct {...} {...}`
+ - [x] Lambda: Add the Lambda \ to the definition

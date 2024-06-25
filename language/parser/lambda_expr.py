@@ -18,9 +18,10 @@ def p_argument_list(p):
                        | expression COMMA expression_list'''
     p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
 
-def p_argument_list_ID(p):
-    'expression_list : IDENTIFIER COMMA expression_list'
-    p[0] = [gen().VariableExpression(p[1])] + p[3]
+# TODO: hopefully not neccessary -> delete later
+# def p_argument_list_ID(p):
+#     'expression_list : IDENTIFIER COMMA expression_list'
+#     p[0] = [gen().VariableExpression(p[1])] + p[3]
 
 # List of parameters
 def p_parameter_list(p):
@@ -29,12 +30,12 @@ def p_parameter_list(p):
     p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
 
 def p_expression_n_lambda(p):
-    'expression : identifier_list ARROW expression'
-    p[0] = gen().LambdaExpression(p[1], p[3])
+    'expression : LAMBDA identifier_list ARROW expression'
+    p[0] = gen().LambdaExpression(p[2], p[4])
 
 def p_expression_0_lambda(p):
-    'expression : ARROW expression'
-    p[0] = gen().LambdaExpression([], p[2])
+    'expression : LAMBDA ARROW expression'
+    p[0] = gen().LambdaExpression([], p[3])
 
 def p_expression_call_n_args(p):
     'expression : expression LPAREN expression_list RPAREN'

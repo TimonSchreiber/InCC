@@ -8,7 +8,7 @@ used_procedures_and_classes = {
     'ArrayAccessExpression'
 }
 
-# precedence = [[]]
+precedence = [[]]
 
 def p_expression_single_value(p):
     '''expression : NUMBER
