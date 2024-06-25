@@ -7,7 +7,7 @@ class LambdaExpression(InterpretedExpression):
 
     def eval(self, env):
         def lmbd(*values):
-            if len(values) != len(self.vars):  # TODO: change code here to add currying as default: if len(vals < len(vars)) ...
+            if len(values) != len(self.vars):
                 raise Exception(f'wrong number of arguments: is {len(values)}, but should be {len(self.vars)}')
             lmbd_env = Enviroment()
             lmbd_env.set_parent(env)

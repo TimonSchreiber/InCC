@@ -23,7 +23,7 @@ class StructExpression(InterpretedExpression):
     def eval(self, env):
         env1 = Enviroment()
         env1.set_parent(env)
-        for (id, e) in self.body:  # any parent struct access with dot notation is meaningless
+        for (id, e) in self.body:
             v, env1 = e.eval(env1)
             dict.__setitem__(env1, id, v)  # add value to this level of dict
         return (env1.get_vals(), env)  # return the enviroment WITHOUT parent

@@ -26,12 +26,12 @@ def t_NUMBER(t):
     return t
 
 def t_CHAR(t):
-    r'\'(\\t|\\n|\\\'|\\\"|\\\\|.)??\''
+    r'\'(\\t|\\n|\\\'|\\\"|\\\\|[^\\])\''
     t.value = t.value[1:-1]
     return t
 
 def t_STRING(t):
-    r'\"(\\t|\\n|\\\'|\\\"|\\\\|.)*?\"'
+    r'\"(\\t|\\n|\\\'|\\\"|\\\\|[^\\])*?\"'
     t.value = t.value[1:-1]
     return t
 

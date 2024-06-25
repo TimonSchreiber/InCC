@@ -1,19 +1,3 @@
-
-def find_env_for(env, key):
-    if key in env:
-        return env
-    if env.parent is not None:
-        return find_env_for(env.parent, key)
-    return None
-
-def get_parent_env(env, n, key):
-    if n <= 1:
-        return env
-    if env.parent is not None:
-        return get_parent_env(env.parent, n-1, key)
-    return None
-
-
 class Enviroment(dict):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,3 +54,18 @@ class Enviroment(dict):
             return str(self.parent) + dict.__str__(self)
         else:
             return dict.__str__(self)
+
+
+def find_env_for(env: Enviroment, key) -> Enviroment:
+    if key in env:
+        return env
+    if env.parent is not None:
+        return find_env_for(env.parent, key)
+    return None
+
+def get_parent_env(env: Enviroment, n: int, key) -> Enviroment:
+    if n <= 1:
+        return env
+    if env.parent is not None:
+        return get_parent_env(env.parent, n-1, key)
+    return None

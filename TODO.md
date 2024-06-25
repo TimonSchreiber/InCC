@@ -27,4 +27,7 @@
  - [x] Enviroment: Make the dot notation part of the env and not structs, bcs `s := extend {x := 5} {x := 2 + ..x}`
  - [x] Struct: Anonyme structs => `s := extend struct {...} {...}`
  - [x] Lambda: Add the Lambda \ to the definition
- - [ ] Lambda: Allow currying for all lambdas: `\x,y -> ...` is equal to `\x -> \y -> ...`
+ - [ ] ? Types: add python tpye hints as much as possible for readability. t->ply.lex.LexToken; p->ply.yacc.YaccProduction
+ - [ ] ? Lambda: Allow currying for all lambdas: `\x,y -> ...` is equal to `\x -> \y -> ...`
+ - [ ] ? Add compound assignments and modulo to this language
+ - [ ] Code comes from files instead of python strings

@@ -59,6 +59,16 @@ example = r'''
     }
 }'''
 
+example = r'''
+{ f := \x -> x+1
+; g := \x,y -> x + y + 2
+; h := \x -> \y -> x * y
+; a := f(3)
+; b := g(4,5)
+; c := h(6)
+; d := c(7)
+}'''
+
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)
 print(example, '\n\nresult =>', r, '\n')
@@ -89,6 +99,6 @@ https://en.cppreference.com/w/cpp/language/operator_precedence
 
 
 New feature:
-    - lock id_list in expr
-    - currying??
+    [x] lock id_list in expr
+    [ ] currying
 '''
