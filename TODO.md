@@ -7,7 +7,7 @@
  - [x] `While expr Do expr`
  - [x] create separate Enviroment class
  - [ ] create separate REPL class
- - [x] `Lock id[(, id)*] In expr` TODO: for now only one id allowed...
+ - [x] `Lock id[(, id)*] In expr`
  - [x] `Local id assign expr In expr`
  - [ ] change generic expressions in loop/for/while/ite into assign_expr/- bool_expr/...
  - [x] split interpreter.all_expr into files matching lexer/ and parser/
@@ -27,3 +27,4 @@
  - [x] Enviroment: Make the dot notation part of the env and not structs, bcs `s := extend {x := 5} {x := 2 + ..x}`
  - [x] Struct: Anonyme structs => `s := extend struct {...} {...}`
  - [x] Lambda: Add the Lambda \ to the definition
+ - [ ] Lambda: Allow currying for all lambdas: `\x,y -> ...` is equal to `\x -> \y -> ...`

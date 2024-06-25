@@ -52,6 +52,11 @@ example = r'''
     { x := ..x * .y}
 ; ch := '\n'
 ; str := "Hello\tworld!"
+; l := \x -> ch := x
+; m := lock a, ch in
+    { a := 3
+    ; l(5)
+    }
 }'''
 
 result = parser.parse(input=example, lexer=lexer)
@@ -81,4 +86,9 @@ order:
     13. struct_expr
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
+
+
+New feature:
+    - lock id_list in expr
+    - currying??
 '''

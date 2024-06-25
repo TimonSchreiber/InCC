@@ -18,11 +18,6 @@ def p_argument_list(p):
                        | expression COMMA expression_list'''
     p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
 
-# TODO: hopefully not neccessary -> delete later
-# def p_argument_list_ID(p):
-#     'expression_list : IDENTIFIER COMMA expression_list'
-#     p[0] = [gen().VariableExpression(p[1])] + p[3]
-
 # List of parameters
 def p_parameter_list(p):
     '''identifier_list : IDENTIFIER
