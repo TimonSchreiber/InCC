@@ -24,5 +24,5 @@ class BooleanValueExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1 = e1.upper()
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         return (boolean_values[self.e1], env)

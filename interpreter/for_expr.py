@@ -7,12 +7,12 @@ class ForExpression(InterpretedExpression):
         self.change = change
         self.body = body
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         _, env = self.start.eval(env)
-        t, env = self.condition.eval(env)
-        r = None
-        while t:
-            r, env = self.body.eval(env)
+        cond, env = self.condition.eval(env)
+        res = None
+        while cond:
+            res, env = self.body.eval(env)
             _, env = self.change.eval(env)
-            t, env = self.condition.eval(env)
-        return (r, env)
+            cond, env = self.condition.eval(env)
+        return (res, env)

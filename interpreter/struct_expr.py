@@ -1,53 +1,50 @@
 from .lambda_expr import *
 
-# def access_layer(env: Enviroment, n: int):
-#     tmp = env
-#     for i in range(n):
-#         if tmp.get_parent() is None:
-#             raise Exception(f'Inheritance hirachy has not enough layers:\n\t-> Upper limit at {i}, trying to access {n}')
-#         tmp = tmp.get_parent()
-#     return tmp
-
 class DotVariableExpression(InterpretedExpression):
     def __init__(self, dots, name):
         self.dots = dots
         self.name = name
 
-    def eval(self, env):
-        return (env.get_item(self.dots, self.name), env)
+    def eval(self, env: Enviroment):
+        var = env.get_item(self.dots, self.name)
+        return (var, env)
 
 class StructExpression(InterpretedExpression):
     def __init__(self, body):
         self.body = body
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         env1 = Enviroment()
-        env1.set_parent(env)
-        for (id, e) in self.body:
-            v, env1 = e.eval(env1)
-            dict.__setitem__(env1, id, v)  # add value to this level of dict
-        return (env1.get_vals(), env)  # return the enviroment WITHOUT parent
+        env1.set_parent(env)  # set env (local scope) as the parent of this struct
+        for (id, expr) in self.body:
+            val, env1 = expr.eval(env1)
+            dict.__setitem__(env1, id, val)  # add value to this level of dict
+        env1 = env1.remove_root()  # remove the root from env1
+        return (env1, env)
 
 class StructExtendExpression(InterpretedExpression):
-    def __init__(self, e, body):
-        self.e = e
+    def __init__(self, expr, body):
+        self.expr = expr
         self.body = body
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
+        struct, _ = self.expr.eval(env)
         env1 = Enviroment()
-        env1.set_parent(self.e.eval(env)[0])
-        for (id, e) in self.body:
-            val, env1 = e.eval(env1)
+        env1.set_parent(struct)  # set the parent of this struct
+        env1.add_root(env)  # add env (local scope) as the root of this struct
+        for (id, expr) in self.body:
+            val, env1 = expr.eval(env1)
             dict.__setitem__(env1, id, val)  # add value to this level of dict
-        return (env1, env)  # return the enviroment WITH parent
+        env1 = env1.remove_root()  # remove the root from env1
+        return (env1, env)
 
 class StructMemberAccessExpression(InterpretedExpression):
-    def __init__(self, s, dots, id):
-        self.s = s
+    def __init__(self, expr, dots, id):
+        self.expr = expr
         self.dots = dots
         self.id = id
 
-    def eval(self, env):
-        env1 = env[self.s]
-        m = env1.get_item(self.dots, self.id)
-        return (m, env)
+    def eval(self, env: Enviroment):
+        struct, _ = self.expr.eval(env)
+        val = struct.get_item(self.dots, self.id)
+        return (val, env)

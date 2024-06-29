@@ -5,10 +5,10 @@ class WhileExpression(InterpretedExpression):
         self.condition = condition
         self.body = body
 
-    def eval(self, env):
-        t, env = self.condition.eval(env)
-        r = None
-        while t:
-            r, env = self.body.eval(env)
-            t, env = self.condition.eval(env)
-        return (r, env)
+    def eval(self, env: Enviroment):
+        cond, env = self.condition.eval(env)
+        res = None
+        while cond:
+            res, env = self.body.eval(env)
+            cond, env = self.condition.eval(env)
+        return (res, env)

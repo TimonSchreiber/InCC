@@ -12,7 +12,7 @@ unary_operators = {
 }
 
 class InterpretedExpression:
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         raise Exception('eval unimplemented')
 
 class BinaryOperatorExpression(InterpretedExpression):
@@ -21,7 +21,7 @@ class BinaryOperatorExpression(InterpretedExpression):
         self.op = op
         self.e2 = e2
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         x, env = self.e1.eval(env)
         y, env = self.e2.eval(env)
         return (binary_operators[self.op](x, y), env)
@@ -31,7 +31,7 @@ class UnaryOperatorExpression(InterpretedExpression):
         self.op = op.upper()
         self.e1 = e1
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         x, env = self.e1.eval(env)
         return (unary_operators[self.op](x), env)
 
@@ -39,12 +39,12 @@ class ParenthesisExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1 = e1
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         return self.e1.eval(env)
 
 class SelfEvaluatingExpression(InterpretedExpression):
     def __init__(self, e1):
         self.e1 = e1
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         return (self.e1, env)

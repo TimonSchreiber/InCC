@@ -69,6 +69,12 @@ example = r'''
 ; d := c(7)
 }'''
 
+example = r'''
+{ f := \x -> struct { b := x }
+; a := f(3)
+; b := f(3).b
+}'''
+
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)
 print(example, '\n\nresult =>', r, '\n')

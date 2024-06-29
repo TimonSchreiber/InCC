@@ -1,3 +1,5 @@
+from typing import Self
+
 class Enviroment(dict):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -24,24 +26,42 @@ class Enviroment(dict):
     def set_parent(self, parent):
         self.parent = parent
 
-    def get_parent(self):
-        return self.parent
+    # def get_parent(self) -> Self:
+    #     return self.parent
 
-    def get_vals(self):
-        """
-        self.items()    -> List of (key, value) tuples of THIS dict (no parent)
-        dict(...)       -> convert back to dict
-        Enviroment(...) -> convert to Enviroment
-        """
-        env = Enviroment(dict(self.items()))
-        env.locked_variables = set(self.locked_variables)
-        return env
+    # def get_vals(self) -> Self:
+    #     """
+    #     self.items()    -> List of (key, value) tuples of THIS dict (no parent)
+    #     dict(...)       -> convert back to dict
+    #     Enviroment(...) -> convert to Enviroment
+    #     """
+    #     env = Enviroment(dict(self.items()))
+    #     env.locked_variables = set(self.locked_variables)
+    #     return env
 
-    def get_item(self, n, key):
-        d = get_parent_env(self, n, key)
-        if d is not None:
-            return d[key]
+    def get_item(self, dots: int, key):
+        env = get_parent_env(self, dots, key)
+        if env is not None:
+            return env[key]
         raise Exception(f'Inheritance hirachy has not enough layers.')
+
+    def remove_root(self) -> Self:
+        if self is None or self.parent is None:
+            return None
+        env: Self = self
+        while env.parent.parent is not None:
+            env = env.parent
+        env.parent = None
+        return self
+
+    def add_root(self, root: Self) -> None:
+        # if self.parent is None:
+        #     self.set_parent(root)
+        #     return
+        env: Self = self
+        while env.parent is not None:
+            env = env.parent
+        env.parent = root
 
     def lock_variables(self, keys):
         for key in keys : self.locked_variables.add(key)
@@ -49,7 +69,7 @@ class Enviroment(dict):
     def unlock_variables(self, keys):
         for key in keys : self.locked_variables.remove(key)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.parent:
             return str(self.parent) + dict.__str__(self)
         else:
@@ -63,9 +83,9 @@ def find_env_for(env: Enviroment, key) -> Enviroment:
         return find_env_for(env.parent, key)
     return None
 
-def get_parent_env(env: Enviroment, n: int, key) -> Enviroment:
-    if n <= 1:
+def get_parent_env(env: Enviroment, dots: int, key) -> Enviroment:
+    if dots <= 1:
         return env
     if env.parent is not None:
-        return get_parent_env(env.parent, n-1, key)
+        return get_parent_env(env.parent, dots-1, key)
     return None

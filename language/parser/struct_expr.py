@@ -30,7 +30,7 @@ def p_expression_struct(p):
     p[0] = gen().StructExpression(p[3])
 
 def p_expression_struct_member_access(p):
-    'expression : IDENTIFIER dots IDENTIFIER'
+    'expression : expression dots IDENTIFIER'
     p[0] = gen().StructMemberAccessExpression(p[1], p[2], p[3])
 
 def p_expression_dots_id(p):

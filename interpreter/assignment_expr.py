@@ -4,15 +4,15 @@ class VariableExpression(InterpretedExpression):
     def __init__(self, name):
         self.name = name
 
-    def eval(self, env):
+    def eval(self, env: Enviroment):
         return (env[self.name], env)
 
 class AssignmentExpression(InterpretedExpression):
-    def __init__(self, v, e):
-        self.v = v
-        self.e = e
+    def __init__(self, var, expr):
+        self.var = var
+        self.expr = expr
 
-    def eval(self, env):
-        value, env = self.e.eval(env)
-        env[self.v] = value
+    def eval(self, env: Enviroment):
+        value, env = self.expr.eval(env)
+        env[self.var] = value
         return (value, env)

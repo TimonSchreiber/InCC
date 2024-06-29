@@ -5,9 +5,9 @@ class LoopExpression(InterpretedExpression):
         self.number = number
         self.body = body
 
-    def eval(self, env):
-        n, env = self.number.eval(env)
-        r = None
-        for _ in range(int(n)):
-            r, env = self.body.eval(env)
-        return (r, env)
+    def eval(self, env: Enviroment):
+        loops, env = self.number.eval(env)
+        res = None
+        for _ in range(int(loops)):
+            res, env = self.body.eval(env)
+        return (res, env)
