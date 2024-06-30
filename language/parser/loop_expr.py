@@ -1,5 +1,5 @@
 from .code_generation import gen
-from .sequences_expr import *
+from .sequence_expr import *
 from ..lexer.loop_expr import tokens
 
 used_procedures_and_classes |= {

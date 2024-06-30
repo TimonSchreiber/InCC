@@ -1,6 +1,6 @@
 from .code_generation import gen
 from .boolean_expr import *
-from ..lexer.sequences_expr import tokens
+from ..lexer.sequence_expr import tokens
 
 used_procedures_and_classes |= {
     'SequenceExpression'
