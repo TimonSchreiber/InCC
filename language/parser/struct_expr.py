@@ -9,9 +9,10 @@ used_procedures_and_classes |= {
     'DotVariableExpression'
 }
 
-precedence = precedence + [
+precedence = [
     ['left', 'EXTEND'],
-    ['left', 'STRUCT'],
+    ['left', 'STRUCT']
+] + precedence + [
     ['left', 'DOT']
 ]
 
