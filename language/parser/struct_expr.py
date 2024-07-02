@@ -16,7 +16,7 @@ precedence = [
     ['left', 'DOT']
 ]
 
-def p_dot_notation(p):
+def p_dots(p):
     '''dots : DOT
             | dots DOT'''
     p[0] = 1 if len(p) == 2 else p[1] + 1

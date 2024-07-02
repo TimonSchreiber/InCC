@@ -10,7 +10,11 @@ precedence = [
     ['left', 'IN']
 ] + precedence
 
-# Using the identifier_list form lambda_expr.py to lock more than one variable
+def p_identifier_list(p):
+    '''identifier_list : IDENTIFIER
+                       | IDENTIFIER COMMA identifier_list'''
+    p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
+
 def p_expression_lock(p):
     'expression : LOCK identifier_list IN expression'
     p[0] = gen().LockExpression(p[2], p[4])

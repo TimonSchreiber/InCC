@@ -59,6 +59,7 @@ example = r'''
     }
 }'''
 
+# currying?
 example = r'''
 { f := \x -> x+1
 ; g := \x,y -> x + y + 2
@@ -69,11 +70,45 @@ example = r'''
 ; d := c(7)
 }'''
 
+
 example = r'''
-{ f := \x -> struct { b := x }
-; a := f(3)
-; b := f(3).b
+{ g := \x -> struct { h := x }
+; a := 3
+; s := g(3)
+; arr := [s, s.h, s.x]
+; t := struct
+    { b := 1
+    ; c := struct { d := 3 }
+    ; e := struct { f := 4 }
+    }
+; u := struct
+    { b := 1
+    ; c := g(3)
+    ; d := g(4)
+    }
+; v := struct
+    { b := 1
+    ; c := struct { d := struct { y := 5} }
+    ; d := struct { f := struct { y := 8} }
+    ; set := \x -> b := x
+    }
+; w := struct { set_a := \x -> a := x }
+; w.set_a(8)
+; z := a
+; v.set(3)
 }'''
+
+example = r'''
+{ x := 2
+; f := { local x := 3 in f := \y -> a*x*y }
+; a := 5
+; x := 7
+; b := f(9)
+}'''
+
+# Note: Dot notation only looks up in the current struct hirachy
+#       Without dot looks up in the 'normal' enviroment
+#  -->  change all #eval calls to #eval(self, env, struct) where struct is almost always None
 
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)
@@ -91,7 +126,7 @@ order:
     02. comparison_expr
     04. assignment_expr
     03. boolean_expr
-    05. sequences_expr
+    05. sequence_expr
     06. loop_expr
     07. for_expr
     08. while_expr
@@ -102,9 +137,4 @@ order:
     13. struct_expr
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
-
-
-New feature:
-    [x] lock id_list in expr
-    [ ] currying
 '''

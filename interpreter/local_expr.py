@@ -10,6 +10,6 @@ class LocalExpression(InterpretedExpression):
         env1 = Enviroment()
         env1.set_parent(env)
         val, env1 = self.value.eval(env1)
-        env1[self.var] = val
+        dict.__setitem__(env1, self.var, val)
         res, _ = self.body.eval(env1)
         return res, env

@@ -16,10 +16,15 @@ class StructExpression(InterpretedExpression):
     def eval(self, env: Enviroment):
         env1 = Enviroment()
         env1.set_parent(env)  # set env (local scope) as the parent of this struct
+        # env1.add_root(env)  # set env (local scope) as the parent of this struct
         for (id, expr) in self.body:
+            print(f'set -> id: {id}\tenv1: {env1}')
             val, env1 = expr.eval(env1)
+            print(f'\t{id} := {val}\t tpye: {type(val)}')
+            # if (type(val) is Enviroment): env1.add_root(env)
             dict.__setitem__(env1, id, val)  # add value to this level of dict
-        env1 = env1.remove_root()  # remove the root from env1
+        env1.remove_root()  # remove the root from env1
+        print(f'remove id: {id}\tval: {val}\tenv1: {env1}')
         return (env1, env)
 
 class StructExtendExpression(InterpretedExpression):
@@ -35,7 +40,7 @@ class StructExtendExpression(InterpretedExpression):
         for (id, expr) in self.body:
             val, env1 = expr.eval(env1)
             dict.__setitem__(env1, id, val)  # add value to this level of dict
-        env1 = env1.remove_root()  # remove the root from env1
+        env1.remove_root()  # remove the root from env1
         return (env1, env)
 
 class StructMemberAccessExpression(InterpretedExpression):

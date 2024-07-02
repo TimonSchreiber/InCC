@@ -17,7 +17,7 @@ def p_expression_single_value(p):
                   | STRING'''
     p[0] = gen().SelfEvaluatingExpression(p[1])
 
-def p_expression_list(p):
+def p_expression_list_non_empty(p):
     'expression : LIST LPAREN expression_list RPAREN'
     p[0] = gen().ListExpression(p[3])
 
@@ -25,7 +25,7 @@ def p_expression_list_empty(p):
     'expression : LIST LPAREN RPAREN'
     p[0] = gen().ListExpression(None)
 
-def p_expression_array(p):
+def p_expression_array_non_empty(p):
     '''expression : LBRACKET expression_list RBRACKET
                   | ARRAY LPAREN expression_list RPAREN'''
     p[0] = gen().ArrayExpression(p[2]) if len(p) == 4 else gen().ArrayExpression(p[3])

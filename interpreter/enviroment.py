@@ -5,6 +5,7 @@ class Enviroment(dict):
         super().__init__(*args, **kwargs)
         self.locked_variables = set()
         self.parent: Enviroment = None
+        self.surrounding_struct: Enviroment = None
 
     def __getitem__(self, key):
         if key in self:
@@ -45,19 +46,16 @@ class Enviroment(dict):
             return env[key]
         raise Exception(f'Inheritance hirachy has not enough layers.')
 
-    def remove_root(self) -> Self:
-        if self is None or self.parent is None:
-            return None
+    def remove_root(self):
+        if self.parent is None:
+            return #self
         env: Self = self
         while env.parent.parent is not None:
             env = env.parent
         env.parent = None
-        return self
+        return #self
 
     def add_root(self, root: Self) -> None:
-        # if self.parent is None:
-        #     self.set_parent(root)
-        #     return
         env: Self = self
         while env.parent is not None:
             env = env.parent
@@ -71,10 +69,11 @@ class Enviroment(dict):
 
     def __str__(self) -> str:
         if self.parent:
-            return str(self.parent) + dict.__str__(self)
+            return dict.__str__(self) + str(self.parent)
         else:
             return dict.__str__(self)
 
+## ---------- END OF CLASS ENVIROMENT ----------
 
 def find_env_for(env: Enviroment, key) -> Enviroment:
     if key in env:

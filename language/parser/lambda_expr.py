@@ -12,16 +12,9 @@ precedence = [
     ['left', 'ARROW']
 ] + precedence
 
-# List of arguments
-def p_argument_list(p):
+def p_expression_list(p):
     '''expression_list : expression
                        | expression COMMA expression_list'''
-    p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
-
-# List of parameters
-def p_parameter_list(p):
-    '''identifier_list : IDENTIFIER
-                       | IDENTIFIER COMMA identifier_list'''
     p[0] = [p[1]] if len(p) == 2 else [p[1]] + p[3]
 
 def p_expression_n_lambda(p):
