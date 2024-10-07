@@ -55,6 +55,12 @@ class Enviroment(dict):
         env.parent = None
         return #self
 
+    def get_root(self) -> Self:
+        env: Self = self
+        while env.parent is not None:
+            env = env.parent
+        return env
+
     def add_root(self, root: Self) -> None:
         env: Self = self
         while env.parent is not None:

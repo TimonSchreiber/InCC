@@ -1,3 +1,22 @@
+## Notes:
+
+### Bücher:
+
+* Übersetzerbau - Virtuelle Maschinen
+
+### Git:
+
+https://git.inf.h-brs.de/aaster2m/incc24
+
+### Übersetzungen:
+1. `nasm -g -F dwarf -o example.o -f elf64 example.s`
+    - `dwarf` -> ein debugging Format
+    - `elf64` -> extended library Format in 64 Bit
+2. `-gcc -g -gdwarf -ggdb -z noexecstack -o example example.o`
+    - `-g -g -gdwarf` -> debugging Optionen
+    - `-o example` -> Name der ausführbaren Datei
+    - `-z noexecstack` -> der Unterdrückung einer Warnung gilt
+
 ## TODO-List
 
  - [x] `Loop expr Do expr`
@@ -31,3 +50,4 @@
  - [ ] ? Lambda: Allow currying for all lambdas: `\x,y -> ...` is equal to `\x -> \y -> ...`
  - [ ] ? Add compound assignments and modulo to this language
  - [ ] Code comes from files instead of python strings
+ - [ ] Procedure: `expression : proc (var_list) var_list -> expression`

@@ -1,18 +1,18 @@
 from ply.lex import lex
 from ply.yacc import yacc
 
-from language.lexer.struct_expr import *
-from language.parser.struct_expr import *
+from language.lexer.proc_expr import *
+from language.parser.proc_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
-from interpreter import struct_expr
+from interpreter import proc_expr
 
-set_generator_module(struct_expr)
+set_generator_module(proc_expr)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = struct_expr.env
+env = proc_expr.env
 
 example = r'''
 { a := 5
@@ -106,9 +106,22 @@ example = r'''
 ; b := f(9)
 }'''
 
-# Note: Dot notation only looks up in the current struct hirachy
-#       Without dot looks up in the 'normal' enviroment
-#  -->  change all #eval calls to #eval(self, env, struct) where struct is almost always None
+example = r'''
+{
+    faktor := 2;
+    p := proc (x,y) z,w -> {
+        q := proc(x) -> {
+            faktor*x
+            # faktor := y/z/w sollte fahler produzieren
+	    };
+        if x=0 then
+            z := 1
+        else
+            z := x+y+p(y,x-1)*q(x);
+        w := 2*z;
+        w
+    }
+}'''
 
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)
