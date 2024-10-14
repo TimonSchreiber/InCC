@@ -19,22 +19,20 @@ def to_x86_64(cma_code, env) :
                 code += 'pop  rax\n'
                 code += 'sub  rax, rcx\n'
                 code += 'push rax\n'
-            # case ['mul'] :
-            #     code += 'pop  rcx\n'
-            #     code += 'pop  rax\n'
-            #     code += 'add  rax, rcx\n'
-            #     code += 'push rax\n'
-            # case ['div'] :
-            #     code += 'pop  rcx\n'
-            #     code += 'pop  rax\n'
-            #     code += 'add  rax, rcx\n'
-            #     code += 'push rax\n'
+            case ['mul'] :
+                code += 'pop  rcx\n'
+                code += 'pop  rax\n'
+                code += 'mul  rcx\n'
+                code += 'push rax\n'
+            case ['div'] :
+                code += 'pop  rcx\n'
+                code += 'pop  rax\n'
+                code += 'div  rcx\n'
+                code += 'push rax\n'
             case [*unknown] :
                 code += f'Error: unknown CMa statement {unknown}'
 
     return format_code(code)
-
-
 
 def x86_program(x86_code, env) :
     program  = x86_prefix(env)

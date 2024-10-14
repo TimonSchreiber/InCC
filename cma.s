@@ -11,16 +11,21 @@ main:
         mov     rbp,    rax             ; set frame pointer to current (empty) stack pointer
                 
         ;;; Start des eigentlichen Programms
-        push    qword 3 
-        push    qword 8 
-        pop     rcx     
-        pop     rax     
-        add     rax,    rcx     
-        push    rax     
-        push    qword 4700
+        push    qword 13
+        push    qword 2 
         pop     rcx     
         pop     rax     
         sub     rax,    rcx     
+        push    rax     
+        push    qword 47
+        push    qword 100
+        pop     rcx     
+        pop     rax     
+        mul     rcx     
+        push    rax     
+        pop     rcx     
+        pop     rax     
+        add     rax,    rcx     
         push    rax     
         ;;; Ende des eigentlichen Programms
                 

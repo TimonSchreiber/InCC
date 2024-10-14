@@ -1,13 +1,16 @@
-default:: a.out
+default:: cma.out
 
 clean::
-	-rm -f *.out *.o
+	-rm -f cma.out cma.o cma.s
 
-run:: a.out
+run:: cma.out
 	./$<
 
-a.out: a.o
+cma.out: cma.o
 	gcc -no-pie -z noexecstack -o $@ $<
 
-a.o: a.s
+cma.o: cma.s
 	nasm -f elf64 $<
+
+cma.s: cma.py
+	python3 ./cma.py
