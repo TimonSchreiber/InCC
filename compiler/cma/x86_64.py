@@ -1,18 +1,17 @@
 import re
 from .enviroment import global_variables, total_size
 
-def to_x86_64(cma_code, env: dict) -> str:
-    code = ""
+def to_x86_64(cma_code: str, env: dict) -> str:
+    code = ''
 
     for line in cma_code.splitlines():
-        match re.split('[,\s]+',line):
+        match re.split('[,\s]+', line):
             case ['pop'] :
                 code +=  'pop   rax\n'
             case ['loadc', q] :
                 code += ';;; loadc\n'
                 code +=f'mov  rax, {str(q)}\n'
                 code += 'push rax\n'
-                # code += f'push  qword {str(q)}\n'
             case ['load'] :
                 code += ';;; load\n'
                 code += 'pop qword rdx\n'
@@ -60,9 +59,9 @@ def to_x86_64(cma_code, env: dict) -> str:
             case [*unknown] :
                 code += f'Error: unknown CMa statement {unknown}'
 
-    return format_code(code)
+    return code #format_code(code)
 
-def x86_program(x86_code, env: dict) -> str:
+def x86_program(x86_code: str, env: dict) -> str:
     program  = x86_prefix(env)
     program += x86_start(env)
     program += '\n;;; Start des eigentlichen Programms\n'
@@ -81,30 +80,27 @@ def x86_start(env: dict) -> str:
     program  = '\n'
     program += 'SECTION  .text\nglobal main\n'
     program += 'main:\n'
-    program += '  push  rbp                 ; unnötig, weil es den Wert 1 enthält, trotzem notwendig, weil sonst segfault\n'
-    program += '  mov   rax,rsp             ; rsp zeigt auf den geretteten rbp  \n'
-    program += '  sub   rax,qword 8         ; neuer rbp sollte ein wort darüber liegen\n'
-    program += '  mov   rbp,rax             ; set frame pointer to current (empty) stack pointer\n'
-
-    ## what is happening here?
-    program +=f'\tsub\trsp, {total_size(global_variables(env))}\n'
+    program += '  push rbp                  ; unnötig, weil es den Wert 1 enthält, trotzem notwendig, weil sonst segfault\n'
+    program += '  mov  rax,rsp              ; rsp zeigt auf den geretteten rbp\n'
+    program += '  sub  rax,qword 8          ; neuer rbp sollte ein wort darüber liegen\n'
+    program += '  mov  rbp,rax              ; set frame pointer to current (empty) stack pointer\n'
+    size = total_size(global_variables(env))
+    program +=f'  sub  rsp, {size}          ; move rsp to accomodate global variables\n'
     return program
 
 def x86_final(env: dict) -> str:
-    program  = '  pop   rax\n'
-    program += '  mov   rsi, rax\n'
-    program += '  mov   rdi,i64_fmt         ; arguments in rdi, rsi\n'
-    program += '  mov   rax,0               ; no xmm registers used\n'
-    program += '  push  rbp                 ; set up stack frame, must be alligned\n'
-    program += '  call  printf              ; Call C function\n'
-    program += '  pop   rbp                 ; restore stack\n'
-
-    # clean up variables
-    program += f'\tadd\trsp,{total_size(global_variables(env))}\n'
-
+    program  = '  pop  rax\n'
+    program += '  mov  rsi, rax\n'
+    program += '  mov  rdi, i64_fmt         ; arguments in rdi, rsi\n'
+    program += '  mov  rax, 0               ; no xmm registers used\n'
+    program += '  push rbp                  ; set up stack frame, must be alligned\n'
+    program += '  call printf               ; Call C function\n'
+    program += '  pop  rbp                  ; restore stack\n'
+    size = total_size(global_variables(env))
+    program +=f'  add  rsp, {size}          ; clean up variables\n'
     program += '\n;;; Rueckkehr zum aufrufenden Kontext\n'
-    program += '  pop   rbp                 ; original rbp ist last thing on the stack\n'
-    program += '  mov   rax,0               ; return 0\n'
+    program += '  pop  rbp                  ; original rbp ist last thing on the stack\n'
+    program += '  mov  rax, 0               ; return 0\n'
     program += '  ret\n'
     return program
 
@@ -113,13 +109,14 @@ def format_line(line: str) -> str:
     l = ''
     if ':' in line:
         x = re.split(':', line, 1)
-        l += f'{x[0]+": ":<{tab_width}}'
+        l += f'{x[0] + ": ":<{tab_width}}'
         line = x[1]
     else:
         l += tab_width * ' '
 
     if line.startswith(';;;'):
-        return l + line + '\n'
+        # return l + line + '\n'
+        return line + '\n'
 
     comment = None
     if ';' in line :
@@ -130,16 +127,16 @@ def format_line(line: str) -> str:
     x = re.split("[\s]+", line.strip(), 1)
     l += f'{x[0]:<{tab_width}}'
 
-    if len(x)>1:
+    if len(x) > 1:
         line = x[1]
         x = re.split(",", line.strip())
         for y in x[:-1]:
-            l += f'{y.strip()+",":<{tab_width}}'
+            l += f'{y.strip() + ",":<{tab_width}}'
         l += f'{x[-1].strip():<{tab_width}}'
-    if comment :
+    if comment:
         l = f'{l:<40}' + ';' + comment
 
-    return l +' \n'
+    return l + '\n'
 
-def format_code(c) :
+def format_code(c: str) -> str:
     return ''.join([format_line(l) for l in c.splitlines()])
