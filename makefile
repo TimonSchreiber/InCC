@@ -13,4 +13,4 @@ cma.o: cma.s
 	nasm -f elf64 $<
 
 cma.s: cma.py
-	python3 ./cma.py
+	python3 ./$<
