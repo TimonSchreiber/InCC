@@ -1,4 +1,4 @@
-from .arithmetic_expr import *
+from .comparison_expr import *
 from .enviroment import new_addr
 
 @dataclass

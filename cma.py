@@ -15,11 +15,7 @@ lexer = lex()
 parser = yacc(start='expression')
 env = {}
 
-program = '''
-{ x := 1
-; y := 3
-; z := 1234567890000
-}'''
+program = '''6 = 7'''
 
 ast = parser.parse(input=program)
 code_x86 = to_x86_64(ast.code_r(env), env)
