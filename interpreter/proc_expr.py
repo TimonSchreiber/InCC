@@ -1,15 +1,5 @@
 from .struct_expr import *
 
-def tmp(lst):
-    for e in lst:
-        if e is AssignmentExpression:
-            var, expr = e
-            if env1.__contains__(var):
-                res, env1 = expr.eval(env1)
-        else:
-            res, env1 = e.eval(env1)
-    return res
-
 class ProcExpression(InterpretedExpression):
     def __init__(self, vars, locals, body):
         self.vars = vars
@@ -33,6 +23,9 @@ class ProcExpression(InterpretedExpression):
                     if env1.__contains__(var):
                         res, env1 = expr.eval(env1)
                     else:
+                        # TODO: this should add the varibale as a new global variable
+                        # TODO: is 'env' the root env???
+                        # res, env = expr.eval(env)
                         raise Exception(f'Not allowed to create new variables')
                 else:
                     res, env1 = e.eval(env1)

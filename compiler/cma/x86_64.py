@@ -7,57 +7,61 @@ def to_x86_64(cma_code: str, env: dict) -> str:
     for line in cma_code.splitlines():
         match re.split('[,\s]+', line):
             case ['pop'] :
-                code +=  'pop   rax\n'
+                code += 'pop   rax\n'
             case ['loadc', q] :
                 code += ';;; loadc\n'
-                code +=f'mov  rax, {str(q)}\n'
-                code += 'push rax\n'
+                code +=f'mov   rax, {str(q)}\n'
+                code += 'push  rax\n'
             case ['load'] :
                 code += ';;; load\n'
-                code += 'pop qword rdx\n'
-                code += 'neg  rdx\n'
-                code += 'add  rdx, rbx\n'
-                code += 'push qword [rdx]\n'
+                code +=f'mov   rax, {str(q)}\n'
+                code += 'push  rax\n'
+                code += 'neg   rdx\n'
+                code += 'add   rdx, rbx\n'
+                code += 'push  qword [rdx]\n'
             case ['store'] :
                 code += ';;; store\n'
-                code += 'pop  qword rdx\n'
-                code += 'neg  rdx\n'
-                code += 'add  rdx, rbx\n'
-                code += 'pop  qword rax\n'
-                code += 'mov  qword [rdx], rax\n'
-                code += 'push rax\n'
+                code += 'pop   qword rdx\n'
+                code += 'neg   rdx\n'
+                code += 'add   rdx, rbx\n'
+                code += 'pop   qword rax\n'
+                code += 'mov   qword [rdx], rax\n'
+                code += 'push  rax\n'
             case ['add'] :
                 code += ';;; add\n'
-                code += 'pop  rcx\n'
-                code += 'pop  rax\n'
-                code += 'add  rax, rcx\n'
-                code += 'push rax\n'
+                code += 'pop   rcx\n'
+                code += 'pop   rax\n'
+                code += 'add   rax, rcx\n'
+                code += 'push  rax\n'
             case ['sub'] :
                 code += ';;; sub\n'
-                code += 'pop  rcx\n'
-                code += 'pop  rax\n'
-                code += 'sub  rax, rcx\n'
-                code += 'push rax\n'
+                code += 'pop   rcx\n'
+                code += 'pop   rax\n'
+                code += 'sub   rax, rcx\n'
+                code += 'push  rax\n'
             case ['mul'] :
                 code += ';;; mul\n'
-                code += 'pop  rcx\n'
-                code += 'pop  rax\n'
-                code += 'mul  rcx\n'
-                code += 'push rax\n'
+                code += 'pop   rcx\n'
+                code += 'pop   rax\n'
+                code += 'mul   rcx\n'
+                code += 'push  rax\n'
             case ['div'] :
                 code += ';;; div\n'
-                code += 'pop  rcx\n'
-                code += 'pop  rax\n'
+                code += 'pop   rcx\n'
+                code += 'pop   rax\n'
                 code += 'cqo\n'     ## copies the sign (bit 63) of the value in the RAX register into every bit position of the RDX register
-                code += 'idiv rcx\n'
-                code += 'push rax\n'
+                code += 'idiv  rcx\n'
+                code += 'push  rax\n'
             case ['uminus'] :
                 code += ';;; uminus\n'
-                code += 'pop  rax\n'
-                code += 'neg  rax\n'
-                code += 'push rax\n'
+                code += 'pop   rax\n'
+                code += 'neg   rax\n'
+                code += 'push  rax\n'
             case [*unknown] :
                 code += f'Error: unknown CMa statement {unknown}'
+            # TODO: 'alloc n', 'loadrc j', 'enter', 'ret', 'mark', 'call ?', 'slide q m',
+
+            # TODO: classes?? 'proc formals locals? ?body?'
 
     return code #format_code(code)
 
@@ -80,27 +84,27 @@ def x86_start(env: dict) -> str:
     program  = '\n'
     program += 'SECTION  .text\nglobal main\n'
     program += 'main:\n'
-    program += '  push rbp                  ; unnötig, weil es den Wert 1 enthält, trotzem notwendig, weil sonst segfault\n'
-    program += '  mov  rax,rsp              ; rsp zeigt auf den geretteten rbp\n'
-    program += '  sub  rax,qword 8          ; neuer rbp sollte ein wort darüber liegen\n'
-    program += '  mov  rbp,rax              ; set frame pointer to current (empty) stack pointer\n'
+    program += '  push  rbp                 ; unnötig, weil es den Wert 1 enthält, trotzem notwendig, weil sonst segfault\n'
+    program += '  mov   rax,rsp             ; rsp zeigt auf den geretteten rbp\n'
+    program += '  sub   rax,qword 8         ; neuer rbp sollte ein wort darüber liegen\n'
+    program += '  mov   rbp,rax             ; set frame pointer to current (empty) stack pointer\n'
     size = total_size(global_variables(env))
-    program +=f'  sub  rsp, {size}          ; move rsp to accomodate global variables\n'
+    program +=f'  sub   rsp, {size}         ; move rsp to accomodate global variables\n'
     return program
 
 def x86_final(env: dict) -> str:
-    program  = '  pop  rax\n'
-    program += '  mov  rsi, rax\n'
-    program += '  mov  rdi, i64_fmt         ; arguments in rdi, rsi\n'
-    program += '  mov  rax, 0               ; no xmm registers used\n'
-    program += '  push rbp                  ; set up stack frame, must be alligned\n'
-    program += '  call printf               ; Call C function\n'
-    program += '  pop  rbp                  ; restore stack\n'
+    program  = '  pop   rax\n'
+    program += '  mov   rsi, rax\n'
+    program += '  mov   rdi, i64_fmt        ; arguments in rdi, rsi\n'
+    program += '  mov   rax, 0              ; no xmm registers used\n'
+    program += '  push  rbp                 ; set up stack frame, must be alligned\n'
+    program += '  call  printf              ; Call C function\n'
+    program += '  pop   rbp                 ; restore stack\n'
     size = total_size(global_variables(env))
-    program +=f'  add  rsp, {size}          ; clean up variables\n'
+    program +=f'  add   rsp, {size}         ; clean up variables\n'
     program += '\n;;; Rueckkehr zum aufrufenden Kontext\n'
-    program += '  pop  rbp                  ; original rbp ist last thing on the stack\n'
-    program += '  mov  rax, 0               ; return 0\n'
+    program += '  pop   rbp                 ; original rbp ist last thing on the stack\n'
+    program += '  mov   rax, 0              ; return 0\n'
     program += '  ret\n'
     return program
 
