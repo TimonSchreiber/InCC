@@ -1,15 +1,15 @@
 from .while_expr import *
 
 class ITEExpression(InterpretedExpression):
-    def __init__(self, condition, ifbody, elsebody):
+    def __init__(self, condition, if_body, else_body):
         self.condition = condition
-        self.ifbody = ifbody
-        self.elsebody = elsebody
+        self.if_body = if_body
+        self.else_body = else_body
 
     def eval(self, env: Enviroment):
         cond, env = self.condition.eval(env)
         if cond:
-            return self.ifbody.eval(env)
-        if self.elsebody:
-            return self.elsebody.eval(env)
+            return self.if_body.eval(env)
+        if self.else_body:
+            return self.else_body.eval(env)
         return (None, env)
