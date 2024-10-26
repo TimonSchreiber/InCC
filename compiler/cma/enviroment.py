@@ -2,9 +2,9 @@ next_addr = 0
 
 def new_addr(size: int) -> int:
     global next_addr
-    ret = next_addr
+    curr_addr = next_addr
     next_addr += size
-    return ret
+    return curr_addr
 
 def total_size(env: dict) -> int:
     return sum(map(lambda v: v['size'] , env.values()))

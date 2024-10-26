@@ -7,12 +7,15 @@ class ITEExpression(CompiledExpression):
     else_body : CompiledExpression
 
     def code_r(self, env: dict) -> str:
-        return f'if_1:\n' \
+        lbl = label()
+        if self.else_body is None:  # TODO: not the best solution
+            self.else_body = SelfEvaluatingExpression(0)
+        return f'if_{lbl}:\n' \
                 + self.condition.code_r(env) \
-                + f'jumpz else_1\n' \
-             + f'then_1:\n' \
+                + f'jumpz else_{lbl}\n' \
+             + f'then_{lbl}:\n' \
                 + self.if_body.code_r(env) \
-                + f'jump endif_1\n' \
-             + f'else_1:\n' \
+                + f'jump endif_{lbl}\n' \
+             + f'else_{lbl}:\n' \
                 + self.else_body.code_r(env) \
-             + f'endif_1:\n'
+             + f'endif_{lbl}:\n'

@@ -16,11 +16,9 @@ parser: LRParser = yacc(start='expression')
 env = {}
 
 program = '''{
-    x := 3;
-    if x < 2 then
-        y := 42
-    else
-        y := 24
+    x := -1;
+    while x < 2 do
+        x := x + 1
 }
 '''
 

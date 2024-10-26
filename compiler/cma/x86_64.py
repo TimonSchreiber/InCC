@@ -26,6 +26,14 @@ def to_x86_64(cma_code: str, env: dict) -> str:
                 code += 'pop   qword rax\n'
                 code += 'mov   qword [rdx], rax\n'
                 code += 'push  rax\n'
+            case ['jumpz', label] :
+                code += ';;; jumpz\n'
+                code += 'pop   rax\n'
+                code += 'test  rax,rax\n'
+                code +=f'je {label}\n'
+            case ['jump', label] :
+                code += ';;; jump\n'
+                code +=f'jmp   {label}\n'
             case ['add'] :
                 code += ';;; add\n'
                 code += 'pop   rcx\n'
@@ -104,14 +112,6 @@ def to_x86_64(cma_code: str, env: dict) -> str:
                 code += 'pop   rax\n'
                 code += 'neg   rax\n'
                 code += 'push  rax\n'
-            case ['jumpz', label] :
-                code += ';;; jumpz\n'
-                code += 'pop   rax\n'
-                code += 'test  rax,rax\n'
-                code +=f'je {label}\n'
-            case ['jump', label] :
-                code += ';;; jump\n'
-                code +=f'jmp   {label}\n'
             case [label] if label.endswith(':') :
                 code += label
                 code += '\n'
