@@ -14,8 +14,7 @@ def to_x86_64(cma_code: str, env: dict) -> str:
                 code += 'push  rax\n'
             case ['load'] :
                 code += ';;; load\n'
-                code +=f'mov   rax, {str(q)}\n'
-                code += 'push  rax\n'
+                code += 'pop   rdx\n'
                 code += 'neg   rdx\n'
                 code += 'add   rdx, rbx\n'
                 code += 'push  qword [rdx]\n'
@@ -105,6 +104,17 @@ def to_x86_64(cma_code: str, env: dict) -> str:
                 code += 'pop   rax\n'
                 code += 'neg   rax\n'
                 code += 'push  rax\n'
+            case ['jumpz', label] :
+                code += ';;; jumpz\n'
+                code += 'pop   rax\n'
+                code += 'test  rax,rax\n'
+                code +=f'je {label}\n'
+            case ['jump', label] :
+                code += ';;; jump\n'
+                code +=f'jmp   {label}\n'
+            case [label] if label.endswith(':') :
+                code += label
+                code += '\n'
             case [*unknown] :
                 code += f'Error: unknown CMa statement {unknown}'
             # TODO: 'alloc n', 'loadrc j', 'enter', 'ret', 'mark', 'call ?', 'slide q m',

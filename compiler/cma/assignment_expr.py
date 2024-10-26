@@ -6,16 +6,16 @@ class VariableExpression(CompiledExpression):
     name : str
 
     def code_l(self, env: dict) -> str:
-        return f'loadc {env[self.name]["addr"]}' + '\n'
+        return f'loadc {env[self.name]["addr"]}\n'
 
     def code_r(self, env: dict) -> str:
-        return f'loadc {env[self.name]["addr"]}' + '\n' \
-                'load' + '\n'
+        return f'loadc {env[self.name]["addr"]}\n' \
+                'load\n'
 
 @dataclass
 class AssignmentExpression(CompiledExpression):
-    var : str
-    expr: CompiledExpression
+    var  : str
+    expr : CompiledExpression
 
     def code_r(self, env: dict) -> str:
         if self.var not in env:
@@ -23,4 +23,4 @@ class AssignmentExpression(CompiledExpression):
         var = VariableExpression(self.var)
         return self.expr.code_r(env) \
              + var.code_l(env) \
-             + 'store' + '\n'
+             + 'store\n'

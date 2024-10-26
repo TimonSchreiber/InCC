@@ -12,5 +12,5 @@ cma.out: cma.o
 cma.o: cma.s
 	nasm -f elf64 $<
 
-cma.s: cma.py compiler/cma/x86_64.py
+cma.s: cma.py compiler/cma/*
 	python3 ./$<
