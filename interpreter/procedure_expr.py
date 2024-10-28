@@ -1,6 +1,6 @@
 from .struct_expr import *
 
-class ProcExpression(InterpretedExpression):
+class ProcedureExpression(InterpretedExpression):
     def __init__(self, vars, locals, body):
         self.vars = vars
         self.locals = locals

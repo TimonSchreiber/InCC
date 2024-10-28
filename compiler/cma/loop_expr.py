@@ -14,11 +14,15 @@ class LoopExpression(CompiledExpression):
     def code_r(self, env: dict) -> str:
         lbl = label()
         return 'loadc 0\n' \
-             f'loop_{lbl}:\n' \
-                + self.condition.code_r(env) \
-                + f'jumpz endloop_{lbl}\n' \
-                + 'pop\n' \
-             + f'do_{lbl}:\n' \
-                + self.body.code_r(env) \
-                + f'jump loop_{lbl}\n' \
-             + f'endloop_{lbl}:\n'
+             + self.number.code_r(env) \
+             + f'loop_{lbl}:\n' \
+             + 'dup\n' \
+             + f'jumpz endloop_{lbl}\n' \
+             + 'dec\n' \
+             + 'swap\n' \
+             + 'pop\n' \
+             + self.body.code_r(env) \
+             + 'swap\n' \
+             + f'jump loop_{lbl}\n' \
+             + f'endloop_{lbl}:\n' \
+             + 'pop'

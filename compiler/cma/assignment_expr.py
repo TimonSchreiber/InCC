@@ -20,7 +20,7 @@ class AssignmentExpression(CompiledExpression):
     def code_r(self, env: dict) -> str:
         if self.var not in env:
             env[self.var] = {'addr': new_addr(8), 'scope': 'global', 'size': 8}
-        var = VariableExpression(self.var)
+
         return self.expr.code_r(env) \
-             + var.code_l(env) \
+             + f'loadc {env[self.var]["addr"]}\n' \
              + 'store\n'

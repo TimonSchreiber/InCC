@@ -1,18 +1,18 @@
 from ply.lex import lex
 from ply.yacc import yacc
 
-from language.lexer.proc_expr import *
-from language.parser.proc_expr import *
+from language.lexer.procedure_expr import *
+from language.parser.procedure_expr import *
 from language.parser.code_generation import set_generator_module, check_generator_module
 
-from interpreter import proc_expr
+from interpreter import procedure_expr
 
-set_generator_module(proc_expr)
+set_generator_module(procedure_expr)
 check_generator_module(used_procedures_and_classes)
 
 lexer = lex()
 parser = yacc(start='expression')
-env = proc_expr.env
+env = procedure_expr.env
 
 example = r'''
 { a := 5

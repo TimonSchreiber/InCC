@@ -1,125 +1,202 @@
 import re
 from .enviroment import global_variables, total_size
 
+"""
+    reference: https://www.felixcloutier.com/x86/
+"""
+
 def to_x86_64(cma_code: str, env: dict) -> str:
     code = ''
 
     for line in cma_code.splitlines():
         match re.split('[,\s]+', line):
             case ['pop'] :
-                code += 'pop   rax\n'
+                code += f''';;; pop
+                    pop   rax
+                '''
             case ['loadc', q] :
-                code += ';;; loadc\n'
-                code +=f'mov   rax, {str(q)}\n'
-                code += 'push  rax\n'
+                code += f''';;; loadc
+                    mov   rax, {str(q)}
+                    push  rax
+                '''
             case ['load'] :
-                code += ';;; load\n'
-                code += 'pop   rdx\n'
-                code += 'neg   rdx\n'
-                code += 'add   rdx, rbx\n'
-                code += 'push  qword [rdx]\n'
+                code += f''';;; load
+                    pop   rdx
+                    neg   rdx
+                    add   rdx, rbx
+                    push  qword [rdx]
+                '''
+            case ['loadrc', j] :
+                code += f''';;; loadrc
+                    mov   rax, rbp
+                    add   rax, qword {j}
+                    push  rax
+                '''
             case ['store'] :
-                code += ';;; store\n'
-                code += 'pop   qword rdx\n'
-                code += 'neg   rdx\n'
-                code += 'add   rdx, rbx\n'
-                code += 'pop   qword rax\n'
-                code += 'mov   qword [rdx], rax\n'
-                code += 'push  rax\n'
-            case ['jumpz', label] :
-                code += ';;; jumpz\n'
-                code += 'pop   rax\n'
-                code += 'test  rax,rax\n'
-                code +=f'je {label}\n'
-            case ['jump', label] :
-                code += ';;; jump\n'
-                code +=f'jmp   {label}\n'
+                code += f''';;; store
+                    pop   qword rdx
+                    neg   rdx
+                    add   rdx, rbx
+                    pop   qword rax
+                    mov   qword [rdx], rax
+                    push  rax
+                '''
+            case ['jumpz', l] :
+                code += f''';;; jumpz
+                    pop   rax
+                    test  rax,rax
+                    je {l}
+                '''
+            case ['jump', l] :
+                code += f''';;; jump
+                    jmp   {l}
+                '''
+            case ['dup'] :
+                code += f''';;; dup
+                    pop   rax
+                    push  rax
+                    push  rax
+                '''
+            case ['swap'] :
+                code += f''';;; swap
+                    pop   rcx
+                    pop   rax
+                    push  rcx
+                    push  rax
+                '''
+            case ['slide', q, m] :
+                code += f''';;; slide
+                    pop   rax
+                    add   rsp, qword {q}
+                    push  rax
+                '''
+            case ['alloc', s] :
+                code += f''';;; alloc
+                    sub   rsp, qword {s}
+                '''
+            case ['enter'] :
+                code += f''';;; enter
+                    mov   rbp, rbx
+                    sub   rbp, rsp
+                '''
+            case ['mark'] :
+                code += f''';;; mark
+                    push  rbp
+                '''
+            case ['call'] :
+                code += f''';;; call
+                    pop   rax
+                    call  rax
+                '''
+            case ['ret'] :
+                code += f''';;; ret
+                    mov   rsp, rbx      ; restore stack pointer to prev frame
+                    sub   rsp, rbp      ; rsp <- rbx - rbp (=N)
+                    mov   rax, rbx      ; restore frame pointer
+                    sub   rax, rbp      ;
+                    mov   rbp, [rax+8]  ; rbp <- [rbx - rbp + 8]
+                    ret
+                '''
+            case ['dec'] :  # also 'inc' available
+                code += f''';;; dec
+                    pop   rax
+                    dec   rax
+                    push  rax
+                '''
             case ['add'] :
-                code += ';;; add\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'add   rax, rcx\n'
-                code += 'push  rax\n'
+                code += f''';;; add
+                    pop   rcx
+                    pop   rax
+                    add   rax, rcx
+                    push  rax
+                '''
             case ['sub'] :
-                code += ';;; sub\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'sub   rax, rcx\n'
-                code += 'push  rax\n'
+                code += f''';;; sub
+                    pop   rcx
+                    pop   rax
+                    sub   rax, rcx
+                    push  rax
+                '''
             case ['mul'] :
-                code += ';;; mul\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'mul   rcx\n'
-                code += 'push  rax\n'
+                code += f''';;; mul
+                    pop   rcx
+                    pop   rax
+                    mul   rcx
+                    push  rax
+                '''
             case ['div'] :
-                code += ';;; div\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cqo\n'     ## copies the sign (bit 63) of the value in the RAX register into every bit position of the RDX register
-                code += 'idiv  rcx\n'
-                code += 'push  rax\n'
+                ## cqo copies the sign (bit 63) of the value in the RAX register into every bit position of the RDX register
+                code += f''';;; div
+                    pop   rcx
+                    pop   rax
+                    cqo
+                    idiv  rcx
+                    push  rax
+                '''
             case ['le'] :
-                code += ';;; le\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'setl  al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; le
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    setl  al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['gr'] :
-                code += ';;; gr\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'setg  al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; gr
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    setg  al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['leq'] :
-                code += ';;; leq\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'setle al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; leq
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    setle al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['geq'] :
-                code += ';;; geq\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'setge al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; geq
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    setge al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['eq'] :
-                code += ';;; eq\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'sete  al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; eq
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    sete  al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['neq'] :
-                code += ';;; neq\n'
-                code += 'pop   rcx\n'
-                code += 'pop   rax\n'
-                code += 'cmp   rax, rcx\n'
-                code += 'setne al\n'
-                code += 'movzx rax, al\n'
-                code += 'push  rax\n'
+                code += f''';;; neq
+                    pop   rcx
+                    pop   rax
+                    cmp   rax, rcx
+                    setne al
+                    movzx rax, al
+                    push  rax
+                '''
             case ['uminus'] :
-                code += ';;; uminus\n'
-                code += 'pop   rax\n'
-                code += 'neg   rax\n'
-                code += 'push  rax\n'
+                code += f''';;; uminus
+                    pop   rax
+                    neg   rax
+                    push  rax
+                '''
             case [label] if label.endswith(':') :
-                code += label
-                code += '\n'
+                code += label + '\n'
             case [*unknown] :
                 code += f'Error: unknown CMa statement {unknown}'
-            # TODO: 'alloc n', 'loadrc j', 'enter', 'ret', 'mark', 'call ?', 'slide q m',
-
-            # TODO: classes?? 'proc formals locals? ?body?'
 
     return code #format_code(code)
 
@@ -176,9 +253,8 @@ def format_line(line: str) -> str:
     else:
         l += tab_width * ' '
 
-    if line.startswith(';;;'):
-        # return l + line + '\n'
-        return line + '\n'
+    if line.strip().startswith(';;;'):
+        return l + line.strip() + '\n'
 
     comment = None
     if ';' in line :
