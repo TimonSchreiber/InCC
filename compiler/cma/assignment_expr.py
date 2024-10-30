@@ -10,8 +10,6 @@ class VariableExpression(CompiledExpression):
         return f'{load} {getitem(env, self.name)["addr"]}\n'
 
     def code_r(self, env: dict) -> str:
-        # load = 'loadc' if getitem(env, self.name)['scope'] == 'global' else 'loadrc'
-        # return f'{load} {getitem(env, self.name)["addr"]}\n' \
         return self.code_l(env) \
              + 'load\n'
 

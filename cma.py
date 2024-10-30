@@ -17,20 +17,9 @@ env = {}
 
 program = '''
 {
-    faktor := 2;
-    p := proc (x,y) z,w -> {
-        q := proc(x) -> {
-            faktor*x
-            # faktor := y/z/w #sollte fahler produzieren
-	    };
-        if x=0 then
-            z := 1
-        else
-            z := x+y+p(y,x-1)*q(x);
-        w := 2*z;
-        w
-    };
-    p(2,3)
+    y := 2;
+    for x := 1; x > 2; x := x-1 do
+        y := y * 2
 }'''
 
 ast = parser.parse(input=program, lexer=lexer)

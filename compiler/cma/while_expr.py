@@ -7,7 +7,6 @@ class WhileExpression(CompiledExpression):
 
     def code_r(self, env: dict) -> str:
         lbl = label()
-        # TODO: what does loadc 0 and pop do here?
         return 'loadc 0\n' \
              + f'while_{lbl}:\n' \
              + self.condition.code_r(env) \

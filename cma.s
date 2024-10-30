@@ -27,47 +27,11 @@ main:
         push    rax     
         ;;; pop
         pop     rax     
-        ;;; jump
-        jmp     endproc_1
-                proc_1:         
-        ;;; enter
-        mov     rbp,    rbx     
-        sub     rbp,    rsp     
-        ;;; alloc
-        sub     rsp,    qword 16
-        ;;; jump
-        jmp     endproc_2
-                proc_2:         
-        ;;; enter
-        mov     rbp,    rbx     
-        sub     rbp,    rsp     
-        ;;; alloc
-        sub     rsp,    qword 0 
         ;;; loadc
-        mov     rax,    0       
+        mov     rax,    1       
         push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; mul
-        pop     rcx     
-        pop     rax     
-        mul     rcx     
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
+        ;;; loadc
+        mov     rax,    8       
         push    rax     
         ;;; store
         pop     qword rdx
@@ -76,35 +40,12 @@ main:
         pop     qword rax
         mov     qword [rdx],rax     
         push    rax     
-        ;;; pop
-        pop     rax     
-        ;;; ret
-        mov     rsp,    rbx             ; restore stack pointer to prev frame
-        sub     rsp,    rbp             ; rsp <- rbx - rbp (=N)
-        mov     rax,    rbx             ; restore frame pointer
-        sub     rax,    rbp     
-        mov     rbp,    [rax+8]         ; rbp <- [rbx - rbp + 8]
-        ret     
-                endproc_2:         
         ;;; loadc
-        mov     rax,    proc_2  
+        mov     rax,    0       
         push    rax     
+                for_1:         
         ;;; loadc
-        mov     rax,    16      
-        push    rax     
-        ;;; store
-        pop     qword rdx
-        neg     rdx     
-        add     rdx,    rbx     
-        pop     qword rax
-        mov     qword [rdx],rax     
-        push    rax     
-        ;;; pop
-        pop     rax     
-                if_3:         
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
+        mov     rax,    8       
         push    rax     
         ;;; load
         pop     rdx     
@@ -112,26 +53,40 @@ main:
         add     rdx,    rbx     
         push    qword [rdx]
         ;;; loadc
-        mov     rax,    0       
+        mov     rax,    2       
         push    rax     
-        ;;; eq
+        ;;; gr
         pop     rcx     
         pop     rax     
         cmp     rax,    rcx     
-        sete    al      
+        setg    al      
         movzx   rax,    al      
         push    rax     
         ;;; jumpz
         pop     rax     
         test    rax,    rax     
-        je      else_3  
-                then_3:         
+        je      endfor_1
+        ;;; pop
+        pop     rax     
+                do_1:         
         ;;; loadc
-        mov     rax,    1       
+        mov     rax,    0       
         push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword 8 
+        ;;; load
+        pop     rdx     
+        neg     rdx     
+        add     rdx,    rbx     
+        push    qword [rdx]
+        ;;; loadc
+        mov     rax,    2       
+        push    rax     
+        ;;; mul
+        pop     rcx     
+        pop     rax     
+        mul     rcx     
+        push    rax     
+        ;;; loadc
+        mov     rax,    0       
         push    rax     
         ;;; store
         pop     qword rdx
@@ -140,35 +95,8 @@ main:
         pop     qword rax
         mov     qword [rdx],rax     
         push    rax     
-        ;;; jump
-        jmp     endif_3 
-                else_3:         
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -24
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; add
-        pop     rcx     
-        pop     rax     
-        add     rax,    rcx     
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
+        ;;; loadc
+        mov     rax,    8       
         push    rax     
         ;;; load
         pop     rdx     
@@ -183,149 +111,6 @@ main:
         pop     rax     
         sub     rax,    rcx     
         push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -24
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; mark
-        push    rbp     
-        ;;; loadc
-        mov     rax,    8       
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; call
-        pop     rax     
-        call    rax     
-        ;;; pop
-        pop     rax     
-        ;;; slide
-        pop     rax     
-        add     rsp,    qword 8 
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; mark
-        push    rbp     
-        ;;; loadc
-        mov     rax,    16      
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; call
-        pop     rax     
-        call    rax     
-        ;;; pop
-        pop     rax     
-        ;;; slide
-        pop     rax     
-        add     rsp,    qword 0 
-        push    rax     
-        ;;; mul
-        pop     rcx     
-        pop     rax     
-        mul     rcx     
-        push    rax     
-        ;;; add
-        pop     rcx     
-        pop     rax     
-        add     rax,    rcx     
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword 8 
-        push    rax     
-        ;;; store
-        pop     qword rdx
-        neg     rdx     
-        add     rdx,    rbx     
-        pop     qword rax
-        mov     qword [rdx],rax     
-        push    rax     
-                endif_3:         
-        ;;; pop
-        pop     rax     
-        ;;; loadc
-        mov     rax,    2       
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword 8 
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; mul
-        pop     rcx     
-        pop     rax     
-        mul     rcx     
-        push    rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword 16
-        push    rax     
-        ;;; store
-        pop     qword rdx
-        neg     rdx     
-        add     rdx,    rbx     
-        pop     qword rax
-        mov     qword [rdx],rax     
-        push    rax     
-        ;;; pop
-        pop     rax     
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword 16
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; loadrc
-        mov     rax,    rbp     
-        add     rax,    qword -16
-        push    rax     
-        ;;; store
-        pop     qword rdx
-        neg     rdx     
-        add     rdx,    rbx     
-        pop     qword rax
-        mov     qword [rdx],rax     
-        push    rax     
-        ;;; pop
-        pop     rax     
-        ;;; ret
-        mov     rsp,    rbx             ; restore stack pointer to prev frame
-        sub     rsp,    rbp             ; rsp <- rbx - rbp (=N)
-        mov     rax,    rbx             ; restore frame pointer
-        sub     rax,    rbp     
-        mov     rbp,    [rax+8]         ; rbp <- [rbx - rbp + 8]
-        ret     
-                endproc_1:         
-        ;;; loadc
-        mov     rax,    proc_1  
-        push    rax     
         ;;; loadc
         mov     rax,    8       
         push    rax     
@@ -336,33 +121,9 @@ main:
         pop     qword rax
         mov     qword [rdx],rax     
         push    rax     
-        ;;; pop
-        pop     rax     
-        ;;; loadc
-        mov     rax,    3       
-        push    rax     
-        ;;; loadc
-        mov     rax,    2       
-        push    rax     
-        ;;; mark
-        push    rbp     
-        ;;; loadc
-        mov     rax,    8       
-        push    rax     
-        ;;; load
-        pop     rdx     
-        neg     rdx     
-        add     rdx,    rbx     
-        push    qword [rdx]
-        ;;; call
-        pop     rax     
-        call    rax     
-        ;;; pop
-        pop     rax     
-        ;;; slide
-        pop     rax     
-        add     rsp,    qword 8 
-        push    rax     
+        ;;; jump
+        jmp     for_1   
+                endfor_1:         
         ;;; Ende des eigentlichen Programms
                 
         pop     rax     
