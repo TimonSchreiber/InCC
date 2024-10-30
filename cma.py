@@ -17,24 +17,26 @@ env = {}
 
 program = '''
 {
-    x := 4;
-    y := 2;
-    while x > 0 do {
-        y := y * 2;
-        x := x - 1
+    faktor := 2;
+    p := proc (x,y) z,w -> {
+        q := proc(x) -> {
+            faktor*x
+            # faktor := y/z/w #sollte fahler produzieren
+	    };
+        if x=0 then
+            z := 1
+        else
+            z := x+y+p(y,x-1)*q(x);
+        w := 2*z;
+        w
     };
-    y
-}
-'''
-
-# program = '''
-# { p := proc(a,b) x -> a + b
-# }'''
+    p(2,3)
+}'''
 
 ast = parser.parse(input=program, lexer=lexer)
 code_x86 = to_x86_64(ast.code_r(env), env)
 
-print(format_code(code_x86))
+# print(format_code(code_x86))
 
 with open("./cma.s","w") as program_code:
     program_code.write(x86_program(code_x86, env))

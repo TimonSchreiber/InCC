@@ -6,8 +6,10 @@ from .enviroment import global_variables, total_size
 """
 
 def to_x86_64(cma_code: str, env: dict) -> str:
-    code = ''
+    with open("./cma.cma","w") as cma:
+        cma.write(cma_code)
 
+    code = ''
     for line in cma_code.splitlines():
         match re.split('[,\s]+', line):
             case ['pop'] :
@@ -216,6 +218,7 @@ def x86_prefix(env: dict) -> str:
     return program
 
 def x86_start(env: dict) -> str:
+    size = total_size(global_variables(env))
     program  = '\n'
     program += 'SECTION  .text\nglobal main\n'
     program += 'main:\n'
@@ -223,11 +226,11 @@ def x86_start(env: dict) -> str:
     program += '  mov   rax,rsp             ; rsp zeigt auf den geretteten rbp\n'
     program += '  sub   rax,qword 8         ; neuer rbp sollte ein wort darüber liegen\n'
     program += '  mov   rbp,rax             ; set frame pointer to current (empty) stack pointer\n'
-    size = total_size(global_variables(env))
-    program +=f'  sub   rsp, {size}         ; move rsp to accomodate global variables\n'
+    program +=f'  sub   rsp, {size}         ; reserve space for {size} bytes of global variables\n'
     return program
 
 def x86_final(env: dict) -> str:
+    size = total_size(global_variables(env))
     program  = '  pop   rax\n'
     program += '  mov   rsi, rax\n'
     program += '  mov   rdi, i64_fmt        ; arguments in rdi, rsi\n'
@@ -235,8 +238,7 @@ def x86_final(env: dict) -> str:
     program += '  push  rbp                 ; set up stack frame, must be alligned\n'
     program += '  call  printf              ; Call C function\n'
     program += '  pop   rbp                 ; restore stack\n'
-    size = total_size(global_variables(env))
-    program +=f'  add   rsp, {size}         ; clean up variables\n'
+    program +=f'  add   rsp, {size}         ; free space for {size} bytes of global variables\n'
     program += '\n;;; Rueckkehr zum aufrufenden Kontext\n'
     program += '  pop   rbp                 ; original rbp ist last thing on the stack\n'
     program += '  mov   rax, 0              ; return 0\n'

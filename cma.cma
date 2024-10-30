@@ -1,0 +1,95 @@
+loadc 2
+loadc 0
+store
+pop
+jump endproc_1
+proc_1:
+enter
+alloc 16
+jump endproc_2
+proc_2:
+enter
+alloc 0
+loadc 0
+load
+loadrc -16
+load
+mul
+loadrc -16
+store
+pop
+ret
+endproc_2:
+loadc proc_2
+loadc 16
+store
+pop
+if_3:
+loadrc -16
+load
+loadc 0
+eq
+jumpz else_3
+then_3:
+loadc 1
+loadrc 8
+store
+jump endif_3
+else_3:
+loadrc -16
+load
+loadrc -24
+load
+add
+loadrc -16
+load
+loadc 1
+sub
+loadrc -24
+load
+mark
+loadc 8
+load
+call
+pop
+slide 8 8
+loadrc -16
+load
+mark
+loadc 16
+load
+call
+pop
+slide 0 8
+mul
+add
+loadrc 8
+store
+endif_3:
+pop
+loadc 2
+loadrc 8
+load
+mul
+loadrc 16
+store
+pop
+loadrc 16
+load
+loadrc -16
+store
+pop
+ret
+endproc_1:
+loadc proc_1
+loadc 8
+store
+pop
+loadc 3
+loadc 2
+mark
+loadc 8
+load
+call
+pop
+slide 8 8

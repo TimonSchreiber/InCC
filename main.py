@@ -120,8 +120,13 @@ example = r'''
             z := x+y+p(y,x-1)*q(x);
         w := 2*z;
         w
-    }
+    };
+    p(2,3)
 }'''
+
+# example = '''
+# { p := proc(a,b) -> a + b
+# }'''
 
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)
@@ -148,6 +153,7 @@ order:
     11. local_expr (acts like letrec)
     12. lambda_expr
     13. struct_expr
+    14. procedure_expr
 
 https://en.cppreference.com/w/cpp/language/operator_precedence
 '''
