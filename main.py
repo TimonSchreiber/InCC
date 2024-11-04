@@ -14,6 +14,17 @@ lexer = lex()
 parser = yacc(start='expression')
 env = procedure_expr.env
 
+counter = r'''
+{ counter := acc -> {x -> { acc := acc + x}}
+; counter := x -> y -> x := x + y
+; c := counter(0)
+; a1 := c(1)
+; a2 := c(1)
+; a3 := c(1)
+; a4 := c(2)
+; a5 := c(3)
+}'''
+
 example = r'''
 { a := 5
 ; local a := 6 in
@@ -127,6 +138,18 @@ example = r'''
 # example = '''
 # { p := proc(a,b) -> a + b
 # }'''
+
+example ='''
+{
+    x := 3;
+    f := proc(a) b -> {
+        b := x + a;
+        g := proc(c) d -> {
+            d := c + x
+        }
+    }
+}
+'''
 
 result = parser.parse(input=example, lexer=lexer)
 r, d = result.eval(env)

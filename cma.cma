@@ -1,30 +1,64 @@
-loadc 2
+loadc 3
 loadc 0
 store
 pop
-loadc 1
-loadc 8
-store
+jump endproc_1
+proc_1:
+enter
+alloc 8
 loadc 0
-for_1:
-loadc 8
 load
-loadc 2
-gr
-jumpz endfor_1
+loadrc -16
+load
+add
+loadrc 8
+store
 pop
-do_1:
+jump endproc_2
+proc_2:
+enter
+alloc 8
+loadrc -16
+load
 loadc 0
 load
-loadc 2
-mul
-loadc 0
-store
-loadc 8
+add
+loadrc -24
 load
-loadc 1
 sub
+loadrc 8
+store
+loadrc -16
+store
+pop
+ret
+endproc_2:
+loadc proc_2
+loadc 16
+store
+pop
+loadc 7
+loadrc 8
+load
+mark
+loadc 16
+load
+call
+pop
+slide 8 8
+loadrc -16
+store
+pop
+ret
+endproc_1:
+loadc proc_1
 loadc 8
 store
-jump for_1
-endfor_1:
+pop
+loadc 3
+mark
+loadc 8
+load
+call
+pop
+slide 0 8

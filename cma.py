@@ -17,10 +17,25 @@ env = {}
 
 program = '''
 {
-    y := 2;
-    for x := 1; x > 2; x := x-1 do
-        y := y * 2
-}'''
+    x := 3;
+    f := proc(a) b -> {
+        b := x + a;
+        g := proc(c,e) d -> {
+            d := c + x - e
+            # d := b + x # Nicht erlaubt!
+        };
+        g(b,7)
+    };
+    f(3)
+}
+'''
+
+# program = '''
+# {
+#     y := 2;
+#     for x := 1; x > 2; x := x-1 do
+#         y := y * 2
+# }'''
 
 ast = parser.parse(input=program, lexer=lexer)
 code_x86 = to_x86_64(ast.code_r(env), env)
