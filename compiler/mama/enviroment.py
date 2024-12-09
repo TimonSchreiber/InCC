@@ -31,6 +31,13 @@ def getitem(env: dict, key: any) -> any:
         return root_env[key]
     raise KeyError(f'No value {key} found in {env}')
 
+def lookup(env: dict, key: any) -> dict:
+    if key in env:
+        return env[key]
+    if '..' in env:
+        return lookup(env['..'], key)
+    raise KeyError(f'No value {key} found in {env}')
+
 class Enviroment(dict):
     def __getitem__(self, key: any) -> any:
         # TODO: use this when cma calls dict.getitem()

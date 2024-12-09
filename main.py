@@ -1,18 +1,17 @@
-from ply.lex import lex
-from ply.yacc import yacc
+from interpreter.enviroment import Enviroment
+from interpreter.interpreter import eval
 
-from language.lexer.procedure_expr import *
-from language.parser.procedure_expr import *
-from language.parser.code_generation import set_generator_module, check_generator_module
+from language.lexer.tokens import lexer
+from language.parser.parser import parser
 
-from interpreter import procedure_expr
+from syntaxtree.syntaxtree import cons, head, tail
 
-set_generator_module(procedure_expr)
-check_generator_module(used_procedures_and_classes)
-
-lexer = lex()
-parser = yacc(start='expression')
-env = procedure_expr.env
+env = Enviroment()
+env |= {
+    'head': head,
+    'tail': tail,
+    'cons': cons
+}
 
 counter = r'''
 { counter := acc -> {x -> { acc := acc + x}}
@@ -139,22 +138,25 @@ example = r'''
 # { p := proc(a,b) -> a + b
 # }'''
 
-example ='''
+example = r'''
 {
-    x := 3;
-    f := proc(a) b -> {
-        b := x + a;
-        g := proc(c) d -> {
-            d := c + x
-        }
-    }
+    lst := list(1)
 }
 '''
 
-result = parser.parse(input=example, lexer=lexer)
-r, d = result.eval(env)
+example = r'''{
+    a := 4;
+    f := proc() -> 4;
+    f()
+}
+'''
+
+ast = parser.parse(input=example, lexer=lexer)
+
+r = eval(ast, env)
+
 print(example, '\n\nresult =>', r, '\n')
-for k,v in d.items():
+for k,v in env.items():
     print(k, ':', v)
 
 # for p in precedence:
@@ -173,7 +175,7 @@ order:
     08. while_expr
     09. ite_expr (If Then Else)
     10. lock_expr
-    11. local_expr (acts like letrec)
+    11. letrec_expr (acts like letrec)
     12. lambda_expr
     13. struct_expr
     14. procedure_expr

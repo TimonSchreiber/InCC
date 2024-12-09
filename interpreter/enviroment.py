@@ -79,6 +79,9 @@ class Enviroment(dict):
         else:
             return dict.__str__(self)
 
+    # def items(self):
+    #     return self.items()
+
 ## ---------- END OF CLASS ENVIROMENT ----------
 
 def find_env_for(env: Enviroment, key) -> Enviroment:

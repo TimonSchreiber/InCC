@@ -1,0 +1,11 @@
+('mkvec', 0)
+('mkfunval', 'lambda_1')
+('jump', 'endlambda_1')
+('label', 'lambda_1')
+('pushloc', 0)
+popenv
+('label', 'endlambda_1')
+('loadc', 5)
+mkbasic
+('slide', 1)
+getbasic
