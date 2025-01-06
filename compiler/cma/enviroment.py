@@ -1,3 +1,5 @@
+## TODO: deprecated --> delete file and use compiler/enviroment in the cma/compiler
+
 next_addr = 0
 def new_addr(size: int) -> int:
     global next_addr

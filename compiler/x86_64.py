@@ -1,8 +1,8 @@
 from compiler.enviroment import global_vars, total_size
 
-def x86_program(x86_code: str, env: dict) -> str:
+def x86_program(x86_code: str, env: dict, *func: tuple[str]) -> str:
     size = total_size(global_vars(env))
-    program  = x86_prefix()
+    program  = x86_prefix(*func)
     program += x86_start(size)
     program += '\n;;; Start des eigentlichen Programms\n'
     program += x86_code

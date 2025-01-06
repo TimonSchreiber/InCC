@@ -14,7 +14,7 @@ def lookup(env: dict, key1: str, key2: str) -> any:
     if key1 in env and key2 in env[key1]:
         return env[key1][key2]
     elif parent(env):
-        return lookup(env[parent(env)], key1, key2)
+        return lookup(parent(env), key1, key2)
     raise Exception(f'lookup of {key1},{key2} failed')
 
 label_counter = 0

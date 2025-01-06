@@ -5,11 +5,12 @@
 import argparse
 
 from compiler.cma.compiler import code_r
-from compiler.cma.x86_64 import to_x86_64 as cma_to_x86_64, x86_program as cma_x86_program
+from compiler.cma.x86_64 import to_x86_64 as cma_to_x86_64
 
 from compiler.mama.compiler import code_b
-from compiler.mama.x86_64 import to_x86_64 as mama_to_x86_64, x86_program as mama_x86_program
+from compiler.mama.x86_64 import to_x86_64 as mama_to_x86_64
 
+from compiler.compiler import x86_program
 from interpreter.interpreter import eval
 
 from language.lexer.tokens import lexer
@@ -42,4 +43,4 @@ if __name__ == '__main__':
         asm_code = code_r(source_code, env)
 
         with open('./cma.s','w') as program_code:
-            program_code.write(cma_x86_program(code_x86, env))
+            program_code.write(x86_program(code_x86, env, 'printf'))

@@ -1,0 +1,5 @@
+('pushglob', 0)
+getbasic
+('loadc', 21)
+store
+getbasic

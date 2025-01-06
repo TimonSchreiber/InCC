@@ -1,5 +1,4 @@
-from compiler.mama.enviroment import label
-from compiler.mama.enviroment import lookup
+from compiler.enviroment import label,  lookup
 from syntaxtree.syntaxtree import *
 
 binary_operators = {
@@ -93,7 +92,7 @@ def code_b(expr: Expression, rho: dict, kp: int) -> list[tuple[str | int]]:
         case _:
             raise Exception(f'code_b uninplemented for {expr}')
 
-def code_v(expr: Expression, rho: dict, kp: int) -> list[str]:
+def code_v(expr: Expression, rho: dict, kp: int) -> list[tuple[str | int]]:
     match expr:
         case VariableExpression(name):
             return [
@@ -152,7 +151,8 @@ def code_v(expr: Expression, rho: dict, kp: int) -> list[str]:
             size = len(free_vars)
 
             arguments = sum([code_v(VariableExpression(free_vars[i]), rho, kp + i) for i in range(size)], [])
-            print("arguments: ", arguments)
+            # TODO: delete later
+            print('arguments: ', arguments)
 
             rho2 = {'..': rho}
             rho2 |= {
@@ -204,13 +204,25 @@ def code_v(expr: Expression, rho: dict, kp: int) -> list[str]:
             raise Exception(f'code_v uninplemented for {expr}')
 
 def getvar(name: str, rho: dict, kp: int) -> tuple[str, int]:
-    match lookup(rho, name):
-        case {'addr' : j, 'scope' : 'local', 'size' : _}:
+    scope = lookup(rho, name, 'scope')
+    match scope:
+        case 'local':
+            j = lookup(rho, name, 'addr')
             return ('pushloc', kp-j)
-        case {'addr' : j, 'scope' : 'global', 'size' : _}:
+        case 'global':
+            j = lookup(rho, name, 'addr')
             return ('pushglob', j)
         case _:
             raise Exception(f'variable {name} not defined in {rho}')
+
+# def getvar(name: str, rho: dict, kp: int) -> tuple[str, int]:
+#     match lookup(rho, name):
+#         case {'addr' : j, 'scope' : 'local', 'size' : _}:
+#             return ('pushloc', kp-j)
+#         case {'addr' : j, 'scope' : 'global', 'size' : _}:
+#             return ('pushglob', j)
+#         case _:
+#             raise Exception(f'variable {name} not defined in {rho}')
 
 def free(expr: Expression) -> set[str]:
     match expr:

@@ -1,4 +1,4 @@
-from compiler.cma.enviroment import getitem, label, new_addr
+from compiler.enviroment import lookup, label, new_addr
 
 from syntaxtree.syntaxtree import *
 
@@ -21,13 +21,13 @@ unary_operators = {
 
 def code_l(expr: Expression, env: dict) -> list[str]:
     match expr:
-        case VariableExpression(name) if getitem(env, name)['scope'] == 'global':
+        case VariableExpression(name) if lookup(env, name, 'scope') == 'global':
             return [
-                ('loadc', getitem(env, name)["addr"])
+                ('loadc', lookup(env, name, 'addr'))
             ]
         case VariableExpression(name):
             return [
-                ('loadrc', getitem(env, name)["addr"])
+                ('loadrc', lookup(env, name, 'addr'))
             ]
         case _:
             raise Exception(f'code_l uninplemented for {expr}')
